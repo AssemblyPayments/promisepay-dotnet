@@ -4,19 +4,57 @@ using Newtonsoft.Json;
 
 namespace PromisePayDotNet.DAO
 {
-    public class User
+    public class User : AbstractDAO
     {
-        [JsonProperty(PropertyName = "created_at")]
-        public DateTime CreatedAt { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        public string ID { get; set; }
 
+        [JsonProperty(PropertyName = "first_name")]
+        public string FirstName { get; set; }
+
+        [JsonProperty(PropertyName = "last_name")]
+        public string LastName { get; set; }
+
+        [JsonProperty(PropertyName = "email")]
+        public string Email { get; set; }
+
+        [JsonProperty(PropertyName = "mobile")]
+        public string MobileName { get; set; }
+
+        [JsonProperty(PropertyName = "address_line1")]
+        public string AddressLine1 { get; set; }
+
+        [JsonProperty(PropertyName = "address_line2")]
+        public string AddressLine2 { get; set; }
+
+        [JsonProperty(PropertyName = "city")]
+        public string City { get; set; }
+
+        [JsonProperty(PropertyName = "zip")]
+        public string Zip { get; set; }
+
+        [JsonProperty(PropertyName = "state")]
+        public string State { get; set; }
+
+        [JsonProperty(PropertyName = "country")]
+        public string Country { get; set; }
+
+        [JsonProperty(PropertyName = "dob")]
+        public string Dob { get; set; }
+
+        [JsonProperty(PropertyName = "created_at")]
+        public DateTime? CreatedAt { get; set; }
 
         [JsonProperty(PropertyName = "updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [JsonProperty(PropertyName = "full_name")]
         public String FullName { get; set; }
 
-        [JsonExtensionData]
-        public IDictionary<string, object> AdditionalData { get; set; }
+        [JsonProperty(PropertyName = "verification_state")]
+        public string VerificationState { get; set; }
+
+        [JsonProperty(PropertyName = "drivers_license")]
+        public string DriversLicense { get; set; }
     }
 }
