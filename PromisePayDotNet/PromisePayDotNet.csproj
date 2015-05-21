@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -51,14 +54,22 @@
     <Compile Include="DAO\BankAccount.cs" />
     <Compile Include="DAO\CardAccount.cs" />
     <Compile Include="DAO\DisbursementAccount.cs" />
+    <Compile Include="DAO\ErrorsDAO.cs" />
     <Compile Include="DAO\Item.cs" />
     <Compile Include="DAO\Marketplace.cs" />
     <Compile Include="DAO\PayPalAccount.cs" />
+    <Compile Include="DAO\SuccessWrapper.cs" />
     <Compile Include="DAO\User.cs" />
+    <Compile Include="Exceptions\ApiErrorsException.cs" />
+    <Compile Include="Exceptions\MisconfigurationException.cs" />
+    <Compile Include="Exceptions\UnauthorizedException.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="Implementations\AbstractRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Settings\PromisePaySettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrappers\WrapperFactory.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

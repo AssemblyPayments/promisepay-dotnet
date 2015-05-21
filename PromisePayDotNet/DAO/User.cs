@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace PromisePayDotNet.DAO
 {
@@ -49,7 +48,7 @@ namespace PromisePayDotNet.DAO
         public DateTime? UpdatedAt { get; set; }
 
         [JsonProperty(PropertyName = "full_name")]
-        public String FullName { get; set; }
+        public string FullName { get; set; }
 
         [JsonProperty(PropertyName = "verification_state")]
         public string VerificationState { get; set; }

@@ -7,5 +7,8 @@ namespace PromisePayDotNet.DAO
     {
         [JsonExtensionData]
         public IDictionary<string, object> AdditionalData { get; set; }
+
+        [JsonProperty(PropertyName = "links")]
+        public IDictionary<string, string> Links { get; set; }
     }
 }
