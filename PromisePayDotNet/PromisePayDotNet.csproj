@@ -58,7 +58,6 @@
     <Compile Include="DAO\Item.cs" />
     <Compile Include="DAO\Marketplace.cs" />
     <Compile Include="DAO\PayPalAccount.cs" />
-    <Compile Include="DAO\SuccessWrapper.cs" />
     <Compile Include="DAO\User.cs" />
     <Compile Include="Exceptions\ApiErrorsException.cs" />
     <Compile Include="Exceptions\MisconfigurationException.cs" />
