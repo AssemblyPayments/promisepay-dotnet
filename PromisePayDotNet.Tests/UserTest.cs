@@ -1,8 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
+using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Implementations;
+using System;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -22,7 +24,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
-        public void TestCreateUserMethod()
+        public void UserCreateSuccessful()
         {
             var repo = new UserRepository();
             var id = Guid.NewGuid().ToString();
@@ -48,7 +50,284 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual(user.Email, createdUser.Email);
             Assert.IsTrue(createdUser.CreatedAt.HasValue);
             Assert.IsTrue(createdUser.UpdatedAt.HasValue);
-            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidationErrorUserCreateMissedId()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = null,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+            repo.CreateUser(user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidationErrorUserCreateMissedFirstName()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = null,
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+            repo.CreateUser(user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidationErrorUserCreateWrongCountry()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "Australia", //Not a correct ISO code
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+            repo.CreateUser(user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidationErrorUserCreateWrongEmail()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id
+            };
+            repo.CreateUser(user);
+        }
+
+        [TestMethod]
+        public void ListUsersSuccessful()
+        {
+            //First, create a user, so we'll have at least one 
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+
+            var createdUser = repo.CreateUser(user);
+
+            //Then, list users
+            var users = repo.ListUsers(200);
+
+            Assert.IsNotNull(users);
+            Assert.IsTrue(users.Any());
+            Assert.IsTrue(users.Any(x => x.ID == id));
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentException))]
+        public void ListUsersNegativeParams()
+        {
+            var repo = new UserRepository();
+            repo.ListUsers(-10, -20);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ListUsersTooHighLimit()
+        {
+            var repo = new UserRepository();
+            repo.ListUsers(201);
+        }
+
+
+        [TestMethod]
+        public void GetUserSuccessful()
+        {
+            //First, create a user with known id
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+
+            var createdUser = repo.CreateUser(user);
+
+            //Then, get user
+            var gotUser = repo.GetUserById(id);
+
+            Assert.IsNotNull(gotUser);
+            Assert.AreEqual(gotUser.ID, id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnauthorizedException))] 
+        //That's bad idea not to distinguish between "wrong login/password" and "There is no such ID in DB"
+        public void GetUserMissingId()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            repo.GetUserById(id);
+        }
+
+        [Ignore] //Skipped until API method will be fixed
+        [TestMethod]
+        public void DeleteUserSuccessful()
+        {
+            //First, create a user with known id
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+
+            var createdUser = repo.CreateUser(user);
+
+            //Then, get user
+            var gotUser = repo.GetUserById(id);
+            Assert.IsNotNull(gotUser);
+            Assert.AreEqual(gotUser.ID, id);
+
+            //Now, delete user
+            repo.DeleteUser(id);
+
+            //And check whether user exists now
+            var success = false;
+            try
+            {
+                repo.GetUserById(id);
+            }
+            catch (UnauthorizedException)
+            {
+                success = true;
+            }
+
+            if (!success)
+            {
+                Assert.Fail("Delete user failed!");
+            }
+        }
+
+        [TestMethod]
+        //That's bad idea not to distinguish between "wrong login/password" and "There is no such ID in DB"
+        public void DeleteUserMissingId()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            Assert.IsFalse(repo.DeleteUser(id));
+        }
+
+
+        [TestMethod]
+        public void EditUserSuccessful()
+        {
+            //First, create a user we'll work with
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+
+            var createdUser = repo.CreateUser(user);
+
+            //Now, try to edit newly created user
+            user.FirstName = "Test123";
+            user.LastName = "Test123";
+            var modifiedUser = repo.UpdateUser(user);
+
+            Assert.AreEqual("Test123", modifiedUser.FirstName);
+            Assert.AreEqual("Test123", modifiedUser.LastName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnauthorizedException))]
+        public void EditUserMissingId()
+        {
+            var repo = new UserRepository();
+            var id = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                ID = id,
+                FirstName = "Test",
+                LastName = "Test",
+                City = "Test",
+                AddressLine1 = "Line 1",
+                Country = "AUS",
+                State = "state",
+                Zip = "123456",
+                Email = id + "@google.com"
+            };
+
+            repo.UpdateUser(user);
         }
     }
 }

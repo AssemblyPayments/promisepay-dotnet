@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using PromisePayDotNet.DAO;
+﻿using PromisePayDotNet.DAO;
+using System.Collections.Generic;
 
 namespace PromisePayDotNet.Interfaces
 {
@@ -12,7 +11,9 @@ namespace PromisePayDotNet.Interfaces
 
         User CreateUser(User user);
 
-        void DeleteUser(string userId);
+        User UpdateUser(User user);
+
+        bool DeleteUser(string userId);
 
         void SendMobilePin(string userId);
 
@@ -25,7 +26,5 @@ namespace PromisePayDotNet.Interfaces
         IEnumerable<BankAccount> ListBankAccountsForUser(string userId);
 
         DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin);
-
-
     }
 }
