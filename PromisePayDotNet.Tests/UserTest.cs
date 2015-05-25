@@ -329,5 +329,52 @@ namespace PromisePayDotNet.Tests
 
             repo.UpdateUser(user);
         }
+
+
+        [TestMethod]
+        [Ignore] //Currently, this test returns 401
+        public void SendMobilePinSuccessful()
+        {
+            var repo = new UserRepository();
+            repo.SendMobilePin("89592d8a-6cdb-4857-a90d-b41fc817d639"); //ID for user with mobile phone
+        }
+
+        [TestMethod]
+        public void ListUserItemsSuccessful()
+        {
+            var repo = new UserRepository();
+            var items = repo.ListItemsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [TestMethod]
+        public void ListUserBankAccountsSuccessful()
+        {
+            var repo = new UserRepository();
+            var items = repo.ListBankAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [TestMethod]
+        public void ListUserCardAccountsSuccessful()
+        {
+            var repo = new UserRepository();
+            var items = repo.ListCardAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [TestMethod]
+        public void ListUserPayPalAccountsSuccessful()
+        {
+            var repo = new UserRepository();
+            var items = repo.ListPayPalAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void ListUserDisbursementAccountsSuccessful()
+        {
+            var repo = new UserRepository();
+            var items = repo.ListDisbursementAccounts("89592d8a-6cdb-4857-a90d-b41fc817d639", "123","123");
+        }
+
+
     }
 }

@@ -18,7 +18,7 @@ namespace PromisePayDotNet.DAO
         public string Email { get; set; }
 
         [JsonProperty(PropertyName = "mobile")]
-        public string MobileName { get; set; }
+        public string Mobile { get; set; }
 
         [JsonProperty(PropertyName = "address_line1")]
         public string AddressLine1 { get; set; }

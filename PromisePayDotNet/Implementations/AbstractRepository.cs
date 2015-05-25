@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Configuration;
+using System.Net;
+using Newtonsoft.Json;
+using PromisePayDotNet.DAO;
 using PromisePayDotNet.Exceptions;
 using RestSharp;
 
@@ -57,5 +60,21 @@ namespace PromisePayDotNet.Implementations
             };
         }
 
+        protected IRestResponse SendRequest(RestClient client, RestRequest request)
+        {
+            var response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedException("Your login/password are unknown to server");
+            }
+
+            if (((int)response.StatusCode) == 422)
+            {
+                var errors = JsonConvert.DeserializeObject<ErrorsDAO>(response.Content).Errors;
+                throw new ApiErrorsException("API returned errors, see Errors property", errors);
+            }
+            return response;
+        }
     }
 }

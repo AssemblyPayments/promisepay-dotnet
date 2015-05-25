@@ -12,6 +12,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class UserRepository : AbstractRepository, IUserRepository
     {
+        #region public methods
+
         public IEnumerable<User> ListUsers(int limit = 10, int offset = 0)
         {
             if (limit < 0 || offset < 0)
@@ -19,7 +21,7 @@ namespace PromisePayDotNet.Implementations
                 throw new ArgumentException("limit and offset values should be nonnegative!");
             }
 
-            if (limit > 200)
+            if (limit > UserListLimit)
             {
                 throw new ArgumentException("Max value for limit parameter is 200!");
             }
@@ -30,8 +32,16 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("offset", offset);
 
             var response = SendRequest(client, request);
-            var userCollection =  JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content)["users"];
-            return JsonConvert.DeserializeObject<List<User>>(JsonConvert.SerializeObject(userCollection));
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("users"))
+            {
+                var userCollection = dict["users"];
+                return JsonConvert.DeserializeObject<List<User>>(JsonConvert.SerializeObject(userCollection));
+            }
+            else
+            {
+                return new List<User>();
+            }
         }
 
         public User GetUserById(string userId)
@@ -57,7 +67,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("first_name", user.FirstName);
             request.AddParameter("last_name", user.LastName);
             request.AddParameter("email", user.Email);
-            request.AddParameter("mobile", user.MobileName);
+            request.AddParameter("mobile", user.Mobile);
             request.AddParameter("address_line1", user.AddressLine1);
             request.AddParameter("address_line2", user.AddressLine2);
             request.AddParameter("state", user.State);
@@ -91,32 +101,163 @@ namespace PromisePayDotNet.Implementations
 
         public void SendMobilePin(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/:id/mobile_pin", Method.POST);
+            request.AddUrlSegment("id", userId);
+            var response = SendRequest(client, request);
+
         }
 
         public IEnumerable<Item> ListItemsForUser(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/{id}/items", Method.GET);
+            request.AddUrlSegment("id", userId);
+            var response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("items"))
+            {
+                var itemCollection = dict["items"];
+                return JsonConvert.DeserializeObject<List<Item>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<Item>();
+            }
         }
 
         public IEnumerable<PayPalAccount> ListPayPalAccountsForUser(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/{id}/paypal_accounts", Method.GET);
+            request.AddUrlSegment("id", userId);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
+                {
+                    return new List<PayPalAccount>();
+                }
+                throw e;
+            }
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("paypal_accounts"))
+            {
+                var itemCollection = dict["paypal_accounts"];
+                return JsonConvert.DeserializeObject<List<PayPalAccount>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<PayPalAccount>();
+            }
         }
 
         public IEnumerable<CardAccount> ListCardAccountsForUser(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/{id}/card_accounts", Method.GET);
+            request.AddUrlSegment("id", userId);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
+                {
+                    return new List<CardAccount>();
+                }
+                throw e;
+            }
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("card_accounts"))
+            {
+                var itemCollection = dict["card_accounts"];
+                return JsonConvert.DeserializeObject<List<CardAccount>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<CardAccount>();
+            }
         }
 
         public IEnumerable<BankAccount> ListBankAccountsForUser(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/{id}/bank_accounts", Method.GET);
+            request.AddUrlSegment("id", userId);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
+                {
+                    return new List<BankAccount>();
+                }
+                throw e;
+            }
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("bank_accounts"))
+            {
+                var itemCollection = dict["bank_accounts"];
+                return JsonConvert.DeserializeObject<List<BankAccount>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<BankAccount>();
+            }
         }
 
         public DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin)
         {
             throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
+            request.AddUrlSegment("id", userId);
+            request.AddUrlSegment("account_id", accountId);
+            request.AddUrlSegment("mobile_pin", mobilePin);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                throw e;
+            }
+        
         }
 
         public User UpdateUser(User user)
@@ -129,7 +270,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("first_name", user.FirstName);
             request.AddParameter("last_name", user.LastName);
             request.AddParameter("email", user.Email);
-            request.AddParameter("mobile", user.MobileName);
+            request.AddParameter("mobile", user.Mobile);
             request.AddParameter("address_line1", user.AddressLine1);
             request.AddParameter("address_line2", user.AddressLine2);
             request.AddParameter("state", user.State);
@@ -140,23 +281,9 @@ namespace PromisePayDotNet.Implementations
             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, User>>(response.Content).Values.First();
         }
+        #endregion
 
-        private IRestResponse SendRequest(RestClient client, RestRequest request)
-        {
-            var response = client.Execute(request);
-
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                throw new UnauthorizedException("Your login/password are unknown to server");
-            }
-
-            if (((int)response.StatusCode) == 422)
-            {
-                var errors = JsonConvert.DeserializeObject<ErrorsDAO>(response.Content).Errors;
-                throw new ApiErrorsException("API returned errors, see Errors property", errors);
-            }
-            return response;
-        }
+        #region private methods
 
         private void ValidateUser(User user)
         {
@@ -197,5 +324,9 @@ namespace PromisePayDotNet.Implementations
         }
 
         private readonly List<string> CountryCodes = new List<string> { "AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BIH", "BWA", "BVT", "BRA", "VGB", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "HKG", "MAC", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "ANT", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE" };
+
+        private const int UserListLimit = 200;
+
+        #endregion
     }
 }
