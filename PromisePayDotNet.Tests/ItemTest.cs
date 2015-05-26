@@ -215,5 +215,44 @@ namespace PromisePayDotNet.Tests
 
             repo.UpdateItem(item);
         }
+
+        [TestMethod]
+        public void ListTransactionsForItem()
+        {
+            var repo = new ItemRepository();
+            var transactions = repo.ListTransactionsForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+        }
+
+        [TestMethod]
+        public void GetStatusForItem()
+        {
+            var repo = new ItemRepository();
+            var status = repo.GetStatusForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(status);
+        }
+
+        [TestMethod]
+        public void ListFeesForItem()
+        {
+            var repo = new ItemRepository();
+            var fees = repo.ListFeesForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+        }
+
+        [TestMethod]
+        public void ListBuyersForItem()
+        {
+            var repo = new ItemRepository();
+            var buyers = repo.ListBuyersForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsTrue(buyers.Any());
+        }
+
+        [TestMethod]
+        public void ListSellersForItem()
+        {
+            var repo = new ItemRepository();
+            var sellers = repo.ListSellersForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsTrue(sellers.Any());
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
+using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
 using System;
@@ -110,17 +111,82 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<Transaction> ListTransactionsForItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}/transactions", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no transaction found")
+                {
+                    return new List<Transaction>();
+                }
+                throw e;
+            }
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("transactions"))
+            {
+                var itemCollection = dict["transactions"];
+                return JsonConvert.DeserializeObject<List<Transaction>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<Transaction>();
+            }
         }
 
         public ItemStatus GetStatusForItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}/status", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            IRestResponse response;
+            response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("items"))
+            {
+                var itemCollection = dict["items"];
+                return JsonConvert.DeserializeObject<ItemStatus>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Fee> ListFeesForItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}/fees", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            IRestResponse response;
+            response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("fees"))
+            {
+                var itemCollection = dict["fees"];
+                return JsonConvert.DeserializeObject<List<Fee>>(JsonConvert.SerializeObject(itemCollection));
+            }
+            else
+            {
+                return new List<Fee>();
+            }
         }
 
         public IEnumerable<User> ListBuyersForItem(string itemId)
