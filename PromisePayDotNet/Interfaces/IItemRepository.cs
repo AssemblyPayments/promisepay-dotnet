@@ -14,7 +14,7 @@ namespace PromisePayDotNet.Interfaces
 
         bool DeleteItem(string itemId);
 
-        void UpdateItem(Item item);
+        Item UpdateItem(Item item);
 
         IEnumerable<Transaction> ListTransactionsForItem(string itemId);
 

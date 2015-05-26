@@ -91,9 +91,21 @@ namespace PromisePayDotNet.Implementations
             }
         }
 
-        public void UpdateItem(Item item)
+        public Item UpdateItem(Item item)
         {
-            throw new System.NotImplementedException();
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}", Method.PATCH);
+            request.AddUrlSegment("id", item.Id);
+
+            request.AddParameter("amount", item.Amount);
+            request.AddParameter("name", item.Name);
+            request.AddParameter("description", item.Description);
+            request.AddParameter("buyer_id", item.BuyerId);
+            request.AddParameter("seller_id", item.SellerId);
+            request.AddParameter("fee_ids", item.FeeIds);
+
+            var response = SendRequest(client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, Item>>(response.Content).Values.First();
         }
 
         public IEnumerable<Transaction> ListTransactionsForItem(string itemId)

@@ -144,9 +144,11 @@ namespace PromisePayDotNet.Tests
             //Now, delete item
             Assert.IsTrue(repo.DeleteItem(id));
 
-            //And check whether user exists now
+            //And check whether item exists now
 
             var deletedItem = repo.GetItemById(id);
+
+            //Exists, but unactive
             Assert.AreEqual("cancelled",deletedItem.State);
         }
 
@@ -158,6 +160,60 @@ namespace PromisePayDotNet.Tests
             var repo = new ItemRepository();
             var id = Guid.NewGuid().ToString();
             Assert.IsFalse(repo.DeleteItem(id));
+        }
+
+        [TestMethod]
+        public void EditItemSuccessful()
+        {
+            //First, create a item we'll work with
+            var repo = new ItemRepository();
+            var id = Guid.NewGuid().ToString();
+            var buyerId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            var sellerId = "fdf58725-96bd-4bf8-b5e6-9b61be20662e"; //some user created before
+            var item = new Item
+            {
+                Id = id,
+                Name = "Test Item #1",
+                Amount = 1000,
+                PaymentType = PaymentType.Express,
+                BuyerId = buyerId, //optional field
+                SellerId = sellerId, //optional field
+                //No fee at this stage, optional field
+                Description = "Test item #1 description"
+            };
+
+            repo.CreateItem(item);
+
+            //Now, try to edit newly created item
+            item.Name = "Test123";
+            item.Description = "Test123";
+            var updatedItem = repo.UpdateItem(item);
+
+            Assert.AreEqual("Test123", updatedItem.Name);
+            Assert.AreEqual("Test123", updatedItem.Description);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnauthorizedException))]
+        public void EditItemMissingId()
+        {
+            var repo = new ItemRepository();
+            var id = Guid.NewGuid().ToString();
+            var buyerId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            var sellerId = "fdf58725-96bd-4bf8-b5e6-9b61be20662e"; //some user created before
+            var item = new Item
+            {
+                Id = id,
+                Name = "Test Item #1",
+                Amount = 1000,
+                PaymentType = PaymentType.Express,
+                BuyerId = buyerId, //optional field
+                SellerId = sellerId, //optional field
+                //No fee at this stage, optional field
+                Description = "Test item #1 description"
+            };
+
+            repo.UpdateItem(item);
         }
     }
 }
