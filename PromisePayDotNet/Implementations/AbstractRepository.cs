@@ -11,6 +11,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class AbstractRepository
     {
+        protected const int EntityListLimit = 200;
+
         protected Hashtable Configurataion
         {
             get

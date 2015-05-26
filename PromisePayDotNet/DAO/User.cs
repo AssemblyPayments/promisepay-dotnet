@@ -6,7 +6,7 @@ namespace PromisePayDotNet.DAO
     public class User : AbstractDAO
     {
         [JsonProperty(PropertyName = "id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }

@@ -30,7 +30,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -43,7 +43,7 @@ namespace PromisePayDotNet.Tests
 
             var createdUser = repo.CreateUser(user);
 
-            Assert.AreEqual(user.ID, createdUser.ID);
+            Assert.AreEqual(user.Id, createdUser.Id);
             Assert.AreEqual(user.FirstName, createdUser.FirstName);
             Assert.AreEqual(user.LastName, createdUser.LastName);
             Assert.AreEqual("Test Test", createdUser.FullName);
@@ -60,7 +60,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = null,
+                Id = null,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -81,7 +81,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = null,
                 LastName = "Test",
                 City = "Test",
@@ -102,7 +102,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -123,7 +123,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -144,7 +144,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -162,7 +162,7 @@ namespace PromisePayDotNet.Tests
 
             Assert.IsNotNull(users);
             Assert.IsTrue(users.Any());
-            Assert.IsTrue(users.Any(x => x.ID == id));
+            Assert.IsTrue(users.Any(x => x.Id == id));
 
         }
 
@@ -191,7 +191,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -208,7 +208,7 @@ namespace PromisePayDotNet.Tests
             var gotUser = repo.GetUserById(id);
 
             Assert.IsNotNull(gotUser);
-            Assert.AreEqual(gotUser.ID, id);
+            Assert.AreEqual(gotUser.Id, id);
         }
 
         [TestMethod]
@@ -230,7 +230,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -246,7 +246,7 @@ namespace PromisePayDotNet.Tests
             //Then, get user
             var gotUser = repo.GetUserById(id);
             Assert.IsNotNull(gotUser);
-            Assert.AreEqual(gotUser.ID, id);
+            Assert.AreEqual(gotUser.Id, id);
 
             //Now, delete user
             repo.DeleteUser(id);
@@ -286,7 +286,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",
@@ -316,7 +316,7 @@ namespace PromisePayDotNet.Tests
             var id = Guid.NewGuid().ToString();
             var user = new User
             {
-                ID = id,
+                Id = id,
                 FirstName = "Test",
                 LastName = "Test",
                 City = "Test",

@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,12 +13,46 @@ namespace PromisePayDotNet.Implementations
     {
         public IEnumerable<Item> ListItems(int limit = 10, int offset = 0)
         {
-            throw new System.NotImplementedException();
+            if (limit < 0 || offset < 0)
+            {
+                throw new ArgumentException("limit and offset values should be nonnegative!");
+            }
+
+            if (limit > EntityListLimit)
+            {
+                throw new ArgumentException("Max value for limit parameter is 200!");
+            }
+
+            var client = GetRestClient();
+            var request = new RestRequest("/items", Method.GET);
+            request.AddParameter("limit", limit);
+            request.AddParameter("offset", offset);
+
+            var response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("items"))
+            {
+                var userCollection = dict["items"];
+                return JsonConvert.DeserializeObject<List<Item>>(JsonConvert.SerializeObject(userCollection));
+            }
+            else
+            {
+                return new List<Item>();
+            }
         }
 
         public Item GetItemById(string itemId)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, Item>>(response.Content).Values.First();
         }
 
         public Item CreateItem(Item item)
@@ -35,9 +71,24 @@ namespace PromisePayDotNet.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, Item>>(response.Content).Values.First();
         }
 
-        public void DeleteItem(string itemId)
+        public bool DeleteItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}", Method.DELETE);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(client, request);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void UpdateItem(Item item)

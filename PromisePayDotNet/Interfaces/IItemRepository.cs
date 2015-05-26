@@ -12,7 +12,7 @@ namespace PromisePayDotNet.Interfaces
 
         Item CreateItem(Item item);
 
-        void DeleteItem(string itemId);
+        bool DeleteItem(string itemId);
 
         void UpdateItem(Item item);
 

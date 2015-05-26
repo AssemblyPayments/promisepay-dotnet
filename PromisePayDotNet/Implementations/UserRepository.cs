@@ -21,7 +21,7 @@ namespace PromisePayDotNet.Implementations
                 throw new ArgumentException("limit and offset values should be nonnegative!");
             }
 
-            if (limit > UserListLimit)
+            if (limit > EntityListLimit)
             {
                 throw new ArgumentException("Max value for limit parameter is 200!");
             }
@@ -63,7 +63,7 @@ namespace PromisePayDotNet.Implementations
             ValidateUser(user);
             var client = GetRestClient();
             var request = new RestRequest("/users", Method.POST);
-            request.AddParameter("id", user.ID);
+            request.AddParameter("id", user.Id);
             request.AddParameter("first_name", user.FirstName);
             request.AddParameter("last_name", user.LastName);
             request.AddParameter("email", user.Email);
@@ -265,8 +265,8 @@ namespace PromisePayDotNet.Implementations
             ValidateUser(user);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.PATCH);
-            request.AddUrlSegment("id", user.ID);
-            request.AddParameter("id", user.ID);
+            request.AddUrlSegment("id", user.Id);
+            request.AddParameter("id", user.Id);
             request.AddParameter("first_name", user.FirstName);
             request.AddParameter("last_name", user.LastName);
             request.AddParameter("email", user.Email);
@@ -287,7 +287,7 @@ namespace PromisePayDotNet.Implementations
 
         private void ValidateUser(User user)
         {
-            if (String.IsNullOrEmpty(user.ID))
+            if (String.IsNullOrEmpty(user.Id))
             {
                 throw new ValidationException("Field User.ID should not be empty!");
             }
@@ -324,8 +324,6 @@ namespace PromisePayDotNet.Implementations
         }
 
         private readonly List<string> CountryCodes = new List<string> { "AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BIH", "BWA", "BVT", "BRA", "VGB", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "HKG", "MAC", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "ANT", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE" };
-
-        private const int UserListLimit = 200;
 
         #endregion
     }
