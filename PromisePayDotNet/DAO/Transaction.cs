@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace PromisePayDotNet.DAO
 {
-    public class Transaction
+    public class Transaction : AbstractDAO
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }

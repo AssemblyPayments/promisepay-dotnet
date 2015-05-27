@@ -9,6 +9,8 @@ namespace PromisePayDotNet.DI
         public static void Init(IUnityContainer container)
         {
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IItemRepository, ItemRepository>();
+            container.RegisterType<ITransactionRepository, TransactionRepository>();
         }
     }
 }

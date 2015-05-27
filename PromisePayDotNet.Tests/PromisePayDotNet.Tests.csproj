@@ -56,8 +56,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigTest.cs" />
+    <Compile Include="ItemActionsTest.cs" />
     <Compile Include="ItemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>

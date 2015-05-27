@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PromisePayDotNet.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PromisePayDotNet.DAO
 {
