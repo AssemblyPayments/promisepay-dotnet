@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AbstractDAO.cs" />
+    <Compile Include="DAO\Bank.cs" />
     <Compile Include="DAO\BankAccount.cs" />
     <Compile Include="DAO\BPayDetails.cs" />
+    <Compile Include="DAO\Card.cs" />
     <Compile Include="DAO\CardAccount.cs" />
     <Compile Include="DAO\DetailsContainer.cs" />
     <Compile Include="DAO\DisbursementAccount.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="DAO\Item.cs" />
     <Compile Include="DAO\ItemStatus.cs" />
     <Compile Include="DAO\Marketplace.cs" />
+    <Compile Include="DAO\PayPal.cs" />
     <Compile Include="DAO\PayPalAccount.cs" />
     <Compile Include="DAO\Transaction.cs" />
     <Compile Include="DAO\User.cs" />
@@ -82,10 +85,16 @@
     <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Implementations\AbstractRepository.cs" />
+    <Compile Include="Implementations\BankAccountRepository.cs" />
+    <Compile Include="Implementations\CardAccountRepository.cs" />
     <Compile Include="Implementations\ItemRepository.cs" />
+    <Compile Include="Implementations\PayPalAccountRepository.cs" />
     <Compile Include="Implementations\TransactionRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
+    <Compile Include="Interfaces\IBankAccountRepository.cs" />
+    <Compile Include="Interfaces\ICardAccountRepository.cs" />
     <Compile Include="Interfaces\IItemRepository.cs" />
+    <Compile Include="Interfaces\IPayPalAccountRepository.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Settings\PromisePaySettings.cs" />
