@@ -236,6 +236,7 @@ namespace PromisePayDotNet.Tests
         {
             var repo = new ItemRepository();
             var fees = repo.ListFeesForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            
         }
 
         [TestMethod]
@@ -253,6 +254,22 @@ namespace PromisePayDotNet.Tests
             var sellers = repo.GetSellerForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
             Assert.IsNotNull(sellers);
         }
-        
+
+
+        [TestMethod]
+        public void GetWireDetailsForItemSuccessfully()
+        {
+            var repo = new ItemRepository();
+            var wireDetails = repo.GetWireDetailsForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(wireDetails);
+        }
+
+        [TestMethod]
+        public void GetBPayDetailsForItemSuccessfully()
+        {
+            var repo = new ItemRepository();
+            var bPayDetails = repo.GetBPayDetailsForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(bPayDetails);
+        }
     }
 }

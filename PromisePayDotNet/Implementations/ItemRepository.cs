@@ -207,12 +207,44 @@ namespace PromisePayDotNet.Implementations
 
         public WireDetails GetWireDetailsForItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            AssertIdNotNull(itemId);
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}/wire_details", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            IRestResponse response;
+            response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("items"))
+            {
+                var itemCollection = dict["items"];
+                var details =  JsonConvert.DeserializeObject<DetailsContainer>(JsonConvert.SerializeObject(itemCollection));
+                return details.WireDetails;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public BPayDetails GetBPayDetailsForItem(string itemId)
         {
-            throw new System.NotImplementedException();
+            AssertIdNotNull(itemId);
+            var client = GetRestClient();
+            var request = new RestRequest("/items/{id}/bpay_details", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            IRestResponse response;
+            response = SendRequest(client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("items"))
+            {
+                var itemCollection = dict["items"];
+                var details = JsonConvert.DeserializeObject<DetailsContainer>(JsonConvert.SerializeObject(itemCollection));
+                return details.BPayDetails;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Item MakePayment(string itemId, string accountId, string userId)

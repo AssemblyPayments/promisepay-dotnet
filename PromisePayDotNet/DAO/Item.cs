@@ -81,6 +81,7 @@ namespace PromisePayDotNet.DAO
                     return Fees.Select(x => x.Id).ToList();
                 }
             }
-        } 
+        }
+
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="DAO\BankAccount.cs" />
     <Compile Include="DAO\BPayDetails.cs" />
     <Compile Include="DAO\CardAccount.cs" />
+    <Compile Include="DAO\DetailsContainer.cs" />
     <Compile Include="DAO\DisbursementAccount.cs" />
     <Compile Include="DAO\ErrorsDAO.cs" />
     <Compile Include="DAO\Fee.cs" />
