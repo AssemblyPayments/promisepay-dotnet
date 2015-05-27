@@ -22,9 +22,9 @@ namespace PromisePayDotNet.Interfaces
 
         IEnumerable<Fee> ListFeesForItem(string itemId);
 
-        IEnumerable<User> ListBuyersForItem(string itemId);
+        User GetBuyerForItem(string itemId);
 
-        IEnumerable<User> ListSellersForItem(string itemId);
+        User GetSellerForItem(string itemId);
 
         WireDetails GetWireDetailsForItem(string itemId);
 

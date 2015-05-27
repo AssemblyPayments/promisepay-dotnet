@@ -16,16 +16,7 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<User> ListUsers(int limit = 10, int offset = 0)
         {
-            if (limit < 0 || offset < 0)
-            {
-                throw new ArgumentException("limit and offset values should be nonnegative!");
-            }
-
-            if (limit > EntityListLimit)
-            {
-                throw new ArgumentException("Max value for limit parameter is 200!");
-            }
-
+            AssertListParamsCorrect(limit, offset);
             var client = GetRestClient();
             var request = new RestRequest("/users", Method.GET);
             request.AddParameter("limit", limit);
@@ -46,11 +37,7 @@ namespace PromisePayDotNet.Implementations
 
         public User GetUserById(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
-
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.GET);
             request.AddUrlSegment("id", userId);
@@ -81,10 +68,7 @@ namespace PromisePayDotNet.Implementations
 
         public bool DeleteUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.DELETE);
             request.AddUrlSegment("id", userId);
@@ -101,10 +85,7 @@ namespace PromisePayDotNet.Implementations
 
         public void SendMobilePin(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/:id/mobile_pin", Method.POST);
             request.AddUrlSegment("id", userId);
@@ -114,10 +95,7 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<Item> ListItemsForUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}/items", Method.GET);
             request.AddUrlSegment("id", userId);
@@ -136,10 +114,7 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<PayPalAccount> ListPayPalAccountsForUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}/paypal_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
@@ -170,10 +145,7 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<CardAccount> ListCardAccountsForUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}/card_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
@@ -204,10 +176,7 @@ namespace PromisePayDotNet.Implementations
 
         public IEnumerable<BankAccount> ListBankAccountsForUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}/bank_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
@@ -239,10 +208,7 @@ namespace PromisePayDotNet.Implementations
         public DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin)
         {
             throw new NotImplementedException();
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new ArgumentException("id cannot be empty!");
-            }
+            AssertIdNotNull(userId);
             var client = GetRestClient();
             var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
             request.AddUrlSegment("id", userId);

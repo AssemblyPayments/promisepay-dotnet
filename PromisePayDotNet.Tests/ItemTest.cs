@@ -239,20 +239,20 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
-        public void ListBuyersForItem()
+        public void GetBuyerForItemSuccessfully()
         {
             var repo = new ItemRepository();
-            var buyers = repo.ListBuyersForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
-            Assert.IsTrue(buyers.Any());
+            var buyer = repo.GetBuyerForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(buyer);
         }
 
         [TestMethod]
-        public void ListSellersForItem()
+        public void GetSellerForItemSuccessfully()
         {
             var repo = new ItemRepository();
-            var sellers = repo.ListSellersForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
-            Assert.IsTrue(sellers.Any());
+            var sellers = repo.GetSellerForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(sellers);
         }
-
+        
     }
 }

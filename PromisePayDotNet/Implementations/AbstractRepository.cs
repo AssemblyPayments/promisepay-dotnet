@@ -78,5 +78,26 @@ namespace PromisePayDotNet.Implementations
             }
             return response;
         }
+
+        protected void AssertIdNotNull(string itemId)
+        {
+            if (string.IsNullOrEmpty(itemId))
+            {
+                throw new ArgumentException("id cannot be empty!");
+            }
+        }
+
+        protected void AssertListParamsCorrect(int limit, int offset)
+        {
+            if (limit < 0 || offset < 0)
+            {
+                throw new ArgumentException("limit and offset values should be nonnegative!");
+            }
+
+            if (limit > EntityListLimit)
+            {
+                throw new ArgumentException("Max value for limit parameter is 200!");
+            }
+        }
     }
 }
