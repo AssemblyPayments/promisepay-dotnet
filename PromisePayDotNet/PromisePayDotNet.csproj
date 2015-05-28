@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\AbstractAccount.cs" />
     <Compile Include="DAO\AbstractDAO.cs" />
     <Compile Include="DAO\Bank.cs" />
     <Compile Include="DAO\BankAccount.cs" />

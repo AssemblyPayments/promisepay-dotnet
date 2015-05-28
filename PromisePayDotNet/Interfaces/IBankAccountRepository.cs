@@ -4,11 +4,11 @@ namespace PromisePayDotNet.Interfaces
 {
     public interface IBankAccountRepository
     {
-        BankAccount GetBankAccount(string bankAccountId);
+        BankAccount GetBankAccountById(string bankAccountId);
 
-        BankAccount CreateBankAccount(BankAccount bankAccount);
+        BankAccount CreateBankAccount(BankAccount bankAccount, string mobilePin = "");
 
-        void DeleteBankAccount(string bankAccountId, string mobilePin);
+        bool DeleteBankAccount(string bankAccountId, string mobilePin="");
 
         User GetUserForBankAccount(string bankAccountId);
     }
