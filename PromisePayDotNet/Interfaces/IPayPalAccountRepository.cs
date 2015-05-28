@@ -5,13 +5,13 @@ namespace PromisePayDotNet.Interfaces
     public interface IPayPalAccountRepository
     {
 
-        PayPalAccount GetPayPalAccount(string paypalAccountId);
+        PayPalAccount GetPayPalAccountById(string paypalAccountId);
 
-        PayPalAccount CreateBankAccount(PayPalAccount paypalAccount);
+        PayPalAccount CreatePayPalAccount(PayPalAccount paypalAccount);
 
-        void DeletePayPalAccount(string paypalAccountId, string mobilePin);
+        bool DeletePayPalAccount(string paypalAccountId);
 
-        User GetUserForPayPalAccount(string paypalAccountId, string mobilePin);
+        User GetUserForPayPalAccount(string paypalAccountId);
 
     }
 }

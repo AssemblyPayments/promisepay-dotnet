@@ -20,7 +20,7 @@ namespace PromisePayDotNet.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, BankAccount>>(response.Content).Values.First();
         }
 
-        public BankAccount CreateBankAccount(BankAccount bankAccount, string mobilePin = "")
+        public BankAccount CreateBankAccount(BankAccount bankAccount)
         {
             var client = GetRestClient();
             var request = new RestRequest("/bank_accounts", Method.POST);
@@ -32,19 +32,17 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("account_type", bankAccount.Bank.AccountType);
             request.AddParameter("holder_type", bankAccount.Bank.HolderType);
             request.AddParameter("country", bankAccount.Bank.Country);
-            request.AddParameter("mobile_pin", mobilePin);
             
             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, BankAccount>>(response.Content).Values.First();
         }
 
-        public bool DeleteBankAccount(string bankAccountId, string mobilePin = "")
+        public bool DeleteBankAccount(string bankAccountId)
         {
             AssertIdNotNull(bankAccountId);
             var client = GetRestClient();
             var request = new RestRequest("/bank_accounts/{id}", Method.DELETE);
             request.AddUrlSegment("id", bankAccountId);
-            request.AddParameter("mobile_pin", mobilePin);
             var response = SendRequest(client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {

@@ -6,9 +6,9 @@ namespace PromisePayDotNet.Interfaces
     {
         BankAccount GetBankAccountById(string bankAccountId);
 
-        BankAccount CreateBankAccount(BankAccount bankAccount, string mobilePin = "");
+        BankAccount CreateBankAccount(BankAccount bankAccount);
 
-        bool DeleteBankAccount(string bankAccountId, string mobilePin="");
+        bool DeleteBankAccount(string bankAccountId);
 
         User GetUserForBankAccount(string bankAccountId);
     }

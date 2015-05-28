@@ -75,7 +75,7 @@ namespace PromisePayDotNet.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetBankAccountEmptyId()
+        public void GetCardAccountEmptyId()
         {
             var repo = new CardAccountRepository();
             repo.GetCardAccountById(string.Empty);
@@ -110,7 +110,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
-        public void DeleteBankAccountSuccessfully()
+        public void DeleteCardAccountSuccessfully()
         {
             var repo = new CardAccountRepository();
             var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before

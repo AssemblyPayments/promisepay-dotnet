@@ -20,7 +20,7 @@ namespace PromisePayDotNet.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, CardAccount>>(response.Content).Values.First();
         }
 
-        public CardAccount CreateCardAccount(CardAccount cardAccount, string mobilePin = "")
+        public CardAccount CreateCardAccount(CardAccount cardAccount)
         {
             var client = GetRestClient();
             var request = new RestRequest("/card_accounts", Method.POST);
@@ -30,19 +30,17 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("expiry_month", cardAccount.Card.ExpiryMonth);
             request.AddParameter("expiry_year", cardAccount.Card.ExpiryYear);
             request.AddParameter("cvv", cardAccount.Card.CVV);
-            request.AddParameter("mobile_pin", mobilePin);
 
             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, CardAccount>>(response.Content).Values.First();
         }
 
-        public bool DeleteCardAccount(string cardAccountId, string mobilePin = "")
+        public bool DeleteCardAccount(string cardAccountId)
         {
             AssertIdNotNull(cardAccountId);
             var client = GetRestClient();
             var request = new RestRequest("/card_accounts/{id}", Method.DELETE);
             request.AddUrlSegment("id", cardAccountId);
-            request.AddParameter("mobile_pin", mobilePin);
             var response = SendRequest(client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {

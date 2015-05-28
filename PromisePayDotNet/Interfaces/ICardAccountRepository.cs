@@ -7,9 +7,9 @@ namespace PromisePayDotNet.Interfaces
 
         CardAccount GetCardAccountById(string cardAccountId);
 
-        CardAccount CreateCardAccount(CardAccount cardAccount, string mobilePin = "");
+        CardAccount CreateCardAccount(CardAccount cardAccount);
 
-        bool DeleteCardAccount(string cardAccountId, string mobilePin = "");
+        bool DeleteCardAccount(string cardAccountId);
 
         User GetUserForCardAccount(string cardAccountId);
 
