@@ -7,7 +7,5 @@ namespace PromisePayDotNet.DAO
     {
         [JsonProperty(PropertyName = "bank")]
         public Bank Bank { get; set; }
-
-        public string UserId { get; set; }
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
 using PromisePayDotNet.Exceptions;
 using RestSharp;
+using System;
+using System.Collections;
+using System.Configuration;
+using System.Net;
 
 namespace PromisePayDotNet.Implementations
 {

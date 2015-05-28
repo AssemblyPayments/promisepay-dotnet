@@ -5,11 +5,11 @@ namespace PromisePayDotNet.Interfaces
     public interface ICardAccountRepository
     {
 
-        CardAccount GetCardAccount(string cardAccountId, string mobilePin);
+        CardAccount GetCardAccountById(string cardAccountId);
 
-        CardAccount CreateCardAccount(CardAccount cardAccount);
+        CardAccount CreateCardAccount(CardAccount cardAccount, string mobilePin = "");
 
-        bool DeleteCardAccount(string cardAccountId, string mobilePin);
+        bool DeleteCardAccount(string cardAccountId, string mobilePin = "");
 
         User GetUserForCardAccount(string cardAccountId);
 

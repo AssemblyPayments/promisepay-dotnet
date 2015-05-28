@@ -18,5 +18,8 @@ namespace PromisePayDotNet.DAO
 
         [JsonProperty(PropertyName = "expiry_year")]
         public string ExpiryYear { get; set; }
+
+        [JsonProperty(PropertyName = "cvv")]
+        public string CVV { get; set; }
     }
 }

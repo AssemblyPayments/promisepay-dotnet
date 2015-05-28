@@ -1,11 +1,10 @@
-﻿using System.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace PromisePayDotNet.Implementations
 {

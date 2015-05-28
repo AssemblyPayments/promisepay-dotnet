@@ -20,5 +20,7 @@ namespace PromisePayDotNet.DAO
         [JsonProperty(PropertyName = "currency")]
         public string Currency { get; set; }
 
+        [JsonIgnore]
+        public string UserId { get; set; }
     }
 }
