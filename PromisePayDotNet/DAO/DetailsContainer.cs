@@ -7,7 +7,6 @@ namespace PromisePayDotNet.DAO
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-
         [JsonProperty(PropertyName = "bpay_details")]
         public BPayDetails BPayDetails { get; set; }
 

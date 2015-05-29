@@ -88,12 +88,14 @@
     <Compile Include="Implementations\AbstractRepository.cs" />
     <Compile Include="Implementations\BankAccountRepository.cs" />
     <Compile Include="Implementations\CardAccountRepository.cs" />
+    <Compile Include="Implementations\FeeRepository.cs" />
     <Compile Include="Implementations\ItemRepository.cs" />
     <Compile Include="Implementations\PayPalAccountRepository.cs" />
     <Compile Include="Implementations\TransactionRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Interfaces\ICardAccountRepository.cs" />
+    <Compile Include="Interfaces\IFeeRepository.cs" />
     <Compile Include="Interfaces\IItemRepository.cs" />
     <Compile Include="Interfaces\IPayPalAccountRepository.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />

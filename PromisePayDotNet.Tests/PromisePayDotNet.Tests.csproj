@@ -58,6 +58,7 @@
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="CardAccountTest.cs" />
     <Compile Include="ConfigTest.cs" />
+    <Compile Include="FeeTest.cs" />
     <Compile Include="ItemActionsTest.cs" />
     <Compile Include="ItemTest.cs" />
     <Compile Include="PayPalAccountTest.cs" />

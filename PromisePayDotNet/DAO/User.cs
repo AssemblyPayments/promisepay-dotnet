@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace PromisePayDotNet.DAO
 {
     public class User : AbstractDAO
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }
 
@@ -40,12 +36,6 @@ namespace PromisePayDotNet.DAO
 
         [JsonProperty(PropertyName = "dob")]
         public string Dob { get; set; }
-
-        [JsonProperty(PropertyName = "created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [JsonProperty(PropertyName = "updated_at")]
-        public DateTime? UpdatedAt { get; set; }
 
         [JsonProperty(PropertyName = "full_name")]
         public string FullName { get; set; }

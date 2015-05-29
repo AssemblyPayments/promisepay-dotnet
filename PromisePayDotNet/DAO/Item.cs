@@ -8,20 +8,11 @@ namespace PromisePayDotNet.DAO
 {
     public class Item : AbstractDAO
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
-
-        [JsonProperty(PropertyName = "created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [JsonProperty(PropertyName = "updated_at")]
-        public DateTime? UpdatedAt { get; set; }
 
         [JsonProperty(PropertyName = "state")]
         public string State { get; set; }
@@ -76,10 +67,7 @@ namespace PromisePayDotNet.DAO
                 {
                     return null;
                 }
-                else
-                {
-                    return Fees.Select(x => x.Id).ToList();
-                }
+                return Fees.Select(x => x.Id).ToList();
             }
         }
 

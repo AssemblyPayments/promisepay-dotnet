@@ -1,20 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace PromisePayDotNet.DAO
 {
     public class Transaction : AbstractDAO
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-
-        [JsonProperty(PropertyName = "created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [JsonProperty(PropertyName = "updated_at")]
-        public DateTime? UpdatedAt { get; set; }
-
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 

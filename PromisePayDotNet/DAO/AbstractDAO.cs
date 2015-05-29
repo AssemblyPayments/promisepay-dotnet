@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace PromisePayDotNet.DAO
@@ -10,5 +11,15 @@ namespace PromisePayDotNet.DAO
 
         [JsonProperty(PropertyName = "links")]
         public IDictionary<string, string> Links { get; set; }
+
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
+
+        [JsonProperty(PropertyName = "created_at")]
+        public DateTime? CreatedAt { get; set; }
+
+        [JsonProperty(PropertyName = "updated_at")]
+        public DateTime? UpdatedAt { get; set; }
+
     }
 }

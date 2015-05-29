@@ -1,6 +1,6 @@
 ﻿namespace PromisePayDotNet.DAO
 {
-    public class DisbursementAccount
+    public class DisbursementAccount : AbstractDAO
     {
     }
 }
