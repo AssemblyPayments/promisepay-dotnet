@@ -207,6 +207,7 @@ namespace PromisePayDotNet.Implementations
 
         public DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin)
         {
+            //ToDo find out DisbursementAccount fields and implement this method 
             throw new NotImplementedException();
             AssertIdNotNull(userId);
             var client = GetRestClient();
