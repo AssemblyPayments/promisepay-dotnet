@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PromisePayDotNet.Enums;
 
 namespace PromisePayDotNet.DAO
 {
@@ -8,7 +9,7 @@ namespace PromisePayDotNet.DAO
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "fee_type_id")]
-        public int FeeTypeId { get; set; }
+        public FeeType FeeType { get; set; }
 
         [JsonProperty(PropertyName = "amount")]
         public int Amount { get; set; }
