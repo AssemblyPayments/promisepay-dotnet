@@ -16,5 +16,8 @@ namespace PromisePayDotNet.DAO
         [JsonProperty(PropertyName = "error_lines")]
         public int? ErrorLines { get; set; }
 
+        [JsonProperty(PropertyName = "progress")]
+        public double? progress { get; set; }
+
     }
 }

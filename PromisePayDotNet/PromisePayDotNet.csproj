@@ -94,6 +94,7 @@
     <Compile Include="Implementations\ItemRepository.cs" />
     <Compile Include="Implementations\PayPalAccountRepository.cs" />
     <Compile Include="Implementations\TransactionRepository.cs" />
+    <Compile Include="Implementations\UploadRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Interfaces\ICardAccountRepository.cs" />
