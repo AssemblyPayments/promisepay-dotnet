@@ -9,7 +9,7 @@ namespace PromisePayDotNet.Interfaces
 
         Upload GetUploadById(string uploadId);
 
-        Upload CreateUpload(string csvFile);
+        Upload CreateUpload(string csvData);
 
         Upload GetStatus(string uploadId);
 
