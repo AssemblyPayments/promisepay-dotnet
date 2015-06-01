@@ -42,10 +42,7 @@ namespace PromisePayDotNet.Implementations
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public User GetUserForPayPalAccount(string paypalAccountId)
@@ -54,8 +51,7 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/paypal_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", paypalAccountId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            var response = SendRequest(client, request);
 
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))
@@ -63,10 +59,7 @@ namespace PromisePayDotNet.Implementations
                 var item = dict["users"];
                 return JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(item));
             }
-            else
-            {
-                return null;
-            }         
+            return null;
         }
     }
 }

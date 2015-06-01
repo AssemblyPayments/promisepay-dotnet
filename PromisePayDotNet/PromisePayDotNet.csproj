@@ -77,6 +77,7 @@
     <Compile Include="DAO\PayPal.cs" />
     <Compile Include="DAO\PayPalAccount.cs" />
     <Compile Include="DAO\Transaction.cs" />
+    <Compile Include="DAO\Upload.cs" />
     <Compile Include="DAO\User.cs" />
     <Compile Include="DAO\WireDetails.cs" />
     <Compile Include="DI\InitUnityContainer.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Interfaces\IItemRepository.cs" />
     <Compile Include="Interfaces\IPayPalAccountRepository.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />
+    <Compile Include="Interfaces\IUploadRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Settings\PromisePaySettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

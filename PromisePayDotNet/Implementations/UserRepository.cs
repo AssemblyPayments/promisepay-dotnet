@@ -29,10 +29,7 @@ namespace PromisePayDotNet.Implementations
                 var userCollection = dict["users"];
                 return JsonConvert.DeserializeObject<List<User>>(JsonConvert.SerializeObject(userCollection));
             }
-            else
-            {
-                return new List<User>();
-            }
+            return new List<User>();
         }
 
         public User GetUserById(string userId)
@@ -77,10 +74,7 @@ namespace PromisePayDotNet.Implementations
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public void SendMobilePin(string userId)
@@ -89,8 +83,7 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/users/:id/mobile_pin", Method.POST);
             request.AddUrlSegment("id", userId);
-            var response = SendRequest(client, request);
-
+            SendRequest(client, request);
         }
 
         public IEnumerable<Item> ListItemsForUser(string userId)
@@ -106,10 +99,7 @@ namespace PromisePayDotNet.Implementations
                 var itemCollection = dict["items"];
                 return JsonConvert.DeserializeObject<List<Item>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<Item>();
-            }
+            return new List<Item>();
         }
 
         public IEnumerable<PayPalAccount> ListPayPalAccountsForUser(string userId)
@@ -129,7 +119,7 @@ namespace PromisePayDotNet.Implementations
                 {
                     return new List<PayPalAccount>();
                 }
-                throw e;
+                throw;
             }
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("paypal_accounts"))
@@ -137,10 +127,7 @@ namespace PromisePayDotNet.Implementations
                 var itemCollection = dict["paypal_accounts"];
                 return JsonConvert.DeserializeObject<List<PayPalAccount>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<PayPalAccount>();
-            }
+            return new List<PayPalAccount>();
         }
 
         public IEnumerable<CardAccount> ListCardAccountsForUser(string userId)
@@ -160,7 +147,7 @@ namespace PromisePayDotNet.Implementations
                 {
                     return new List<CardAccount>();
                 }
-                throw e;
+                throw;
             }
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("card_accounts"))
@@ -168,10 +155,7 @@ namespace PromisePayDotNet.Implementations
                 var itemCollection = dict["card_accounts"];
                 return JsonConvert.DeserializeObject<List<CardAccount>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<CardAccount>();
-            }
+            return new List<CardAccount>();
         }
 
         public IEnumerable<BankAccount> ListBankAccountsForUser(string userId)
@@ -199,10 +183,8 @@ namespace PromisePayDotNet.Implementations
                 var itemCollection = dict["bank_accounts"];
                 return JsonConvert.DeserializeObject<List<BankAccount>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<BankAccount>();
-            }
+            
+            return new List<BankAccount>();
         }
 
         public DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin)
@@ -215,14 +197,13 @@ namespace PromisePayDotNet.Implementations
             request.AddUrlSegment("id", userId);
             request.AddUrlSegment("account_id", accountId);
             request.AddUrlSegment("mobile_pin", mobilePin);
-            IRestResponse response;
             try
             {
-                response = SendRequest(client, request);
+                SendRequest(client, request);
             }
             catch (ApiErrorsException e)
             {
-                throw e;
+                throw;
             }
         
         }
@@ -287,10 +268,10 @@ namespace PromisePayDotNet.Implementations
 
         private bool IsCorrectCountryCode(string countryCode)
         {
-            return CountryCodes.Contains(countryCode.ToUpper());
+            return _countryCodes.Contains(countryCode.ToUpper());
         }
 
-        private readonly List<string> CountryCodes = new List<string> { "AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BIH", "BWA", "BVT", "BRA", "VGB", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "HKG", "MAC", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "ANT", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE" };
+        private readonly List<string> _countryCodes = new List<string> { "AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BIH", "BWA", "BVT", "BRA", "VGB", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "HKG", "MAC", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "ANT", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE" };
 
         #endregion
     }

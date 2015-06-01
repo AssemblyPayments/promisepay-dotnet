@@ -27,10 +27,7 @@ namespace PromisePayDotNet.Implementations
                 var userCollection = dict["items"];
                 return JsonConvert.DeserializeObject<List<Item>>(JsonConvert.SerializeObject(userCollection));
             }
-            else
-            {
-                return new List<Item>();
-            }
+            return new List<Item>();
         }
 
         public Item GetItemById(string itemId)
@@ -56,7 +53,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("seller_id", item.SellerId);
             request.AddParameter("fee_ids", item.FeeIds);
             request.AddParameter("description", item.Description);
-            var response = SendRequest(client, request);
+             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Item>>(response.Content).Values.First();
         }
 
@@ -71,10 +68,7 @@ namespace PromisePayDotNet.Implementations
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public Item UpdateItem(Item item)
@@ -111,7 +105,7 @@ namespace PromisePayDotNet.Implementations
                 {
                     return new List<Transaction>();
                 }
-                throw e;
+                throw;
             }
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("transactions"))
@@ -119,10 +113,7 @@ namespace PromisePayDotNet.Implementations
                 var itemCollection = dict["transactions"];
                 return JsonConvert.DeserializeObject<List<Transaction>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<Transaction>();
-            }
+            return new List<Transaction>();
         }
 
         public ItemStatus GetStatusForItem(string itemId)
@@ -131,18 +122,14 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/status", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            var response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("items"))
             {
                 var itemCollection = dict["items"];
                 return JsonConvert.DeserializeObject<ItemStatus>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public IEnumerable<Fee> ListFeesForItem(string itemId)
@@ -151,18 +138,14 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/fees", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            var response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("fees"))
             {
                 var itemCollection = dict["fees"];
                 return JsonConvert.DeserializeObject<List<Fee>>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return new List<Fee>();
-            }
+            return new List<Fee>();
         }
 
         public User GetBuyerForItem(string itemId)
@@ -171,18 +154,14 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/buyers", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            IRestResponse response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))
             {
                 var itemCollection = dict["users"];
                 return JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public User GetSellerForItem(string itemId)
@@ -191,18 +170,14 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/sellers", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            IRestResponse response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))
             {
                 var itemCollection = dict["users"];
                 return JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(itemCollection));
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public WireDetails GetWireDetailsForItem(string itemId)
@@ -211,8 +186,7 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/wire_details", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            var response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("items"))
             {
@@ -220,10 +194,7 @@ namespace PromisePayDotNet.Implementations
                 var details =  JsonConvert.DeserializeObject<DetailsContainer>(JsonConvert.SerializeObject(itemCollection));
                 return details.WireDetails;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public BPayDetails GetBPayDetailsForItem(string itemId)
@@ -232,8 +203,7 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/items/{id}/bpay_details", Method.GET);
             request.AddUrlSegment("id", itemId);
-            IRestResponse response;
-            response = SendRequest(client, request);
+            var response = SendRequest(client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("items"))
             {
@@ -241,10 +211,7 @@ namespace PromisePayDotNet.Implementations
                 var details = JsonConvert.DeserializeObject<DetailsContainer>(JsonConvert.SerializeObject(itemCollection));
                 return details.BPayDetails;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public Item MakePayment(string itemId, string accountId, string userId)
@@ -265,10 +232,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-            }            
+            return null;
         }
 
         public Item RequestPayment(string itemId, string sellerId)
@@ -287,10 +251,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-            }       
+            return null;
         }
 
         public Item ReleasePayment(string itemId, string buyerId, int releaseAmount)
@@ -310,10 +271,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-            }   
+            return null;
         }
 
         public Item RequestRelease(string itemId, string sellerId, int releaseAmount)
@@ -333,11 +291,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item Cancel(string itemId)
@@ -354,11 +308,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item AcknowledgeWire(string itemId, string buyerId)
@@ -376,11 +326,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item AcknowledgePayPal(string itemId, string buyerId)
@@ -398,11 +344,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item RevertWire(string itemId, string buyerId)
@@ -420,11 +362,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item RequestRefund(string itemId, string buyerId, string refundAmount, string refundMessage)
@@ -444,11 +382,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
 
         public Item Refund(string itemId, string sellerId, string refundAmount, string refundMessage)
@@ -468,11 +402,7 @@ namespace PromisePayDotNet.Implementations
                 var item = JsonConvert.DeserializeObject<Item>(JsonConvert.SerializeObject(itemCollection));
                 return item;
             }
-            else
-            {
-                return null;
-
-            }
+            return null;
         }
     }
 }
