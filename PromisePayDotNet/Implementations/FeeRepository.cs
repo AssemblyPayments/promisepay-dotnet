@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
+using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
 using System.Collections.Generic;
@@ -38,10 +39,15 @@ namespace PromisePayDotNet.Implementations
 
         public Fee CreateFee(Fee fee)
         {
+            if (!possibleTos.Contains(fee.To))
+            {
+                throw new ValidationException("To should have value of \"buyer\", \"seller\", \"cc\", \"int_wire\", \"paypal_payout\"");
+            }
+
             var client = GetRestClient();
             var request = new RestRequest("/fees", Method.POST);
             request.AddParameter("name", fee.Name);
-            request.AddParameter("fee_type_id", fee.FeeType);
+            request.AddParameter("fee_type_id", (int)fee.FeeType);
             request.AddParameter("amount", fee.Amount);
             request.AddParameter("cap", fee.Cap);
             request.AddParameter("min", fee.Min);
@@ -51,5 +57,7 @@ namespace PromisePayDotNet.Implementations
             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Fee>>(response.Content).Values.First();
         }
+
+        private List<string> possibleTos = new List<string>() {"buyer", "seller", "cc", "int_wire", "paypal_payout"};
     }
 }

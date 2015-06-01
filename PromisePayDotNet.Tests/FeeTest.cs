@@ -1,6 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
+using PromisePayDotNet.Enums;
+using PromisePayDotNet.Exceptions;
+using PromisePayDotNet.Implementations;
+using System;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -18,6 +23,63 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("58e15f18-500e-4cdc-90ca-65e1f1dce565", fee.Id);
             Assert.AreEqual("Buyer Fee @ 10%", fee.Name);
 
+        }
+
+        [TestMethod]
+        public void CreateFeeSuccessfully()
+        {
+            var repo = new FeeRepository();
+            var feeId = Guid.NewGuid().ToString();
+            var createdFee = repo.CreateFee(new Fee
+            {
+                Id = feeId,
+                Amount = 1000,
+                Name = "Test fee #1",
+                FeeType = FeeType.Fixed,
+                Cap = "1",
+                Max = "3",
+                Min = "2",
+                To = "buyer"
+            });
+            Assert.IsNotNull(createdFee);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void CreateFeeWrongTo()
+        {
+            var repo = new FeeRepository();
+            var feeId = Guid.NewGuid().ToString();
+            var createdFee = repo.CreateFee(new Fee
+            {
+                Id = feeId,
+                Amount = 1000,
+                Name = "Test fee #1",
+                FeeType = FeeType.Fixed,
+                Cap = "1",
+                Max = "3",
+                Min = "2",
+            });
+            Assert.IsNotNull(createdFee);
+            Assert.AreEqual("Test fee #1", createdFee.Name);
+        }
+
+        [TestMethod]
+        public void GetFeeByIdSuccessfull()
+        {
+            var repo = new FeeRepository();
+            var id = "79116c9f-d750-4faa-85c7-b7da36f23b38";
+            var fee = repo.GetFeeById(id);
+            Assert.AreEqual(id, fee.Id);
+        }
+
+        [TestMethod]
+        public void ListFeeSuccessfully()
+        {
+            var repo = new FeeRepository();
+            var fees = repo.ListFees();
+            Assert.IsNotNull(fees);
+            Assert.IsTrue(fees.Any());
         }
     }
 }
