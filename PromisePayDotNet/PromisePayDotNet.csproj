@@ -67,6 +67,7 @@
     <Compile Include="DAO\BPayDetails.cs" />
     <Compile Include="DAO\Card.cs" />
     <Compile Include="DAO\CardAccount.cs" />
+    <Compile Include="DAO\Company.cs" />
     <Compile Include="DAO\DetailsContainer.cs" />
     <Compile Include="DAO\DisbursementAccount.cs" />
     <Compile Include="DAO\ErrorsDAO.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Implementations\AbstractRepository.cs" />
     <Compile Include="Implementations\BankAccountRepository.cs" />
     <Compile Include="Implementations\CardAccountRepository.cs" />
+    <Compile Include="Implementations\CompanyRepository.cs" />
     <Compile Include="Implementations\FeeRepository.cs" />
     <Compile Include="Implementations\ItemRepository.cs" />
     <Compile Include="Implementations\PayPalAccountRepository.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Interfaces\ICardAccountRepository.cs" />
+    <Compile Include="Interfaces\ICompanyRepository.cs" />
     <Compile Include="Interfaces\IFeeRepository.cs" />
     <Compile Include="Interfaces\IItemRepository.cs" />
     <Compile Include="Interfaces\IPayPalAccountRepository.cs" />
