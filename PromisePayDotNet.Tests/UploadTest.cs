@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using PromisePayDotNet.DAO;
 using PromisePayDotNet.Implementations;
@@ -10,7 +9,7 @@ namespace PromisePayDotNet.Tests
     public class UploadTest
     {
         [TestMethod]
-        public void TestDeserialization()
+        public void UploadDeserialization()
         {
             var jsonStr =
                 "{ \"id\": \"a2711d90-ed41-4d12-81d2-000000000002\", \"processed_lines\": 6, \"total_lines\": 6, \"update_lines\": 0, \"error_lines\": 6, \"progress\": 100.0 }";

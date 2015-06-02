@@ -10,7 +10,7 @@ namespace PromisePayDotNet.Tests
     public class CompanyTest
     {
         [TestMethod]
-        public void TestDeserialization()
+        public void CompanyDeserialization()
         {
             var jsonStr = "{ \"legal_name\": \"Igor\", \"name\": null, \"id\": \"e466dfb4-f05c-4c7f-92a3-09a0a28c7af5\", \"related\": { \"address\": \"07ed45e5-bb9d-459f-bb7b-a02ecb38f443\" }, \"links\": { \"self\": \"/companies/e466dfb4-f05c-4c7f-92a3-09a0a28c7af5\" } }";
             var company = JsonConvert.DeserializeObject<Company>(jsonStr);

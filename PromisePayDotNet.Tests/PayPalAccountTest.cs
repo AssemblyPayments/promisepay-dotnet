@@ -10,7 +10,7 @@ namespace PromisePayDotNet.Tests
     public class PayPalAccountTest
     {
         [TestMethod]
-        public void TestDeserialization()
+        public void PayPalAccountDeserialization()
         {
             var jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-25T12:31:39.324Z\", \"updated_at\": \"2015-04-25T12:31:39.324Z\", \"id\": \"70d93fe3-6c2e-4a1c-918f-13b8e7bb3779\", \"currency\": \"USD\", \"paypal\": { \"email\": \"test.me@promisepay.com\" }, \"links\": { \"self\": \"/paypal_accounts/70d93fe3-6c2e-4a1c-918f-13b8e7bb3779\", \"users\": \"/paypal_accounts/70d93fe3-6c2e-4a1c-918f-13b8e7bb3779/users\" } }";
             var payPalAccount = JsonConvert.DeserializeObject<PayPalAccount>(jsonStr);
