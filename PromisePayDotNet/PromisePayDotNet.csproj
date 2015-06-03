@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="DAO\AbstractAccount.cs" />
     <Compile Include="DAO\AbstractDAO.cs" />
+    <Compile Include="DAO\Address.cs" />
     <Compile Include="DAO\Bank.cs" />
     <Compile Include="DAO\BankAccount.cs" />
     <Compile Include="DAO\BPayDetails.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Implementations\AbstractRepository.cs" />
+    <Compile Include="Implementations\AddressRepository.cs" />
     <Compile Include="Implementations\BankAccountRepository.cs" />
     <Compile Include="Implementations\CardAccountRepository.cs" />
     <Compile Include="Implementations\CompanyRepository.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Implementations\TransactionRepository.cs" />
     <Compile Include="Implementations\UploadRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
+    <Compile Include="Interfaces\IAddressRepository.cs" />
     <Compile Include="Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Interfaces\ICardAccountRepository.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />

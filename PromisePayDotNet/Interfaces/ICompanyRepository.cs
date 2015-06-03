@@ -8,5 +8,9 @@ namespace PromisePayDotNet.Interfaces
         IEnumerable<Company> ListCompanies();
 
         Company GetCompanyById(string companyId);
+
+        Company CreateCompany(Company company);
+
+        Company EditCompany(Company company);
     }
 }

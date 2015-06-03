@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AddressTest.cs" />
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="CardAccountTest.cs" />
     <Compile Include="CompanyTest.cs" />

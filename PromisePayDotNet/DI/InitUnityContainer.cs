@@ -8,9 +8,16 @@ namespace PromisePayDotNet.DI
     {
         public static void Init(IUnityContainer container)
         {
-            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IAddressRepository, AddressRepository>();
+            container.RegisterType<IBankAccountRepository, BankAccountRepository>();
+            container.RegisterType<ICardAccountRepository, CardAccountRepository>();
+            container.RegisterType<ICompanyRepository, CompanyRepository>();
+            container.RegisterType<IFeeRepository, FeeRepository>();
             container.RegisterType<IItemRepository, ItemRepository>();
+            container.RegisterType<IPayPalAccountRepository, PayPalAccountRepository>();
             container.RegisterType<ITransactionRepository, TransactionRepository>();
+            container.RegisterType<IUploadRepository, UploadRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
         }
     }
 }

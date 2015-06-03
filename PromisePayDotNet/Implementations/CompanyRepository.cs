@@ -33,5 +33,42 @@ namespace PromisePayDotNet.Implementations
             var response = SendRequest(client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }
+
+        public Company CreateCompany(Company company)
+        {
+            var client = GetRestClient();
+            var request = new RestRequest("/companies", Method.POST);
+            request.AddParameter("name", company.Name);
+            request.AddParameter("legal_name", company.LegalName);
+            request.AddParameter("tax_number", company.TaxNumber);
+            request.AddParameter("charge_tax", company.ChargeTax);
+            request.AddParameter("address_line1", company.AddressLine1);
+            request.AddParameter("address_line2", company.AddressLine2);
+            request.AddParameter("city", company.City);
+            request.AddParameter("state", company.State);
+            request.AddParameter("zip", company.Zip);
+            request.AddParameter("country", company.Country);
+            var response = SendRequest(client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
+        }
+
+        public Company EditCompany(Company company)
+        {
+            var client = GetRestClient();
+            var request = new RestRequest("/companies", Method.POST);
+            request.AddParameter("name", company.Name);
+            request.AddParameter("legal_name", company.LegalName);
+            request.AddParameter("tax_number", company.TaxNumber);
+            request.AddParameter("charge_tax", company.ChargeTax);
+            request.AddParameter("address_line1", company.AddressLine1);
+            request.AddParameter("address_line2", company.AddressLine2);
+            request.AddParameter("city", company.City);
+            request.AddParameter("state", company.State);
+            request.AddParameter("zip", company.Zip);
+            request.AddParameter("country", company.Country);
+            var response = SendRequest(client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
+        }
+
     }
 }
