@@ -82,12 +82,14 @@
     <Compile Include="DTO\Transaction.cs" />
     <Compile Include="DTO\Upload.cs" />
     <Compile Include="DTO\User.cs" />
+    <Compile Include="DTO\Widget.cs" />
     <Compile Include="DTO\WireDetails.cs" />
     <Compile Include="DI\InitUnityContainer.cs" />
     <Compile Include="Enums\FeeType.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Exceptions\ApiErrorsException.cs" />
     <Compile Include="Exceptions\MisconfigurationException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Implementations\AbstractRepository.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Implementations\FeeRepository.cs" />
     <Compile Include="Implementations\ItemRepository.cs" />
     <Compile Include="Implementations\PayPalAccountRepository.cs" />
+    <Compile Include="Implementations\TokenRepository.cs" />
     <Compile Include="Implementations\TransactionRepository.cs" />
     <Compile Include="Implementations\UploadRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Interfaces\IFeeRepository.cs" />
     <Compile Include="Interfaces\IItemRepository.cs" />
     <Compile Include="Interfaces\IPayPalAccountRepository.cs" />
+    <Compile Include="Interfaces\ITokenRepository.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />
     <Compile Include="Interfaces\IUploadRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />

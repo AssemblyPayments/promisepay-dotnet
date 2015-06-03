@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Exceptions;
 using RestSharp;
@@ -76,6 +77,18 @@ namespace PromisePayDotNet.Implementations
                 var errors = JsonConvert.DeserializeObject<ErrorsDAO>(response.Content).Errors;
                 throw new ApiErrorsException("API returned errors, see Errors property", errors);
             }
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var message = JsonConvert.DeserializeObject<IDictionary<string,string>>(response.Content)["message"];
+                throw new ApiErrorsException(message, null);
+            }
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                var message = JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content)["message"];
+                throw new NotFoundException(message);
+            }
+
             return response;
         }
 
