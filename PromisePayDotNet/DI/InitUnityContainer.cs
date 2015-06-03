@@ -15,6 +15,7 @@ namespace PromisePayDotNet.DI
             container.RegisterType<IFeeRepository, FeeRepository>();
             container.RegisterType<IItemRepository, ItemRepository>();
             container.RegisterType<IPayPalAccountRepository, PayPalAccountRepository>();
+            container.RegisterType<ITokenRepository, TokenRepository>();
             container.RegisterType<ITransactionRepository, TransactionRepository>();
             container.RegisterType<IUploadRepository, UploadRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
