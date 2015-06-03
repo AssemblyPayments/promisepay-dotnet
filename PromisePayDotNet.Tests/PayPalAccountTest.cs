@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using PromisePayDotNet.DAO;
+using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
 
 namespace PromisePayDotNet.Tests

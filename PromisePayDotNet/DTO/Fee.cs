@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PromisePayDotNet.Enums;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public class Fee : AbstractDAO
+    public class Fee : AbstractDTO
     {
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

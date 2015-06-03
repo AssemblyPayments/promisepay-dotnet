@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
     public class Card
     {

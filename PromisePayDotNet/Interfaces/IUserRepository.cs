@@ -1,4 +1,4 @@
-﻿using PromisePayDotNet.DAO;
+﻿using PromisePayDotNet.DTO;
 using System.Collections.Generic;
 
 namespace PromisePayDotNet.Interfaces

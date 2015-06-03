@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public class Address : AbstractDAO
+    public class Address : AbstractDTO
     {
         [JsonProperty(PropertyName = "addressline1")]
         public string AddressLine1 { get; set; }

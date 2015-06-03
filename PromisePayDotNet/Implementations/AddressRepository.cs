@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using PromisePayDotNet.DAO;
+using PromisePayDotNet.DTO;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
 

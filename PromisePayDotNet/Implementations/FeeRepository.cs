@@ -1,6 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
-using PromisePayDotNet.DAO;
+using PromisePayDotNet.DTO;
 using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Interfaces;
 using RestSharp;

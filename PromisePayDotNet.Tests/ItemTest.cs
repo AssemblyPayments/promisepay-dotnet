@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using PromisePayDotNet.DAO;
+using PromisePayDotNet.DTO;
 using PromisePayDotNet.Enums;
 using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Implementations;

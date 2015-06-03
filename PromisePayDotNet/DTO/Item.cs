@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public class Item : AbstractDAO
+    public class Item : AbstractDTO
     {
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

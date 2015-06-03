@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public class Upload : AbstractDAO
+    public class Upload : AbstractDTO
     {
         [JsonProperty(PropertyName = "total_lines")]
         public int? TotalLines { get; set; }

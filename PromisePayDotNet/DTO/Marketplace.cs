@@ -1,4 +1,4 @@
-﻿namespace PromisePayDotNet.DAO
+﻿namespace PromisePayDotNet.DTO
 {
     public class Marketplace
     {

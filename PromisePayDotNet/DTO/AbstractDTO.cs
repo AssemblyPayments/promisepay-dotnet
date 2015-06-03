@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public abstract class AbstractDAO
+    public abstract class AbstractDTO
     {
         [JsonExtensionData]
         public IDictionary<string, object> AdditionalData { get; set; }

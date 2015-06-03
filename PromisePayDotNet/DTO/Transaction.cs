@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public class Transaction : AbstractDAO
+    public class Transaction : AbstractDTO
     {
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

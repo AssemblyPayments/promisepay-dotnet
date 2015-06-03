@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace PromisePayDotNet.DAO
+namespace PromisePayDotNet.DTO
 {
-    public abstract class AbstractAccount : AbstractDAO
+    public abstract class AbstractAccount : AbstractDTO
     {
         [JsonProperty(PropertyName = "active")]
         public bool Active { get; set; }
