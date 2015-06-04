@@ -109,7 +109,7 @@ namespace PromisePayDotNet.Implementations
 
             if (limit > EntityListLimit)
             {
-                throw new ArgumentException("Max value for limit parameter is 200!");
+                throw new ArgumentException(String.Format("Max value for limit parameter is {0}!",EntityListLimit));
             }
         }
     }
