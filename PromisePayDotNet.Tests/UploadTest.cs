@@ -25,6 +25,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public void ListUploadsSuccessfully()
         {
             var repo = new UploadRepository();
