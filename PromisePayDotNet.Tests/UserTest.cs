@@ -372,7 +372,7 @@ namespace PromisePayDotNet.Tests
         public void ListUserDisbursementAccountsSuccessful()
         {
             var repo = new UserRepository();
-            var items = repo.ListDisbursementAccounts("89592d8a-6cdb-4857-a90d-b41fc817d639", "123","123");
+            var items = repo.GetDisbursementAccount("89592d8a-6cdb-4857-a90d-b41fc817d639", "123","123");
         }
 
 

@@ -11,6 +11,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class ItemRepository : AbstractRepository, IItemRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IEnumerable<Item> ListItems(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);

@@ -9,6 +9,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class CompanyRepository : AbstractRepository, ICompanyRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IEnumerable<Company> ListCompanies()
         {
             var client = GetRestClient();

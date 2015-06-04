@@ -10,6 +10,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class BankAccountRepository : AbstractRepository, IBankAccountRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public BankAccount GetBankAccountById(string bankAccountId)
         {
             AssertIdNotNull(bankAccountId);

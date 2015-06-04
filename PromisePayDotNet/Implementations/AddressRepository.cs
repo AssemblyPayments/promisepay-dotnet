@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PromisePayDotNet.Implementations
 {
     public class AddressRepository : AbstractRepository, IAddressRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public Address GetAddressById(string addressId)
         {
             AssertIdNotNull(addressId);

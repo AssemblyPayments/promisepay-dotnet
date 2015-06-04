@@ -10,6 +10,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class UploadRepository : AbstractRepository, IUploadRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IList<Upload> ListUploads()
         {
             var client = GetRestClient();

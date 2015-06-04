@@ -85,6 +85,10 @@ namespace PromisePayDotNet.Implementations
         {
             var response = client.Execute(request);
 
+            log.Debug(String.Format(
+                    "Executed request to {0} with method {1}, got the following status: {2} and the body is {3}",
+                    response.ResponseUri, request.Method, response.StatusDescription, response.Content));
+
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 log.Error("Your login/password are unknown to server");
@@ -110,6 +114,7 @@ namespace PromisePayDotNet.Implementations
         {
             if (string.IsNullOrEmpty(itemId))
             {
+                log.Error("id cannot be empty!");
                 throw new ArgumentException("id cannot be empty!");
             }
         }
@@ -118,12 +123,15 @@ namespace PromisePayDotNet.Implementations
         {
             if (limit < 0 || offset < 0)
             {
+                log.Error("limit and offset values should be nonnegative!");
                 throw new ArgumentException("limit and offset values should be nonnegative!");
             }
 
             if (limit > EntityListLimit)
             {
-                throw new ArgumentException(String.Format("Max value for limit parameter is {0}!",EntityListLimit));
+                var message = String.Format("Max value for limit parameter is {0}!", EntityListLimit);
+                log.Error(message);
+                throw new ArgumentException(message);
             }
         }
     }

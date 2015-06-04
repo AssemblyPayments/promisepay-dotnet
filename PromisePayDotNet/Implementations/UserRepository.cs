@@ -12,6 +12,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class UserRepository : AbstractRepository, IUserRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         #region public methods
 
         public IEnumerable<User> ListUsers(int limit = 10, int offset = 0)
@@ -187,7 +189,7 @@ namespace PromisePayDotNet.Implementations
             return new List<BankAccount>();
         }
 
-        public DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin)
+        public DisbursementAccount GetDisbursementAccount(string userId, string accountId, string mobilePin)
         {
             //ToDo find out DisbursementAccount fields and implement this method 
             throw new NotImplementedException();

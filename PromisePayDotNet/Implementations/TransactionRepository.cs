@@ -9,6 +9,8 @@ namespace PromisePayDotNet.Implementations
 {
     public class TransactionRepository : AbstractRepository, ITransactionRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IEnumerable<Transaction> ListTransactions(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);

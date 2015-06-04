@@ -25,6 +25,6 @@ namespace PromisePayDotNet.Interfaces
 
         IEnumerable<BankAccount> ListBankAccountsForUser(string userId);
 
-        DisbursementAccount ListDisbursementAccounts(string userId, string accountId, string mobilePin);
+        DisbursementAccount GetDisbursementAccount(string userId, string accountId, string mobilePin);
     }
 }
