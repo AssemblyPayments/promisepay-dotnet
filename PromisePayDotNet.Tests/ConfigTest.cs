@@ -9,13 +9,6 @@ namespace PromisePayDotNet.Tests
     public class ConfigTest
     {
         [TestMethod]
-        public void VerifyAppDomainHasConfigurationSettings()
-        {
-            var value = ConfigurationManager.AppSettings["TestValue"];
-            Assert.IsFalse(String.IsNullOrEmpty(value), "No App.Config found.");
-        }
-
-        [TestMethod]
         public void TestPromisePayConfig()
         {
             var ht = ConfigurationManager.GetSection("PromisePay/Settings") as Hashtable;
