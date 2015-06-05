@@ -19,6 +19,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public void CreateUploadSuccessfully()
         {
             
@@ -34,23 +35,26 @@ namespace PromisePayDotNet.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public void GetUploadByIdSuccessfully()
         {
-            
+            Assert.Fail();
         }
 
 
 
         [TestMethod]
+        [Ignore]
         public void GetStatusSuccessfully()
         {
-            
+            Assert.Fail();            
         }
 
         [TestMethod]
+        [Ignore]
         public void StartImportSuccessfully()
         {
-            
+            Assert.Fail();            
         }
 
 
