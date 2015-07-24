@@ -1,8 +1,6 @@
 #.NET SDK - PromisePay API
 
 
-#PHP SDK - PromisePay API
-
 #1. Installation
 **NuGet:** Install PromisePay via NuGet package manager. The package name is '[PromisePay](https://www.nuget.org/packages/PromisePay.API.NET/0.0.1)'.
 
