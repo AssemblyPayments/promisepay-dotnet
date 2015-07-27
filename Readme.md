@@ -98,7 +98,7 @@ The below example shows the request for a marketplace configured to have the Ite
 		seller_country = "USA",
 		seller_email = "sally.seller@promisepay.com",
 		buyer_email = "bobby.buyer@promisepay.com",
-		fees_ids = "",
+		fee_ids = "",
 		payment_type_id = "2"		
 	};
 	
@@ -120,7 +120,7 @@ The below example shows the request for a marketplace that passes the Item and U
 		external_item_id = "TestItemId1234",
 		external_seller_id = "seller1234",
 		external_buyer_id = "buyer1234",
-		fees_ids = "",
+		fee_ids = "",
 		payment_type_id = "2"		
 	};
 
