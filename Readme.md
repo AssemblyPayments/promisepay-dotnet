@@ -75,12 +75,54 @@ For details and example, please consider the following MSDN article:
 	    Email = id + "@google.com"
 	};
 	
-	var createdUser = repo.CreateUser(user);
+	var createdUser = repo.CreateUser(user);	
 	
 **Listing users**
 
 	var repo = container.Resolve<IUserRepository>();
 	var users = repo.ListUsers();
+	
+**Request a session token**
+The below example shows the request for a marketplace configured to have the Item and User IDs generated automatically for them.
+
+	var repo = container.Resolve<ITokenRepository>();
+	var session_token = new Token {
+		current_user = "seller",
+		item_name = "Test Item",
+		amount = "2500",
+		seller_lastname = "Seller",
+		seller_firstname = "Sally",
+		buyer_lastname = "Buyer",
+		buyer_firstname = "Bobby",
+		buyer_country = "AUS",
+		seller_country = "USA",
+		seller_email = "sally.seller@promisepay.com",
+		buyer_email = "bobby.buyer@promisepay.com",
+		fees_ids = "",
+		payment_type_id = "2"		
+	};
+	
+The below example shows the request for a marketplace that passes the Item and User IDs.
+
+	var repo = container.Resolve<ITokenRepository>();
+	var session_token = new Token {
+		current_user_id = "seller1234",
+		item_name = "Test Item",
+		amount = "2500",
+		seller_lastname = "Seller",
+		seller_firstname = "Sally",
+		buyer_lastname = "Buyer",
+		buyer_firstname = "Bobby",
+		buyer_country = "AUS",
+		seller_country = "USA",
+		seller_email = "sally.seller@promisepay.com",
+		buyer_email = "bobby.buyer@promisepay.com",
+		external_item_id = "TestItemId1234",
+		external_seller_id = "seller1234",
+		external_buyer_id = "buyer1234",
+		fees_ids = "",
+		payment_type_id = "2"		
+	};
 
 
 
