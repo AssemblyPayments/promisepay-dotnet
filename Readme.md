@@ -57,7 +57,66 @@ For details and example, please consider the following MSDN article:
 [https://msdn.microsoft.com/ru-ru/library/dn178463(v=pandp.30).aspx](http://)
 
 #3. Examples
-**Create a user**
+##Tokens
+##### Example 1 - Request session token
+The below example shows the request for a marketplace configured to have the Item and User IDs generated automatically for them.
+
+	var repo = container.Resolve<ITokenRepository>();
+	var session_token = new Token {
+		current_user = "seller",
+		item_name = "Test Item",
+		amount = "2500",
+		seller_lastname = "Seller",
+		seller_firstname = "Sally",
+		buyer_lastname = "Buyer",
+		buyer_firstname = "Bobby",
+		buyer_country = "AUS",
+		seller_country = "USA",
+		seller_email = "sally.seller@promisepay.com",
+		buyer_email = "bobby.buyer@promisepay.com",
+		fee_ids = "",
+		payment_type_id = "2"		
+	};
+#####Example 2 - Request session token
+The below example shows the request for a marketplace that passes the Item and User IDs.
+
+	var repo = container.Resolve<ITokenRepository>();
+	var session_token = new Token {
+		current_user_id = "seller1234",
+		item_name = "Test Item",
+		amount = "2500",
+		seller_lastname = "Seller",
+		seller_firstname = "Sally",
+		buyer_lastname = "Buyer",
+		buyer_firstname = "Bobby",
+		buyer_country = "AUS",
+		seller_country = "USA",
+		seller_email = "sally.seller@promisepay.com",
+		buyer_email = "bobby.buyer@promisepay.com",
+		external_item_id = "TestItemId1234",
+		external_seller_id = "seller1234",
+		external_buyer_id = "buyer1234",
+		fee_ids = "",
+		payment_type_id = "2"		
+	};
+##Items
+
+#####Create an item
+#####Get an item
+#####Get a list of items
+#####Update an item
+#####Delete an item
+#####Get an item status
+#####Get an item's buyer
+#####Get an item's seller
+#####Get an item's fees
+#####Get an item's transactions
+#####Get an item's wire details
+#####Get an item's BPAY details
+
+##Users
+
+#####Create a user
 
 	var repo = container.Resolve<IUserRepository>();
 	
@@ -75,13 +134,59 @@ For details and example, please consider the following MSDN article:
 	    Email = id + "@google.com"
 	};
 	
-	var createdUser = repo.CreateUser(user);
-	
-**Listing users**
+	var createdUser = repo.CreateUser(user);	
+#####Get a user
+#####Get a list of users
 
 	var repo = container.Resolve<IUserRepository>();
 	var users = repo.ListUsers();
+#####Delete a User
+#####Get a user's card accounts
+#####Get a user's PayPal accounts
+#####Get a user's bank accounts
+#####Get a user's items
+#####Set a user's disbursement account
 
+##Item Actions
+#####Make payment
+#####Request payment
+#####Release payment
+#####Request release
+#####Cancel
+#####Acknowledge wire
+#####Acknowledge PayPal
+#####Revert wire
+#####Request refund
+#####Refund
+
+##Card Accounts
+#####Create a card account
+#####Get a card account
+#####Delete a card account
+#####Get a card account's users
+
+##Bank Accounts
+#####Create a bank account
+#####Get a bank account
+#####Delete a bank account
+#####Get a bank account's users
+
+##PayPal Accounts
+#####Create a PayPal account
+#####Get a PayPal account
+#####Delete a PayPal account
+#####Get a PayPal account's users
+
+##Fees
+#####Get a list of fees
+#####Get a fee
+#####Create a fee
+
+##Transactions
+#####Get a list of transactions
+#####Get a transactions
+#####Get a transaction's users
+#####Get a transaction's fees
 
 
 #4. Contributing
