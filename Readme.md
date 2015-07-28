@@ -2,7 +2,10 @@
 
 [![Join the chat at https://gitter.im/PromisePay/promisepay-dotnet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PromisePay/promisepay-dotnet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+<<<<<<< HEAD
 [![NuGet version](https://badge.fury.io/nu/PromisePay%2Fpromisepay-dotnet.svg)](http://badge.fury.io/nu/PromisePay%2Fpromisepay-dotnet) [![Build Status](https://travis-ci.org/PromisePay/promisepay-dotnet.svg)](https://travis-ci.org/PromisePay/promisepay-dotnet) [![Code Climate](https://codeclimate.com/github/PromisePay/promisepay-dotnet/badges/gpa.svg)](https://codeclimate.com/github/PromisePay/promisepay-dotnet) 
+=======
+>>>>>>> PromisePay/develop
 
 #1. Installation
 **NuGet:** Install PromisePay via NuGet package manager. The package name is '[PromisePay](https://www.nuget.org/packages/PromisePay.API.NET/0.0.1)'.
