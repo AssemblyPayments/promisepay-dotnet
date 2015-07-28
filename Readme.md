@@ -14,24 +14,24 @@ Before interacting with PromisePay API, you need to generate an API token. See [
 Once you have recorded your API token, configure the .NET package - see below.
 
 Add the below configuration to either the **App.config** or **Web.config** file, depending if it is a Windows, or Web application.
-
-	<?xml version="1.0" encoding="utf-8" ?>
-	<configuration>
-	  <configSections>
-	    <sectionGroup name="PromisePay">
-	      <section name="Settings" type="PromisePayDotNet.Settings.SettingsHandler,PromisePayDotNet" />
-	    </sectionGroup>
-	  </configSections>
-	  <PromisePay>
-	    <Settings>
-	      <add key="ApiUrl" value="https://test.api.promisepay.com" />
-	      <add key="Login" value="YOUR LOGIN" />
-	      <add key="Password" value="YOUR PASSWORD" />
-	      <add key="Key" value="YOUR API KEY" />
-	    </Settings>
-	  </PromisePay>
-	</configuration>
-
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <sectionGroup name="PromisePay">
+      <section name="Settings" type="PromisePayDotNet.Settings.SettingsHandler,PromisePayDotNet" />
+    </sectionGroup>
+  </configSections>
+  <PromisePay>
+    <Settings>
+      <add key="ApiUrl" value="https://test.api.promisepay.com" />
+      <add key="Login" value="YOUR LOGIN" />
+      <add key="Password" value="YOUR PASSWORD" />
+      <add key="Key" value="YOUR API KEY" />
+    </Settings>
+  </PromisePay>
+</configuration>
+```
 **Environments**
 
 	Prelive: https://test.api.promisepay.com
@@ -45,8 +45,10 @@ You will need to setup your DI container to bind interfaces and implementations 
 
 If you use **Unity** container, just invoke init method, as it's shown below:
 
+```cs
 	var container = new UnityContainer();
 	PromisePayDotNet.DI.InitUnityContainer.Init(container);
+```
 
 If you use another container, just bind interfaces from PromisePayDotNet.Interfaces to PromisePayDotNet.Implementations. You may use any lifecycle; implementations are stateless.
 
@@ -60,45 +62,48 @@ For details and example, please consider the following MSDN article:
 ##Tokens
 ##### Example 1 - Request session token
 The below example shows the request for a marketplace configured to have the Item and User IDs generated automatically for them.
-
-	var repo = container.Resolve<ITokenRepository>();
-	var session_token = new Token {
-		current_user = "seller",
-		item_name = "Test Item",
-		amount = "2500",
-		seller_lastname = "Seller",
-		seller_firstname = "Sally",
-		buyer_lastname = "Buyer",
-		buyer_firstname = "Bobby",
-		buyer_country = "AUS",
-		seller_country = "USA",
-		seller_email = "sally.seller@promisepay.com",
-		buyer_email = "bobby.buyer@promisepay.com",
-		fee_ids = "",
-		payment_type_id = "2"		
-	};
+```cs
+var repo = container.Resolve<ITokenRepository>();
+var session_token = new Token {
+	current_user = "seller",
+	item_name = "Test Item",
+	amount = "2500",
+	seller_lastname = "Seller",
+	seller_firstname = "Sally",
+	buyer_lastname = "Buyer",
+	buyer_firstname = "Bobby",
+	buyer_country = "AUS",
+	seller_country = "USA",
+	seller_email = "sally.seller@promisepay.com",
+	buyer_email = "bobby.buyer@promisepay.com",
+	fee_ids = "",
+	payment_type_id = "2"		
+};
+```
 #####Example 2 - Request session token
 The below example shows the request for a marketplace that passes the Item and User IDs.
 
-	var repo = container.Resolve<ITokenRepository>();
-	var session_token = new Token {
-		current_user_id = "seller1234",
-		item_name = "Test Item",
-		amount = "2500",
-		seller_lastname = "Seller",
-		seller_firstname = "Sally",
-		buyer_lastname = "Buyer",
-		buyer_firstname = "Bobby",
-		buyer_country = "AUS",
-		seller_country = "USA",
-		seller_email = "sally.seller@promisepay.com",
-		buyer_email = "bobby.buyer@promisepay.com",
-		external_item_id = "TestItemId1234",
-		external_seller_id = "seller1234",
-		external_buyer_id = "buyer1234",
-		fee_ids = "",
-		payment_type_id = "2"		
-	};
+```cs
+var repo = container.Resolve<ITokenRepository>();
+var session_token = new Token {
+	current_user_id = "seller1234",
+	item_name = "Test Item",
+	amount = "2500",
+	seller_lastname = "Seller",
+	seller_firstname = "Sally",
+	buyer_lastname = "Buyer",
+	buyer_firstname = "Bobby",
+	buyer_country = "AUS",
+	seller_country = "USA",
+	seller_email = "sally.seller@promisepay.com",
+	buyer_email = "bobby.buyer@promisepay.com",
+	external_item_id = "TestItemId1234",
+	external_seller_id = "seller1234",
+	external_buyer_id = "buyer1234",
+	fee_ids = "",
+	payment_type_id = "2"		
+};
+```
 ##Items
 
 #####Create an item
@@ -118,28 +123,34 @@ The below example shows the request for a marketplace that passes the Item and U
 
 #####Create a user
 
-	var repo = container.Resolve<IUserRepository>();
-	
-	var id = Guid.NewGuid().ToString();
-	var user = new User
-	{
-	    Id = id,
-	    FirstName = "Test",
-	    LastName = "Test",
-	    City = "Test",
-	    AddressLine1 = "Line 1",
-	    Country = "AUS",
-	    State = "state",
-	    Zip = "123456",
-	    Email = id + "@google.com"
-	};
-	
-	var createdUser = repo.CreateUser(user);	
+```cs
+var repo = container.Resolve<IUserRepository>();
+
+var id = Guid.NewGuid().ToString();
+var user = new User
+{
+    Id = id,
+    FirstName = "Test",
+    LastName = "Test",
+    City = "Test",
+    AddressLine1 = "Line 1",
+    Country = "AUS",
+    State = "state",
+    Zip = "123456",
+    Email = id + "@google.com"
+};
+
+var createdUser = repo.CreateUser(user);	
+```
+
 #####Get a user
 #####Get a list of users
 
+```cs
 	var repo = container.Resolve<IUserRepository>();
 	var users = repo.ListUsers();
+```
+
 #####Delete a User
 #####Get a user's card accounts
 #####Get a user's PayPal accounts
