@@ -1,5 +1,7 @@
 #.NET SDK - PromisePay API
 
+[![Join the chat at https://gitter.im/PromisePay/promisepay-dotnet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PromisePay/promisepay-dotnet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 #1. Installation
 **NuGet:** Install PromisePay via NuGet package manager. The package name is '[PromisePay](https://www.nuget.org/packages/PromisePay.API.NET/0.0.1)'.
