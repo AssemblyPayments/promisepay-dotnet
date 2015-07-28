@@ -62,6 +62,7 @@ For details and example, please consider the following MSDN article:
 ##Tokens
 ##### Example 1 - Request session token
 The below example shows the request for a marketplace configured to have the Item and User IDs generated automatically for them.
+
 ```cs
 var repo = container.Resolve<ITokenRepository>();
 var session_token = new Token {
