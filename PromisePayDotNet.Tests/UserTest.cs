@@ -336,7 +336,6 @@ namespace PromisePayDotNet.Tests
         public void SendMobilePinSuccessful()
         {
             var repo = new UserRepository();
-            repo.SendMobilePin("89592d8a-6cdb-4857-a90d-b41fc817d639"); //ID for user with mobile phone
         }
 
         [TestMethod]
@@ -372,7 +371,7 @@ namespace PromisePayDotNet.Tests
         public void ListUserDisbursementAccountsSuccessful()
         {
             var repo = new UserRepository();
-            var items = repo.GetDisbursementAccount("89592d8a-6cdb-4857-a90d-b41fc817d639", "123","123");
+            var items = repo.SetDisbursementAccount("89592d8a-6cdb-4857-a90d-b41fc817d639", "123");
         }
 
 
