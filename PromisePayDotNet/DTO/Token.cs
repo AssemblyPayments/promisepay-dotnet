@@ -8,6 +8,9 @@ namespace PromisePayDotNet.DTO
         [JsonProperty(PropertyName = "current_user_id")]
         public string CurrentUserId { get; set; }
 
+        [JsonProperty(PropertyName = "current_user")]
+        public string CurrentUser { get; set; }
+
         [JsonProperty(PropertyName = "item_name")]
         public string ItemName { get; set; }
 
