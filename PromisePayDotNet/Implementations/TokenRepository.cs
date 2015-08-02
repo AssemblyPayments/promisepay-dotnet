@@ -24,6 +24,7 @@ namespace PromisePayDotNet.Implementations
             var client = GetRestClient();
             var request = new RestRequest("/request_session_token", Method.GET);
             request.AddParameter("current_user_id", token.CurrentUserId);
+            request.AddParameter("current_user", token.CurrentUser);
             request.AddParameter("item_name", token.ItemName);
             request.AddParameter("amount", token.Amount);
             request.AddParameter("seller_lastname", token.SellerLastName);

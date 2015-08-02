@@ -30,25 +30,27 @@ namespace PromisePayDotNet.Interfaces
 
         BPayDetails GetBPayDetailsForItem(string itemId);
 
-        Item MakePayment(string itemId, string accountId, string userId);
+        //actions methods start here
 
-        Item RequestPayment(string itemId, string sellerId);
+        Item MakePayment(string itemId, string accountId);
 
-        Item ReleasePayment(string itemId, string buyerId, int releaseAmount);
+        Item RequestPayment(string itemId);
 
-        Item RequestRelease(string itemId, string sellerId, int releaseAmount);
+        Item ReleasePayment(string itemId, int releaseAmount);
+
+        Item RequestRelease(string itemId, int releaseAmount);
 
         Item Cancel(string itemId);
 
-        Item AcknowledgeWire(string itemId, string buyerId);
+        Item AcknowledgeWire(string itemId);
 
-        Item AcknowledgePayPal(string itemId, string buyerId);
+        Item AcknowledgePayPal(string itemId);
 
-        Item RevertWire(string itemId, string buyerId);
+        Item RevertWire(string itemId);
 
-        Item RequestRefund(string itemId, string buyerId, string refundAmount, string refundMessage);
+        Item RequestRefund(string itemId, string refundAmount, string refundMessage);
 
-        Item Refund(string itemId, string sellerId, string refundAmount, string refundMessage);
+        Item Refund(string itemId, string refundAmount, string refundMessage);
 
     }
 }

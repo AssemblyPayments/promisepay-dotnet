@@ -15,8 +15,6 @@ namespace PromisePayDotNet.Interfaces
 
         bool DeleteUser(string userId);
 
-        void SendMobilePin(string userId);
-
         IEnumerable<Item> ListItemsForUser(string userId);
 
         IEnumerable<PayPalAccount> ListPayPalAccountsForUser(string userId);
@@ -25,6 +23,6 @@ namespace PromisePayDotNet.Interfaces
 
         IEnumerable<BankAccount> ListBankAccountsForUser(string userId);
 
-        DisbursementAccount GetDisbursementAccount(string userId, string accountId, string mobilePin);
+        bool SetDisbursementAccount(string userId, string accountId);
     }
 }

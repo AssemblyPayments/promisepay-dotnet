@@ -79,15 +79,6 @@ namespace PromisePayDotNet.Implementations
             return true;
         }
 
-        public void SendMobilePin(string userId)
-        {
-            AssertIdNotNull(userId);
-            var client = GetRestClient();
-            var request = new RestRequest("/users/:id/mobile_pin", Method.POST);
-            request.AddUrlSegment("id", userId);
-            SendRequest(client, request);
-        }
-
         public IEnumerable<Item> ListItemsForUser(string userId)
         {
             AssertIdNotNull(userId);
@@ -189,7 +180,7 @@ namespace PromisePayDotNet.Implementations
             return new List<BankAccount>();
         }
 
-        public DisbursementAccount GetDisbursementAccount(string userId, string accountId, string mobilePin)
+        public bool SetDisbursementAccount(string userId, string accountId)
         {
             //ToDo find out DisbursementAccount fields and implement this method 
             throw new NotImplementedException();
@@ -198,7 +189,6 @@ namespace PromisePayDotNet.Implementations
             var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
             request.AddUrlSegment("id", userId);
             request.AddUrlSegment("account_id", accountId);
-            request.AddUrlSegment("mobile_pin", mobilePin);
             try
             {
                 SendRequest(client, request);
