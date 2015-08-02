@@ -13,7 +13,6 @@ namespace PromisePayDotNet.Tests
             var repo = new ItemRepository();
             var itemId = "7c269f52-2236-4aa5-899e-a2e3ecadbc3f";
             var cardId = "2e2ed4fb-4eb2-458e-99f9-2bf0b3004933";
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
             repo.MakePayment(itemId, cardId);
         }
 
