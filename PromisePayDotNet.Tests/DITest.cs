@@ -14,6 +14,7 @@ namespace PromisePayDotNet.Tests
             InitUnityContainer.Init(container);
             var userService = container.Resolve<IUserRepository>();
             Assert.IsNotNull(userService);
+            Assert.Fail();
         }
     }
 }
