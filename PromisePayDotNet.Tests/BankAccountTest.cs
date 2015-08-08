@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
 using RestSharp;
@@ -8,10 +8,9 @@ using System.IO;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
     public class BankAccountTest : AbstractTest
     {
-        [TestMethod]
+        [Test]
         public void BankAccountDeserialization()
         {
             var jsonStr =
@@ -21,7 +20,7 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("USD", bankAccount.Currency);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateBankAccountSuccessfully()
         {
             var content = File.ReadAllText("..\\..\\Fixtures\\bank_account_create.json");
@@ -55,7 +54,7 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("XXX789", createdAccount.Bank.AccountNumber); //Account number is masked
         }
 
-        [TestMethod]
+        [Test]
         public void GetBankAccountSuccessfully()
         {
             var content = File.ReadAllText("..\\..\\Fixtures\\bank_account_get_by_id.json");
@@ -68,7 +67,7 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual(id, gotAccount.Id);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof (ArgumentException))]
         public void GetBankAccountEmptyId()
         {
@@ -77,7 +76,7 @@ namespace PromisePayDotNet.Tests
             repo.GetBankAccountById(string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserForBankAccountSuccessfully()
         {
             var content = File.ReadAllText("..\\..\\Fixtures\\bank_account_get_users.json");
@@ -92,7 +91,7 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual(userId, gotUser.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteBankAccountSuccessfully()
         {
             var content = File.ReadAllText("..\\..\\Fixtures\\bank_account_delete.json");
