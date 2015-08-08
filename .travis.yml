@@ -1,2 +1,9 @@
 language: csharp
-solution: PromisePayDotNet.sln
+script:
+  - xbuild /p:Configuration=Release PromisePayDotNet.sln
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore PromisePayDotNet.sln
+after_script:
+  - nunit-console PromisePayDotNet.Tests/bin/Release/PromisePayDotNet.Tests.dll
