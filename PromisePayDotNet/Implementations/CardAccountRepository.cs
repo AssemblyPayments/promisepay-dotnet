@@ -10,21 +10,23 @@ namespace PromisePayDotNet.Implementations
 {
     public class CardAccountRepository : AbstractRepository, ICardAccountRepository
     {
+        public CardAccountRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public CardAccount GetCardAccountById(string cardAccountId)
         {
             AssertIdNotNull(cardAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/card_accounts/{id}", Method.GET);
             request.AddUrlSegment("id", cardAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, CardAccount>>(response.Content).Values.First();
         }
 
         public CardAccount CreateCardAccount(CardAccount cardAccount)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/card_accounts", Method.POST);
             request.AddParameter("user_id", cardAccount.UserId);
             request.AddParameter("full_name", cardAccount.Card.FullName);
@@ -33,17 +35,16 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("expiry_year", cardAccount.Card.ExpiryYear);
             request.AddParameter("cvv", cardAccount.Card.CVV);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, CardAccount>>(response.Content).Values.First();
         }
 
         public bool DeleteCardAccount(string cardAccountId)
         {
             AssertIdNotNull(cardAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/card_accounts/{id}", Method.DELETE);
             request.AddUrlSegment("id", cardAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return false;
@@ -54,10 +55,9 @@ namespace PromisePayDotNet.Implementations
         public User GetUserForCardAccount(string cardAccountId)
         {
             AssertIdNotNull(cardAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/card_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", cardAccountId);
-            IRestResponse response = SendRequest(client, request);
+            IRestResponse response = SendRequest(Client, request);
 
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))

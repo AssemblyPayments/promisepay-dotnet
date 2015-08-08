@@ -12,6 +12,10 @@ namespace PromisePayDotNet.Implementations
 {
     public class UserRepository : AbstractRepository, IUserRepository
     {
+        public UserRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #region public methods
@@ -19,12 +23,11 @@ namespace PromisePayDotNet.Implementations
         public IEnumerable<User> ListUsers(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);
-            var client = GetRestClient();
             var request = new RestRequest("/users", Method.GET);
             request.AddParameter("limit", limit);
             request.AddParameter("offset", offset);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))
             {
@@ -37,17 +40,15 @@ namespace PromisePayDotNet.Implementations
         public User GetUserById(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.GET);
             request.AddUrlSegment("id", userId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, User>>(response.Content).Values.First();
         }
 
         public User CreateUser(User user)
         {
             ValidateUser(user);
-            var client = GetRestClient();
             var request = new RestRequest("/users", Method.POST);
             request.AddParameter("id", user.Id);
             request.AddParameter("first_name", user.FirstName);
@@ -61,17 +62,16 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("zip", user.Zip);
             request.AddParameter("country", user.Country);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string,User>>(response.Content).Values.First();
         }
 
         public bool DeleteUser(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.DELETE);
             request.AddUrlSegment("id", userId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return false;
@@ -82,10 +82,9 @@ namespace PromisePayDotNet.Implementations
         public IEnumerable<Item> ListItemsForUser(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}/items", Method.GET);
             request.AddUrlSegment("id", userId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("items"))
             {
@@ -98,13 +97,12 @@ namespace PromisePayDotNet.Implementations
         public IEnumerable<PayPalAccount> ListPayPalAccountsForUser(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}/paypal_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
             IRestResponse response;
             try
             {
-                response = SendRequest(client, request);
+                response = SendRequest(Client, request);
             }
             catch (ApiErrorsException e)
             {
@@ -126,13 +124,12 @@ namespace PromisePayDotNet.Implementations
         public IEnumerable<CardAccount> ListCardAccountsForUser(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}/card_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
             IRestResponse response;
             try
             {
-                response = SendRequest(client, request);
+                response = SendRequest(Client, request);
             }
             catch (ApiErrorsException e)
             {
@@ -154,13 +151,12 @@ namespace PromisePayDotNet.Implementations
         public IEnumerable<BankAccount> ListBankAccountsForUser(string userId)
         {
             AssertIdNotNull(userId);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}/bank_accounts", Method.GET);
             request.AddUrlSegment("id", userId);
             IRestResponse response;
             try
             {
-                response = SendRequest(client, request);
+                response = SendRequest(Client, request);
             }
             catch (ApiErrorsException e)
             {
@@ -184,26 +180,25 @@ namespace PromisePayDotNet.Implementations
         {
             //ToDo find out DisbursementAccount fields and implement this method 
             throw new NotImplementedException();
-            AssertIdNotNull(userId);
-            var client = GetRestClient();
-            var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
-            request.AddUrlSegment("id", userId);
-            request.AddUrlSegment("account_id", accountId);
-            try
-            {
-                SendRequest(client, request);
-            }
-            catch (ApiErrorsException e)
-            {
-                throw;
-            }
+//            AssertIdNotNull(userId);
+//
+//            var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
+//            request.AddUrlSegment("id", userId);
+//            request.AddUrlSegment("account_id", accountId);
+//            try
+//            {
+//                SendRequest(Client, request);
+//            }
+//            catch (ApiErrorsException e)
+//            {
+//                throw;
+//            }
         
         }
 
         public User UpdateUser(User user)
         {
             ValidateUser(user);
-            var client = GetRestClient();
             var request = new RestRequest("/users/{id}", Method.PATCH);
             request.AddUrlSegment("id", user.Id);
             request.AddParameter("id", user.Id);
@@ -218,7 +213,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("zip", user.Zip);
             request.AddParameter("country", user.Country);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, User>>(response.Content).Values.First();
         }
         #endregion

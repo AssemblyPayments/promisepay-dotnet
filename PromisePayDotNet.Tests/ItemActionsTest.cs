@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PromisePayDotNet.Implementations;
 
 namespace PromisePayDotNet.Tests
 {
@@ -10,10 +9,7 @@ namespace PromisePayDotNet.Tests
         [TestMethod]
         public void MakePaymentSuccessfully()
         {
-            var repo = new ItemRepository();
-            var itemId = "7c269f52-2236-4aa5-899e-a2e3ecadbc3f";
-            var cardId = "2e2ed4fb-4eb2-458e-99f9-2bf0b3004933";
-            repo.MakePayment(itemId, cardId);
+            Assert.Fail();
         }
 
         [TestMethod]

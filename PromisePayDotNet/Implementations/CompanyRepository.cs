@@ -9,14 +9,17 @@ namespace PromisePayDotNet.Implementations
 {
     public class CompanyRepository : AbstractRepository, ICompanyRepository
     {
+        public CompanyRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public IEnumerable<Company> ListCompanies()
         {
-            var client = GetRestClient();
             var request = new RestRequest("/companies", Method.GET);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("companies"))
             {
@@ -29,16 +32,14 @@ namespace PromisePayDotNet.Implementations
         public Company GetCompanyById(string companyId)
         {
             AssertIdNotNull(companyId);
-            var client = GetRestClient();
             var request = new RestRequest("/companies/{id}", Method.GET);
             request.AddUrlSegment("id", companyId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }
 
         public Company CreateCompany(Company company)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/companies", Method.POST);
             request.AddParameter("name", company.Name);
             request.AddParameter("legal_name", company.LegalName);
@@ -50,13 +51,12 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("state", company.State);
             request.AddParameter("zip", company.Zip);
             request.AddParameter("country", company.Country);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }
 
         public Company EditCompany(Company company)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/companies", Method.POST);
             request.AddParameter("name", company.Name);
             request.AddParameter("legal_name", company.LegalName);
@@ -68,7 +68,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("state", company.State);
             request.AddParameter("zip", company.Zip);
             request.AddParameter("country", company.Country);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }
 

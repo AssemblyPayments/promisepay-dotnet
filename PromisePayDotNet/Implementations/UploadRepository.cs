@@ -10,14 +10,17 @@ namespace PromisePayDotNet.Implementations
 {
     public class UploadRepository : AbstractRepository, IUploadRepository
     {
+        public UploadRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public IList<Upload> ListUploads()
         {
-            var client = GetRestClient();
             var request = new RestRequest("/uploads", Method.GET);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("uploads"))
             {
@@ -30,10 +33,9 @@ namespace PromisePayDotNet.Implementations
         public Upload GetUploadById(string uploadId)
         {
             AssertIdNotNull(uploadId);
-            var client = GetRestClient();
             var request = new RestRequest("/uploads/{id}", Method.GET);
             request.AddUrlSegment("id", uploadId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Upload>>(response.Content).Values.First();
         }
 
@@ -44,10 +46,9 @@ namespace PromisePayDotNet.Implementations
                 throw new ArgumentException("csvData cannot be empty");
             }
 
-            var client = GetRestClient();
             var request = new RestRequest("/uploads", Method.POST);
             request.AddParameter("import", csvData);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("uploads"))
             {
@@ -60,9 +61,8 @@ namespace PromisePayDotNet.Implementations
         public Upload GetStatus(string uploadId)
         {
             AssertIdNotNull(uploadId);
-            var client = GetRestClient();
             var request = new RestRequest("/uploads/{id}/import", Method.GET);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("uploads"))
             {
@@ -75,9 +75,8 @@ namespace PromisePayDotNet.Implementations
         public Upload StartImport(string uploadId)
         {
             AssertIdNotNull(uploadId);
-            var client = GetRestClient();
             var request = new RestRequest("/uploads/{id}/import", Method.PATCH);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("uploads"))
             {

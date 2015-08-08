@@ -11,13 +11,16 @@ namespace PromisePayDotNet.Implementations
 {
     public class FeeRepository : AbstractRepository, IFeeRepository
     {
+        public FeeRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public IEnumerable<Fee> ListFees()
         {
-            var client = GetRestClient();
             var request = new RestRequest("/fees", Method.GET);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("fees"))
             {
@@ -30,18 +33,15 @@ namespace PromisePayDotNet.Implementations
         public Fee GetFeeById(string feeId)
         {
             AssertIdNotNull(feeId);
-            var client = GetRestClient();
             var request = new RestRequest("/fees/{id}", Method.GET);
             request.AddUrlSegment("id", feeId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Fee>>(response.Content).Values.First();
         }
 
         public Fee CreateFee(Fee fee)
         {
             VailidateFee(fee);
-
-            var client = GetRestClient();
             var request = new RestRequest("/fees", Method.POST);
             request.AddParameter("name", fee.Name);
             request.AddParameter("fee_type_id", (int)fee.FeeType);
@@ -51,7 +51,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("max", fee.Max);
             request.AddParameter("to", fee.To);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Fee>>(response.Content).Values.First();
         }
 

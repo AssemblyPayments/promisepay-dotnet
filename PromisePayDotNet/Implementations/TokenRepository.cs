@@ -9,19 +9,21 @@ namespace PromisePayDotNet.Implementations
 {
     public class TokenRepository : AbstractRepository, ITokenRepository
     {
+        public TokenRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public string RequestToken()
         {
-            var client = GetRestClient();
             var request = new RestRequest("/request_token", Method.GET);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content).Values.First();            
         }
 
         public string RequestSessionToken(Token token)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/request_session_token", Method.GET);
             request.AddParameter("current_user_id", token.CurrentUserId);
             request.AddParameter("current_user", token.CurrentUser);
@@ -40,16 +42,15 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("external_buyer_id", token.ExternalBuyerId);
             request.AddParameter("fee_ids", token.FeeIds);
             request.AddParameter("payment_type_id", (int)token.PaymentType);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content).Values.First();                        
         }
 
         public Widget GetWidget(string sessionToken)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/widget", Method.GET);
             request.AddParameter("session_token", sessionToken);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("widget"))
             {
