@@ -1,15 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
 using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
+using RestSharp;
 using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    public class CompanyTest
+    public class CompanyTest : AbstractTest
     {
-        [TestMethod]
+        [Test]
         public void CompanyDeserialization()
         {
             var jsonStr = "{ \"legal_name\": \"Igor\", \"name\": null, \"id\": \"e466dfb4-f05c-4c7f-92a3-09a0a28c7af5\", \"related\": { \"address\": \"07ed45e5-bb9d-459f-bb7b-a02ecb38f443\" }, \"links\": { \"self\": \"/companies/e466dfb4-f05c-4c7f-92a3-09a0a28c7af5\" } }";
@@ -19,42 +20,57 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5", company.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void ListCompaniesSuccessfully()
         {
-            var repo = new CompanyRepository();
+            var content = File.ReadAllText("../../Fixtures/companies_list.json");
+
+            var client = GetMockClient(content);
+            var repo = new CompanyRepository(client.Object);
             var companies = repo.ListCompanies();
+            client.VerifyAll();
             Assert.IsNotNull(companies);
             Assert.IsTrue(companies.Any());
         }
 
-        [TestMethod]
+        [Test]
         public void GetCompanyByIdSuccessfully()
         {
-            var repo = new CompanyRepository();
+            var content = File.ReadAllText("../../Fixtures/companies_get_by_id.json");
+
+            var client = GetMockClient(content);
+            var repo = new CompanyRepository(client.Object);
             var company = repo.GetCompanyById("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5");
+            client.VerifyAll();
             Assert.IsNotNull(company);
             Assert.AreEqual("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5",company.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateCompanySuccessfully()
         {
-            var repo = new CompanyRepository();
+            var content = File.ReadAllText("../../Fixtures/companies_create.json");
+
+            var client = GetMockClient(content);
+            var repo = new CompanyRepository(client.Object);
             var createdCompany = repo.CreateCompany(new Company
             {
                 LegalName = "Test company #1",
                 Name = "Test company #1",
                 Country = "AUS"
             });
+            client.VerifyAll();
             Assert.IsNotNull(createdCompany);
             Assert.IsNotNull(createdCompany.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void EditCompanySuccessfully()
         {
-            var repo = new CompanyRepository();
+            var content = File.ReadAllText("../../Fixtures/companies_edit.json");
+
+            var client = GetMockClient(content);
+            var repo = new CompanyRepository(client.Object);
             var editedCompany = repo.EditCompany(new Company
             {
                 Id = "739dcfc5-adf0-4a00-b639-b4e05922994d",
@@ -62,6 +78,7 @@ namespace PromisePayDotNet.Tests
                 Name = "Test company #2",
                 Country = "AUS"
             });
+            client.VerifyAll();
             Assert.AreEqual("Test company #2", editedCompany.Name);
         }
 

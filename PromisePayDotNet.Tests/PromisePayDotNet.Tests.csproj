@@ -92,6 +92,7 @@
     <Compile Include="AddressTest.cs" />
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="CardAccountTest.cs" />
+    <Compile Include="CompanyTest.cs" />
     <Compile Include="DITest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +106,10 @@
     <None Include="Fixtures\card_account_delete.json" />
     <None Include="Fixtures\card_account_get_by_id.json" />
     <None Include="Fixtures\card_account_get_users.json" />
+    <None Include="Fixtures\companies_create.json" />
+    <None Include="Fixtures\companies_edit.json" />
+    <None Include="Fixtures\companies_get_by_id.json" />
+    <None Include="Fixtures\companies_list.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
