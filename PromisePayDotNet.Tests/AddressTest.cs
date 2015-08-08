@@ -4,7 +4,6 @@ using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
 using System.IO;
 
-
 namespace PromisePayDotNet.Tests
 {
     public class AddressTest : AbstractTest

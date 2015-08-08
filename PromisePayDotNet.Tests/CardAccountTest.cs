@@ -12,7 +12,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void CardAccountDeserialization()
         {
-            var jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-26T06:28:55.559Z\", \"updated_at\": \"2015-04-26T06:28:55.559Z\", \"id\": \"ea464d25-fc9a-4887-861a-3d8ec2e12c19\", \"currency\": \"USD\", \"card\": { \"type\": \"visa\", \"full_name\": \"Joe Frio\", \"number\": \"XXXX-XXXX-XXXX-1111\", \"expiry_month\": \"5\", \"expiry_year\": \"2016\" }, \"links\": { \"self\": \"/card_accounts/ea464d25-fc9a-4887-861a-3d8ec2e12c19\", \"users\": \"/card_accounts/ea464d25-fc9a-4887-861a-3d8ec2e12c19/users\" } }";
+            const string jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-26T06:28:55.559Z\", \"updated_at\": \"2015-04-26T06:28:55.559Z\", \"id\": \"ea464d25-fc9a-4887-861a-3d8ec2e12c19\", \"currency\": \"USD\", \"card\": { \"type\": \"visa\", \"full_name\": \"Joe Frio\", \"number\": \"XXXX-XXXX-XXXX-1111\", \"expiry_month\": \"5\", \"expiry_year\": \"2016\" }, \"links\": { \"self\": \"/card_accounts/ea464d25-fc9a-4887-861a-3d8ec2e12c19\", \"users\": \"/card_accounts/ea464d25-fc9a-4887-861a-3d8ec2e12c19/users\" } }";
             var cardAccount = JsonConvert.DeserializeObject<CardAccount>(jsonStr);
             Assert.AreEqual("ea464d25-fc9a-4887-861a-3d8ec2e12c19", cardAccount.Id);
             Assert.AreEqual("USD", cardAccount.Currency);
@@ -27,7 +27,7 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new CardAccountRepository(client.Object);
 
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
             var account = new CardAccount
             {
                 UserId = userId,
@@ -95,7 +95,7 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CardAccountRepository(client.Object);
-            var id = "25d34744-8ef0-46a4-8b18-2a8322933cd1";
+            const string id = "25d34744-8ef0-46a4-8b18-2a8322933cd1";
 
             var result = repo.DeleteCardAccount(id);
             client.VerifyAll();

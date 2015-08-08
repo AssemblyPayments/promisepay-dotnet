@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
-using RestSharp;
 using System;
 using System.IO;
 
@@ -13,8 +12,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void BankAccountDeserialization()
         {
-            var jsonStr =
-                "{ \"active\": true, \"created_at\": \"2015-04-26T06:24:19.248Z\", \"updated_at\": \"2015-04-26T06:24:19.248Z\", \"id\": \"8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"currency\": \"USD\", \"bank\": { \"bank_name\": \"Test Me\", \"country\": \"AUS\", \"account_name\": \"Test Account\", \"routing_number\": \"XXXXXXX3\", \"account_number\": \"XXXX344\", \"holder_type\": \"personal\", \"account_type\": \"savings\" }, \"links\": { \"self\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"users\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a/users\" } }";
+            const string jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-26T06:24:19.248Z\", \"updated_at\": \"2015-04-26T06:24:19.248Z\", \"id\": \"8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"currency\": \"USD\", \"bank\": { \"bank_name\": \"Test Me\", \"country\": \"AUS\", \"account_name\": \"Test Account\", \"routing_number\": \"XXXXXXX3\", \"account_number\": \"XXXX344\", \"holder_type\": \"personal\", \"account_type\": \"savings\" }, \"links\": { \"self\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"users\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a/users\" } }";
             var bankAccount = JsonConvert.DeserializeObject<BankAccount>(jsonStr);
             Assert.AreEqual("8d65c86c-14f4-4abf-a979-eba0a87b283a", bankAccount.Id);
             Assert.AreEqual("USD", bankAccount.Currency);
@@ -28,7 +26,7 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content); 
             var repo = new BankAccountRepository(client.Object);
 
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
             var account = new BankAccount
             {
                 UserId = userId,
@@ -61,7 +59,7 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
-            var id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
+            const string id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
             var gotAccount = repo.GetBankAccountById(id);
             client.VerifyAll();
             Assert.AreEqual(id, gotAccount.Id);
@@ -83,7 +81,7 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
             var gotUser = repo.GetUserForBankAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c");
             client.VerifyAll();
             Assert.IsNotNull(gotUser);
