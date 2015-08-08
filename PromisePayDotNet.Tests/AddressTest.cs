@@ -21,7 +21,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void GetAddressSuccessfully()
         {
-            var content = File.ReadAllText("..\\..\\Fixtures\\address_get_by_id.json");
+            var content = File.ReadAllText("../../Fixtures\\address_get_by_id.json");
 
             var client = GetMockClient(content);
 
