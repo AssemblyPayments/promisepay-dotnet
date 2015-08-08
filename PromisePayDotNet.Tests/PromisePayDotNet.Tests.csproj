@@ -95,6 +95,7 @@
     <Compile Include="CompanyTest.cs" />
     <Compile Include="ConfigTest.cs" />
     <Compile Include="DITest.cs" />
+    <Compile Include="FeeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,9 @@
     <None Include="Fixtures\companies_edit.json" />
     <None Include="Fixtures\companies_get_by_id.json" />
     <None Include="Fixtures\companies_list.json" />
+    <None Include="Fixtures\fees_create.json" />
+    <None Include="Fixtures\fees_get_by_id.json" />
+    <None Include="Fixtures\fees_list.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

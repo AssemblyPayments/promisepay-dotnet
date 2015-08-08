@@ -1,0 +1,1 @@
+﻿{"fees":{"id":"79116c9f-d750-4faa-85c7-b7da36f23b38","created_at":"2015-06-01T12:14:22.567Z","updated_at":"2015-06-01T12:14:22.567Z","name":"Test fee #1","fee_type_id":1,"amount":1000,"cap":1,"min":2,"max":3,"to":"buyer","links":{"self":"/fees/79116c9f-d750-4faa-85c7-b7da36f23b38"}}}

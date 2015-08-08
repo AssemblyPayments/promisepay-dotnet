@@ -1,34 +1,34 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Enums;
 using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Implementations;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    public class FeeTest
+    public class FeeTest : AbstractTest
     {
-        [TestMethod]
+        [Test]
         public void FeeDeserialization()
         {
-            var jsonStr =
-                "{ \"id\": \"58e15f18-500e-4cdc-90ca-65e1f1dce565\", \"created_at\": \"2014-12-29T08:31:42.168Z\", \"updated_at\": \"2014-12-29T08:31:42.168Z\", \"name\": \"Buyer Fee @ 10%\", \"fee_type_id\": 2, \"amount\": 1000, \"cap\": null, \"min\": null, \"max\": null, \"to\": \"buyer\", \"links\": { \"self\": \"/fees/58e15f18-500e-4cdc-90ca-65e1f1dce565\" } }";
-
+            const string jsonStr = "{ \"id\": \"58e15f18-500e-4cdc-90ca-65e1f1dce565\", \"created_at\": \"2014-12-29T08:31:42.168Z\", \"updated_at\": \"2014-12-29T08:31:42.168Z\", \"name\": \"Buyer Fee @ 10%\", \"fee_type_id\": 2, \"amount\": 1000, \"cap\": null, \"min\": null, \"max\": null, \"to\": \"buyer\", \"links\": { \"self\": \"/fees/58e15f18-500e-4cdc-90ca-65e1f1dce565\" } }";
             var fee = JsonConvert.DeserializeObject<Fee>(jsonStr);
             Assert.IsNotNull(fee);
             Assert.AreEqual("58e15f18-500e-4cdc-90ca-65e1f1dce565", fee.Id);
             Assert.AreEqual("Buyer Fee @ 10%", fee.Name);
-
         }
 
-        [TestMethod]
+        [Test]
         public void CreateFeeSuccessfully()
         {
-            var repo = new FeeRepository();
+            var content = File.ReadAllText("../../Fixtures/fees_create.json");
+            var client = GetMockClient(content);
+
+            var repo = new FeeRepository(client.Object);
             var feeId = Guid.NewGuid().ToString();
             var createdFee = repo.CreateFee(new Fee
             {
@@ -44,11 +44,13 @@ namespace PromisePayDotNet.Tests
             Assert.IsNotNull(createdFee);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ValidationException))]
         public void CreateFeeWrongTo()
         {
-            var repo = new FeeRepository();
+            var client = GetMockClient("");
+
+            var repo = new FeeRepository(client.Object);
             var feeId = Guid.NewGuid().ToString();
             var createdFee = repo.CreateFee(new Fee
             {
@@ -64,19 +66,25 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("Test fee #1", createdFee.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void GetFeeByIdSuccessfull()
         {
-            var repo = new FeeRepository();
-            var id = "79116c9f-d750-4faa-85c7-b7da36f23b38";
+            var content = File.ReadAllText("../../Fixtures/fees_get_by_id.json");
+            var client = GetMockClient(content);
+
+            var repo = new FeeRepository(client.Object);
+            const string id = "79116c9f-d750-4faa-85c7-b7da36f23b38";
             var fee = repo.GetFeeById(id);
             Assert.AreEqual(id, fee.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void ListFeeSuccessfully()
         {
-            var repo = new FeeRepository();
+            var content = File.ReadAllText("../../Fixtures/fees_list.json");
+            var client = GetMockClient(content);
+
+            var repo = new FeeRepository(client.Object);
             var fees = repo.ListFees();
             Assert.IsNotNull(fees);
             Assert.IsTrue(fees.Any());
