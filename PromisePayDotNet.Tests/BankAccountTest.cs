@@ -23,7 +23,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void CreateBankAccountSuccessfully()
         {
-            var content = File.ReadAllText("../../Fixtures\\bank_account_create.json");
+            var content = File.ReadAllText("../../Fixtures/bank_account_create.json");
 
             var client = GetMockClient(content); 
             var repo = new BankAccountRepository(client.Object);
@@ -57,7 +57,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void GetBankAccountSuccessfully()
         {
-            var content = File.ReadAllText("../../Fixtures\\bank_account_get_by_id.json");
+            var content = File.ReadAllText("../../Fixtures/bank_account_get_by_id.json");
 
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
@@ -79,7 +79,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void GetUserForBankAccountSuccessfully()
         {
-            var content = File.ReadAllText("../../Fixtures\\bank_account_get_users.json");
+            var content = File.ReadAllText("../../Fixtures/bank_account_get_users.json");
 
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
@@ -94,7 +94,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void DeleteBankAccountSuccessfully()
         {
-            var content = File.ReadAllText("../../Fixtures\\bank_account_delete.json");
+            var content = File.ReadAllText("../../Fixtures/bank_account_delete.json");
 
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
