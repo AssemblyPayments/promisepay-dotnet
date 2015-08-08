@@ -1,19 +1,25 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Configuration;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
     public class ConfigTest
     {
-        [TestMethod]
+        [Test]
         public void TestPromisePayConfig()
         {
             var ht = ConfigurationManager.GetSection("PromisePay/Settings") as Hashtable;
-            var keyVal = ht["ApiUrl"] as String;
-            Assert.AreEqual("https://test.api.promisepay.com", keyVal, "App.config section is wrong");
+            if (ht != null)
+            {
+                var keyVal = ht["ApiUrl"] as String;
+                Assert.AreEqual("https://test.api.promisepay.com", keyVal, "App.config section is wrong");
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
     }
 }

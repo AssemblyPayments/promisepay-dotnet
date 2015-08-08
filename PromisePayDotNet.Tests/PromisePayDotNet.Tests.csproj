@@ -93,6 +93,7 @@
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="CardAccountTest.cs" />
     <Compile Include="CompanyTest.cs" />
+    <Compile Include="ConfigTest.cs" />
     <Compile Include="DITest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
