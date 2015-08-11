@@ -98,6 +98,7 @@
     <Compile Include="FeeTest.cs" />
     <Compile Include="ItemActionsTest.cs" />
     <Compile Include="ItemTest.cs" />
+    <Compile Include="PayPalAccountTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,10 @@
     <None Include="Fixtures\items_list.json" />
     <None Include="Fixtures\items_list_transactions.json" />
     <None Include="Fixtures\items_not_found.json" />
+    <None Include="Fixtures\paypal_account_create.json" />
+    <None Include="Fixtures\paypal_account_delete.json" />
+    <None Include="Fixtures\paypal_account_get_by_id.json" />
+    <None Include="Fixtures\paypal_account_get_users.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,15 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
+using RestSharp;
+using System;
+using System.IO;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    public class PayPalAccountTest
+    public class PayPalAccountTest : AbstractTest
     {
-        [TestMethod]
+        [Test]
         public void PayPalAccountDeserialization()
         {
             var jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-25T12:31:39.324Z\", \"updated_at\": \"2015-04-25T12:31:39.324Z\", \"id\": \"70d93fe3-6c2e-4a1c-918f-13b8e7bb3779\", \"currency\": \"USD\", \"paypal\": { \"email\": \"test.me@promisepay.com\" }, \"links\": { \"self\": \"/paypal_accounts/70d93fe3-6c2e-4a1c-918f-13b8e7bb3779\", \"users\": \"/paypal_accounts/70d93fe3-6c2e-4a1c-918f-13b8e7bb3779/users\" } }";
@@ -19,10 +20,13 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("test.me@promisepay.com", payPalAccount.PayPal.Email);
         }
 
-        [TestMethod]
+        [Test]
         public void CreatePayPalAccountSuccessfully()
         {
-            var repo = new PayPalAccountRepository();
+            var content = File.ReadAllText("../../Fixtures/paypal_account_create.json");
+            var client = GetMockClient(content);
+            var repo = new PayPalAccountRepository(client.Object);
+
             var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
             var account = new PayPalAccount
             {
@@ -42,80 +46,57 @@ namespace PromisePayDotNet.Tests
 
         }
 
-        [TestMethod]
+        [Test]
         public void GetPayPalAccountSuccessfully()
         {
-            var repo = new PayPalAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new PayPalAccount
-            {
-                UserId = userId,
-                Active = true,
-                PayPal = new PayPal
-                {
-                    Email = "aaa@bbb.com"
-                }
-            };
-            var createdAccount = repo.CreatePayPalAccount(account);
+            var id = "cd2ab053-25e5-491a-a5ec-0c32dbe76efa";
+            var content = File.ReadAllText("../../Fixtures/paypal_account_create.json");
+            var client = GetMockClient(content);
+            var repo = new PayPalAccountRepository(client.Object);
 
-            var gotAccount = repo.GetPayPalAccountById(createdAccount.Id);
+            var gotAccount = repo.GetPayPalAccountById(id);
 
-            Assert.AreEqual(createdAccount.Id, gotAccount.Id);
+            Assert.AreEqual(id, gotAccount.Id);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void GetPayPalAccountEmptyId()
         {
-            var repo = new PayPalAccountRepository();
+            var client = GetMockClient("");
+
+            var repo = new PayPalAccountRepository(client.Object);
+
             repo.GetPayPalAccountById(string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserForPayPalAccountSuccessfully()
         {
-            var repo = new PayPalAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new PayPalAccount
-            {
-                UserId = userId,
-                Active = true,
-                PayPal = new PayPal
-                {
-                    Email = "aaa@bbb.com"
-                }
-            };
-            var createdAccount = repo.CreatePayPalAccount(account);
+            var id = "3a780d4a-5de0-409c-9587-080930ddea3c";
 
-            var gotUser = repo.GetUserForPayPalAccount(createdAccount.Id);
+            var content = File.ReadAllText("../../Fixtures/paypal_account_get_users.json");
+            var client = GetMockClient(content);
+            var repo = new PayPalAccountRepository(client.Object);
+
+            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+
+            var gotUser = repo.GetUserForPayPalAccount(id);
 
             Assert.IsNotNull(gotUser);
 
             Assert.AreEqual(userId, gotUser.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void DeletePayPalAccountSuccessfully()
         {
-            var repo = new PayPalAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new PayPalAccount
-            {
-                UserId = userId,
-                Active = true,
-                PayPal = new PayPal
-                {
-                    Email = "aaa@bbb.com"
-                }
-            };
-            var createdAccount = repo.CreatePayPalAccount(account);
-            Assert.IsTrue(createdAccount.Active);
-            var result = repo.DeletePayPalAccount(createdAccount.Id);
+            var content = File.ReadAllText("../../Fixtures/paypal_account_delete.json");
+            var client = GetMockClient(content);
+            var repo = new PayPalAccountRepository(client.Object);
 
+            var result = repo.DeletePayPalAccount("cd2ab053-25e5-491a-a5ec-0c32dbe76efa");
             Assert.IsTrue(result);
-
-            var gotAccount = repo.GetPayPalAccountById(createdAccount.Id);
-            Assert.IsFalse(gotAccount.Active);
         }
 
     }
