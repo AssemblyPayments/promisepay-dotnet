@@ -103,6 +103,7 @@
     <Compile Include="TokenTest.cs" />
     <Compile Include="TransactionTest.cs" />
     <Compile Include="UploadTest.cs" />
+    <Compile Include="WidgetTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
