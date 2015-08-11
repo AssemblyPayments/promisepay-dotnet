@@ -101,6 +101,7 @@
     <Compile Include="PayPalAccountTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenTest.cs" />
+    <Compile Include="TransactionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -136,6 +137,7 @@
     <None Include="Fixtures\paypal_account_delete.json" />
     <None Include="Fixtures\paypal_account_get_by_id.json" />
     <None Include="Fixtures\paypal_account_get_users.json" />
+    <None Include="Fixtures\transactions_list.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
