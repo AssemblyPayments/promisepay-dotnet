@@ -1,66 +1,75 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    [Ignore]
+
     public class ItemActionsTest
     {
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void MakePaymentSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestPaymentSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void ReleasePaymentSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestReleaseSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void CancelSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void AcknowledgeWireSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void AcknowledgePayPalSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RevertWireSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestRefundSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RefundSuccessfully()
         {
             Assert.Fail();

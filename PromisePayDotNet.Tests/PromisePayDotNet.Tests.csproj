@@ -96,6 +96,8 @@
     <Compile Include="ConfigTest.cs" />
     <Compile Include="DITest.cs" />
     <Compile Include="FeeTest.cs" />
+    <Compile Include="ItemActionsTest.cs" />
+    <Compile Include="ItemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +117,19 @@
     <None Include="Fixtures\fees_create.json" />
     <None Include="Fixtures\fees_get_by_id.json" />
     <None Include="Fixtures\fees_list.json" />
+    <None Include="Fixtures\items_create.json" />
+    <None Include="Fixtures\items_delete.json" />
+    <None Include="Fixtures\items_edit.json" />
+    <None Include="Fixtures\items_edit_unsuccessful.json" />
+    <None Include="Fixtures\items_get_bpay_details.json" />
+    <None Include="Fixtures\items_get_buyer.json" />
+    <None Include="Fixtures\items_get_by_id.json" />
+    <None Include="Fixtures\items_get_seller.json" />
+    <None Include="Fixtures\items_get_status.json" />
+    <None Include="Fixtures\items_get_wire_details.json" />
+    <None Include="Fixtures\items_list.json" />
+    <None Include="Fixtures\items_list_transactions.json" />
+    <None Include="Fixtures\items_not_found.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fixtures\card_account_create.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\items_delete_unsuccessful.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\items_list_fees.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
