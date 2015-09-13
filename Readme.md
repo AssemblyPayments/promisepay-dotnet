@@ -251,6 +251,27 @@ var id = "871f83ce-c55d-43ce-ba97-c65628d041a9";
 
 var user = repo.GetUserById(id);
 ```
+#####Update a user
+
+```cs
+var repo = container.Resolve<IUserRepository>();
+var id = "871f83ce-c55d-43ce-ba97-c65628d041a9";
+
+var user = new User
+{
+    Id = id,
+    FirstName = "Test",
+    LastName = "Test",
+    City = "Test",
+    AddressLine1 = "Line 1",
+    Country = "AUS",
+    State = "state",
+    Zip = "123456",
+    Email = id + "@google.com"
+};
+
+var updatedUser = repo.UpdateUser(user);	
+```
 
 #####Get a list of users
 
@@ -511,6 +532,65 @@ var gotAccount = repo.GetPayPalAccountById(accountId); //gotAccount.Active shoul
 var repo = container.Resolve<IPayPalAccountRepository>();
 var accountId = "14a74a3c-8358-4c99-bcf2-4c6ed7454747";
 var gotUser = repo.GetUserForPayPalAccount(accountId);
+```
+##Companies
+
+#####Create a company
+```cs
+var repo = container.Resolve<ICompanyRepository>();
+var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+var company = new Company
+{
+	UserId = userId,
+	Name = "Acme Co",
+	LegalName = "Acme Co Pty Ltd",
+	TaxNumber = "1231231",
+	ChargeTax = true,
+	AddressLine1 = "123 Test St",
+	AddressLine2 = "",
+	City = "Melbourne",
+	State = "VIC",
+	Zip = "3000",
+	Country = "AUS",
+};
+var createdCompany = repo.CreateCompany(company);
+```
+
+#####Get a company
+```cs
+var repo = container.Resolve<ICompanyRepository>();
+var id = "36aa17fb-5ea6-432b-8363-8074ae02603d";
+var gotItem = repo.GetCompanyById(id);
+```
+
+#####Get a list of companies
+```cs
+var repo = container.Resolve<ICompanyRepository>();
+var companies = repo.ListCompanies();
+```
+
+#####Update a company
+```cs
+var repo = container.Resolve<ICompanyRepository>();
+var id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
+var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+var company = new Company
+{
+	Id = id,
+	UserId = userId,
+	Name = "Acme Co",
+	LegalName = "Acme Co Pty Ltd",
+	TaxNumber = "1231231",
+	ChargeTax = true,
+	AddressLine1 = "123 Test St",
+	AddressLine2 = "",
+	City = "Melbourne",
+	State = "VIC",
+	Zip = "3000",
+	Country = "AUS",
+};
+
+var updatedCompany = repo.UpdateCompany(company);
 ```
 
 ##Fees

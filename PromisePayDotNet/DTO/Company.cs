@@ -5,6 +5,9 @@ namespace PromisePayDotNet.DTO
 {
     public class Company : AbstractDTO
     {
+        [JsonProperty(PropertyName = "user_id")]
+        public string UserId { get; set; }
+
         [JsonProperty(PropertyName = "legal_name")]
         public string LegalName { get; set; }
 
