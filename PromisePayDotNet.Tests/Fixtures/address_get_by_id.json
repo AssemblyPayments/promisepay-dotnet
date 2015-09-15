@@ -1,0 +1,14 @@
+﻿{
+  "addresses": {
+    "addressline1": null,
+    "addressline2": null,
+    "postcode": null,
+    "city": null,
+    "state": null,
+    "id": "07ed45e5-bb9d-459f-bb7b-a02ecb38f443",
+    "country": "Australia",
+    "links": {
+      "self": "/addresses/07ed45e5-bb9d-459f-bb7b-a02ecb38f443"
+    }
+  }
+}

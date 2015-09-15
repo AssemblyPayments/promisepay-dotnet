@@ -1,40 +1,39 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
+using RestSharp;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
     public class UploadTest
     {
-        [TestMethod]
+        [Test]
         public void UploadDeserialization()
         {
-            var jsonStr =
-                "{ \"id\": \"a2711d90-ed41-4d12-81d2-000000000002\", \"processed_lines\": 6, \"total_lines\": 6, \"update_lines\": 0, \"error_lines\": 6, \"progress\": 100.0 }";
+            const string jsonStr = "{ \"id\": \"a2711d90-ed41-4d12-81d2-000000000002\", \"processed_lines\": 6, \"total_lines\": 6, \"update_lines\": 0, \"error_lines\": 6, \"progress\": 100.0 }";
             var upload = JsonConvert.DeserializeObject<Upload>(jsonStr);
             Assert.IsNotNull(upload);
             Assert.AreEqual("a2711d90-ed41-4d12-81d2-000000000002", upload.Id);
         }
 
-        [TestMethod]
+        [Test]
         [Ignore]
         public void CreateUploadSuccessfully()
         {
-            
+            Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
         [Ignore]
         public void ListUploadsSuccessfully()
         {
-            var repo = new UploadRepository();
+            var repo = new UploadRepository(new RestClient());
             var uploads = repo.ListUploads();
             Assert.IsNotNull(uploads);
         }
 
-        [TestMethod]
+        [Test]
         [Ignore]
         public void GetUploadByIdSuccessfully()
         {
@@ -43,14 +42,14 @@ namespace PromisePayDotNet.Tests
 
 
 
-        [TestMethod]
+        [Test]
         [Ignore]
         public void GetStatusSuccessfully()
         {
             Assert.Fail();            
         }
 
-        [TestMethod]
+        [Test]
         [Ignore]
         public void StartImportSuccessfully()
         {

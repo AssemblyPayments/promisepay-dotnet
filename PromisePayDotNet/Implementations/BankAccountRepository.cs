@@ -10,21 +10,23 @@ namespace PromisePayDotNet.Implementations
 {
     public class BankAccountRepository : AbstractRepository, IBankAccountRepository
     {
+        public BankAccountRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public BankAccount GetBankAccountById(string bankAccountId)
         {
             AssertIdNotNull(bankAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/bank_accounts/{id}", Method.GET);
             request.AddUrlSegment("id", bankAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, BankAccount>>(response.Content).Values.First();
         }
 
         public BankAccount CreateBankAccount(BankAccount bankAccount)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/bank_accounts", Method.POST);
             request.AddParameter("user_id", bankAccount.UserId);
             request.AddParameter("bank_name", bankAccount.Bank.BankName);
@@ -35,17 +37,16 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("holder_type", bankAccount.Bank.HolderType);
             request.AddParameter("country", bankAccount.Bank.Country);
             
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, BankAccount>>(response.Content).Values.First();
         }
 
         public bool DeleteBankAccount(string bankAccountId)
         {
             AssertIdNotNull(bankAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/bank_accounts/{id}", Method.DELETE);
             request.AddUrlSegment("id", bankAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return false;
@@ -56,10 +57,9 @@ namespace PromisePayDotNet.Implementations
         public User GetUserForBankAccount(string bankAccountId)
         {
             AssertIdNotNull(bankAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/bank_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", bankAccountId);
-            IRestResponse response = SendRequest(client, request);
+            IRestResponse response = SendRequest(Client, request);
 
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))

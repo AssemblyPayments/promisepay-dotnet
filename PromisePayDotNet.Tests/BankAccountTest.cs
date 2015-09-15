@@ -1,29 +1,32 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
 using System;
+using System.IO;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    public class BankAccountTest
+    public class BankAccountTest : AbstractTest
     {
-        [TestMethod]
+        [Test]
         public void BankAccountDeserialization()
         {
-            var jsonStr =
-                "{ \"active\": true, \"created_at\": \"2015-04-26T06:24:19.248Z\", \"updated_at\": \"2015-04-26T06:24:19.248Z\", \"id\": \"8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"currency\": \"USD\", \"bank\": { \"bank_name\": \"Test Me\", \"country\": \"AUS\", \"account_name\": \"Test Account\", \"routing_number\": \"XXXXXXX3\", \"account_number\": \"XXXX344\", \"holder_type\": \"personal\", \"account_type\": \"savings\" }, \"links\": { \"self\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"users\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a/users\" } }";
+            const string jsonStr = "{ \"active\": true, \"created_at\": \"2015-04-26T06:24:19.248Z\", \"updated_at\": \"2015-04-26T06:24:19.248Z\", \"id\": \"8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"currency\": \"USD\", \"bank\": { \"bank_name\": \"Test Me\", \"country\": \"AUS\", \"account_name\": \"Test Account\", \"routing_number\": \"XXXXXXX3\", \"account_number\": \"XXXX344\", \"holder_type\": \"personal\", \"account_type\": \"savings\" }, \"links\": { \"self\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a\", \"users\": \"/bank_accounts/8d65c86c-14f4-4abf-a979-eba0a87b283a/users\" } }";
             var bankAccount = JsonConvert.DeserializeObject<BankAccount>(jsonStr);
             Assert.AreEqual("8d65c86c-14f4-4abf-a979-eba0a87b283a", bankAccount.Id);
             Assert.AreEqual("USD", bankAccount.Currency);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateBankAccountSuccessfully()
         {
-            var repo = new BankAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            var content = File.ReadAllText("../../Fixtures/bank_account_create.json");
+
+            var client = GetMockClient(content); 
+            var repo = new BankAccountRepository(client.Object);
+
+            const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
             var account = new BankAccount
             {
                 UserId = userId,
@@ -40,106 +43,63 @@ namespace PromisePayDotNet.Tests
                 }
             };
             var createdAccount = repo.CreateBankAccount(account);
+            client.VerifyAll();
             Assert.IsNotNull(createdAccount);
             Assert.IsNotNull(createdAccount.Id);
             Assert.AreEqual("AUD", createdAccount.Currency); // It seems that currency is determined by country
             Assert.IsNotNull(createdAccount.CreatedAt);
             Assert.IsNotNull(createdAccount.UpdatedAt);
-            Assert.AreEqual("XXXXXXX789", createdAccount.Bank.AccountNumber); //Account number is masked
+            Assert.AreEqual("XXX789", createdAccount.Bank.AccountNumber); //Account number is masked
         }
 
-        [TestMethod]
+        [Test]
         public void GetBankAccountSuccessfully()
         {
-            var repo = new BankAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new BankAccount
-            {
-                UserId = userId,
-                Active = true,
-                Bank = new Bank
-                {
-                    BankName = "Test bank, inc",
-                    AccountName = "Test account",
-                    AccountNumber = "8123456789",
-                    AccountType = "savings",
-                    Country = "AUS",
-                    HolderType = "personal",
-                    RoutingNumber = "123456"
-                }
-            };
-            var createdAccount = repo.CreateBankAccount(account);
+            var content = File.ReadAllText("../../Fixtures/bank_account_get_by_id.json");
 
-            var gotAccount = repo.GetBankAccountById(createdAccount.Id);
-
-            Assert.AreEqual(createdAccount.Id, gotAccount.Id);
+            var client = GetMockClient(content);
+            var repo = new BankAccountRepository(client.Object);
+            const string id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
+            var gotAccount = repo.GetBankAccountById(id);
+            client.VerifyAll();
+            Assert.AreEqual(id, gotAccount.Id);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof (ArgumentException))]
         public void GetBankAccountEmptyId()
         {
-            var repo = new BankAccountRepository();
+            var client = GetMockClient("");
+            var repo = new BankAccountRepository(client.Object);
             repo.GetBankAccountById(string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserForBankAccountSuccessfully()
         {
-            var repo = new BankAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new BankAccount
-            {
-                UserId = userId,
-                Active = true,
-                Bank = new Bank
-                {
-                    BankName = "Test bank, inc",
-                    AccountName = "Test account",
-                    AccountNumber = "8123456789",
-                    AccountType = "savings",
-                    Country = "AUS",
-                    HolderType = "personal",
-                    RoutingNumber = "123456"
-                }
-            };
-            var createdAccount = repo.CreateBankAccount(account);
+            var content = File.ReadAllText("../../Fixtures/bank_account_get_users.json");
 
-            var gotUser = repo.GetUserForBankAccount(createdAccount.Id);
-
+            var client = GetMockClient(content);
+            var repo = new BankAccountRepository(client.Object);
+            const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
+            var gotUser = repo.GetUserForBankAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c");
+            client.VerifyAll();
             Assert.IsNotNull(gotUser);
 
             Assert.AreEqual(userId, gotUser.Id);
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteBankAccountSuccessfully()
         {
-            var repo = new BankAccountRepository();
-            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var account = new BankAccount
-            {
-                UserId = userId,
-                Active = true,
-                Bank = new Bank
-                {
-                    BankName = "Test bank, inc",
-                    AccountName = "Test account",
-                    AccountNumber = "8123456789",
-                    AccountType = "savings",
-                    Country = "AUS",
-                    HolderType = "personal",
-                    RoutingNumber = "123456"
-                }
-            };
-            var createdAccount = repo.CreateBankAccount(account);
-            Assert.IsTrue(createdAccount.Active);
-            var result = repo.DeleteBankAccount(createdAccount.Id);
+            var content = File.ReadAllText("../../Fixtures/bank_account_delete.json");
 
+            var client = GetMockClient(content);
+            var repo = new BankAccountRepository(client.Object);
+
+            var result = repo.DeleteBankAccount("e923013e-61e9-4264-9622-83384e13d2b9");
+            client.VerifyAll();
             Assert.IsTrue(result);
-
-            var gotAccount = repo.GetBankAccountById(createdAccount.Id);
-            Assert.IsFalse(gotAccount.Active);
         }
     }
 }

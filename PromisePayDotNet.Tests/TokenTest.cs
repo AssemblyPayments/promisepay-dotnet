@@ -1,25 +1,26 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PromisePayDotNet.DTO;
 using PromisePayDotNet.Implementations;
+using RestSharp;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    [Ignore] 
     public class TokenTest
     {
-        [TestMethod]
+        [Test]
+        [Ignore]
         //it seems I have created a token already, so it return error
         public void RequestToken()
         {
-            var repo = new TokenRepository();
+            var repo = new TokenRepository(new RestClient());
             var token = repo.RequestToken();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestSessionToken()
         {
-            var repo = new TokenRepository();
+            var repo = new TokenRepository(new RestClient());
             var result = repo.RequestSessionToken(new Token
             {
                 CurrentUserId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c",
@@ -37,10 +38,11 @@ namespace PromisePayDotNet.Tests
             });
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void Widget()
         {
-            var repo = new TokenRepository();
+            var repo = new TokenRepository(new RestClient());
             var widget = repo.GetWidget("aaa-bbb-cc");
         }
     }

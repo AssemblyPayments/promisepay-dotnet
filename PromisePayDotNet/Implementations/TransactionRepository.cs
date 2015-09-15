@@ -9,18 +9,21 @@ namespace PromisePayDotNet.Implementations
 {
     public class TransactionRepository : AbstractRepository, ITransactionRepository
     {
+        public TransactionRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public IEnumerable<Transaction> ListTransactions(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);
 
-            var client = GetRestClient();
             var request = new RestRequest("/transactions", Method.GET);
             request.AddParameter("limit", limit);
             request.AddParameter("offset", offset);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("transactions"))
             {
@@ -33,20 +36,18 @@ namespace PromisePayDotNet.Implementations
         public Transaction GetTransaction(string transactionId)
         {
             AssertIdNotNull(transactionId);
-            var client = GetRestClient();
             var request = new RestRequest("/transactions/{id}", Method.GET);
             request.AddUrlSegment("id", transactionId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Transaction>>(response.Content).Values.First();
         }
 
         public User GetUserForTransaction(string transactionId)
         {
             AssertIdNotNull(transactionId);
-            var client = GetRestClient();
             var request = new RestRequest("/transactions/{id}/users", Method.GET);
             request.AddUrlSegment("id", transactionId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))
             {
@@ -59,10 +60,9 @@ namespace PromisePayDotNet.Implementations
         public Fee GetFeeForTransaction(string transactionId)
         {
             AssertIdNotNull(transactionId);
-            var client = GetRestClient();
             var request = new RestRequest("/transactions/{id}/fees", Method.GET);
             request.AddUrlSegment("id", transactionId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("fees"))
             {

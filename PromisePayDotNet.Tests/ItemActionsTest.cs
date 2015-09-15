@@ -1,70 +1,75 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PromisePayDotNet.Implementations;
+﻿using NUnit.Framework;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
-    [Ignore]
+
     public class ItemActionsTest
     {
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void MakePaymentSuccessfully()
         {
-            var repo = new ItemRepository();
-            var itemId = "7c269f52-2236-4aa5-899e-a2e3ecadbc3f";
-            var cardId = "2e2ed4fb-4eb2-458e-99f9-2bf0b3004933";
-            repo.MakePayment(itemId, cardId);
+            Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestPaymentSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void ReleasePaymentSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestReleaseSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void CancelSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void AcknowledgeWireSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void AcknowledgePayPalSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RevertWireSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RequestRefundSuccessfully()
         {
             Assert.Fail();
         }
 
-        [TestMethod]
+        [Test]
+        [Ignore]
         public void RefundSuccessfully()
         {
             Assert.Fail();

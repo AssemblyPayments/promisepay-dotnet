@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using PromisePayDotNet.Implementations;
 using PromisePayDotNet.Interfaces;
+using RestSharp;
 
 namespace PromisePayDotNet.DI
 {
@@ -8,6 +9,7 @@ namespace PromisePayDotNet.DI
     {
         public static void Init(IUnityContainer container)
         {
+            container.RegisterType<IRestClient,RestClient>(new InjectionConstructor());
             container.RegisterType<IAddressRepository, AddressRepository>();
             container.RegisterType<IBankAccountRepository, BankAccountRepository>();
             container.RegisterType<ICardAccountRepository, CardAccountRepository>();

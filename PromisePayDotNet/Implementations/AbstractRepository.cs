@@ -16,6 +16,15 @@ namespace PromisePayDotNet.Implementations
 
         protected const int EntityListLimit = 200;
 
+        protected IRestClient Client;
+
+        public AbstractRepository(IRestClient client)
+        {
+            this.Client = client;
+            client.BaseUrl = new Uri(BaseUrl);
+            client.Authenticator = new HttpBasicAuthenticator(Login, Password);
+        }
+
         protected Hashtable Configurataion
         {
             get
@@ -73,15 +82,7 @@ namespace PromisePayDotNet.Implementations
             }
         }
 
-        protected RestClient GetRestClient()
-        {
-            return new RestClient(BaseUrl)
-            {
-                Authenticator = new HttpBasicAuthenticator(Login, Password)
-            };
-        }
-
-        protected IRestResponse SendRequest(RestClient client, RestRequest request)
+        protected IRestResponse SendRequest(IRestClient client, IRestRequest request)
         {
             var response = client.Execute(request);
 

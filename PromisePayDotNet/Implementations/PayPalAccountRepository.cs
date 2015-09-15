@@ -10,36 +10,37 @@ namespace PromisePayDotNet.Implementations
 {
     public class PayPalAccountRepository : AbstractRepository, IPayPalAccountRepository
     {
+        public PayPalAccountRepository(IRestClient client) : base(client)
+        {
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public PayPalAccount GetPayPalAccountById(string paypalAccountId)
         {
             AssertIdNotNull(paypalAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/paypal_accounts/{id}", Method.GET);
             request.AddUrlSegment("id", paypalAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, PayPalAccount>>(response.Content).Values.First();
         }
 
         public PayPalAccount CreatePayPalAccount(PayPalAccount paypalAccount)
         {
-            var client = GetRestClient();
             var request = new RestRequest("/paypal_accounts", Method.POST);
             request.AddParameter("user_id", paypalAccount.UserId);
             request.AddParameter("paypal_email", paypalAccount.PayPal.Email);
 
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, PayPalAccount>>(response.Content).Values.First();
         }
 
         public bool DeletePayPalAccount(string paypalAccountId)
         {
             AssertIdNotNull(paypalAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/paypal_accounts/{id}", Method.DELETE);
             request.AddUrlSegment("id", paypalAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return false;
@@ -50,10 +51,9 @@ namespace PromisePayDotNet.Implementations
         public User GetUserForPayPalAccount(string paypalAccountId)
         {
             AssertIdNotNull(paypalAccountId);
-            var client = GetRestClient();
             var request = new RestRequest("/paypal_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", paypalAccountId);
-            var response = SendRequest(client, request);
+            var response = SendRequest(Client, request);
 
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
             if (dict.ContainsKey("users"))

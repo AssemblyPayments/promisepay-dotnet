@@ -1,14 +1,13 @@
 ﻿using Microsoft.Practices.Unity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PromisePayDotNet.DI;
 using PromisePayDotNet.Interfaces;
 
 namespace PromisePayDotNet.Tests
 {
-    [TestClass]
     public class DITest
     {
-        [TestMethod]
+        [Test]
         public void TestDIContainer()
         {
             var container = new UnityContainer();

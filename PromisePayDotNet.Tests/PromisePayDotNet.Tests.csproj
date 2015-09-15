@@ -45,9 +45,36 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NUnit.VisualStudio.TestAdapter">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -58,13 +85,10 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AbstractTest.cs" />
     <Compile Include="AddressTest.cs" />
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="CardAccountTest.cs" />
@@ -79,11 +103,43 @@
     <Compile Include="TokenTest.cs" />
     <Compile Include="TransactionTest.cs" />
     <Compile Include="UploadTest.cs" />
-    <Compile Include="UserTest.cs" />
     <Compile Include="WidgetTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Fixtures\address_get_by_id.json" />
+    <None Include="Fixtures\bank_account_create.json" />
+    <None Include="Fixtures\bank_account_delete.json" />
+    <None Include="Fixtures\bank_account_get_by_id.json" />
+    <None Include="Fixtures\bank_account_get_users.json" />
+    <None Include="Fixtures\card_account_delete.json" />
+    <None Include="Fixtures\card_account_get_by_id.json" />
+    <None Include="Fixtures\card_account_get_users.json" />
+    <None Include="Fixtures\companies_create.json" />
+    <None Include="Fixtures\companies_edit.json" />
+    <None Include="Fixtures\companies_get_by_id.json" />
+    <None Include="Fixtures\companies_list.json" />
+    <None Include="Fixtures\fees_create.json" />
+    <None Include="Fixtures\fees_get_by_id.json" />
+    <None Include="Fixtures\fees_list.json" />
+    <None Include="Fixtures\items_create.json" />
+    <None Include="Fixtures\items_delete.json" />
+    <None Include="Fixtures\items_edit.json" />
+    <None Include="Fixtures\items_edit_unsuccessful.json" />
+    <None Include="Fixtures\items_get_bpay_details.json" />
+    <None Include="Fixtures\items_get_buyer.json" />
+    <None Include="Fixtures\items_get_by_id.json" />
+    <None Include="Fixtures\items_get_seller.json" />
+    <None Include="Fixtures\items_get_status.json" />
+    <None Include="Fixtures\items_get_wire_details.json" />
+    <None Include="Fixtures\items_list.json" />
+    <None Include="Fixtures\items_list_transactions.json" />
+    <None Include="Fixtures\items_not_found.json" />
+    <None Include="Fixtures\paypal_account_create.json" />
+    <None Include="Fixtures\paypal_account_delete.json" />
+    <None Include="Fixtures\paypal_account_get_by_id.json" />
+    <None Include="Fixtures\paypal_account_get_users.json" />
+    <None Include="Fixtures\transactions_list.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +147,15 @@
       <Project>{D7EC61A8-A481-49DA-85AE-280B0A3D08B0}</Project>
       <Name>PromisePayDotNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\card_account_create.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\items_delete_unsuccessful.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\items_list_fees.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
