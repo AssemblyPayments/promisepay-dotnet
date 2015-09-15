@@ -577,7 +577,6 @@ var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
 var company = new Company
 {
 	Id = id,
-	UserId = userId,
 	Name = "Acme Co",
 	LegalName = "Acme Co Pty Ltd",
 	TaxNumber = "1231231",
