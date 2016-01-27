@@ -43,9 +43,8 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("fee_ids", token.FeeIds);
             request.AddParameter("payment_type_id", (int)token.PaymentType);
             var response = SendRequest(Client, request);
-            return JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content).Values.First();                        
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);                     
         }
-
         public Widget GetWidget(string sessionToken)
         {
             var request = new RestRequest("/widget", Method.GET);
