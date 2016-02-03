@@ -22,7 +22,7 @@ namespace PromisePayDotNet.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content).Values.First();            
         }
 
-        public string RequestSessionToken(Token token)
+        public IDictionary<string, object> RequestSessionToken(Token token)
         {
             var request = new RestRequest("/request_session_token", Method.GET);
             request.AddParameter("current_user_id", token.CurrentUserId);

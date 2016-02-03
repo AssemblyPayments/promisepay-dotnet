@@ -1,4 +1,5 @@
 ﻿using PromisePayDotNet.DTO;
+using System.Collections.Generic;
 
 namespace PromisePayDotNet.Interfaces
 {
@@ -6,7 +7,7 @@ namespace PromisePayDotNet.Interfaces
     {
         string RequestToken();
 
-        string RequestSessionToken(Token token);
+        IDictionary<string, object> RequestSessionToken(Token token);
 
         Widget GetWidget(string sessionToken);
     }

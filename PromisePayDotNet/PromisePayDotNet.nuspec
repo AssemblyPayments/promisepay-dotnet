@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PromisePay.API.NET</id>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <title>Promise Pay API</title>
     <authors>Igor Sidorov</authors>
     <owners>Andrew McIntosh</owners>

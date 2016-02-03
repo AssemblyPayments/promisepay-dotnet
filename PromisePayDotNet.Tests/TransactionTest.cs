@@ -31,7 +31,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage="unspecified")]
         public void ListTransactionsNegativeParams()
         {
             var client = GetMockClient("");
