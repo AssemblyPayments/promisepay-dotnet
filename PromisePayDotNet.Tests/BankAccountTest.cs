@@ -66,12 +66,11 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (ArgumentException))]
         public void GetBankAccountEmptyId()
         {
             var client = GetMockClient("");
             var repo = new BankAccountRepository(client.Object);
-            repo.GetBankAccountById(string.Empty);
+            Assert.Throws<ArgumentException>(() => repo.GetBankAccountById(string.Empty));
         }
 
         [Test]

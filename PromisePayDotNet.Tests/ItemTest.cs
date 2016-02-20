@@ -10,6 +10,7 @@ using PromisePayDotNet.Implementations;
 using System;
 using System.Linq;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace PromisePayDotNet.Tests
 {
@@ -67,24 +68,22 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ListAllItemsNegativeParams()
         {
             var client = GetMockClient("");
             var repo = new ItemRepository(client.Object);
             //Then, list items
-            var items = repo.ListItems(-10,-10);
+            Assert.Throws<ArgumentException>(() => repo.ListItems(-10, -10));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ListAllItemsTooHighLimit()
         {
             var client = GetMockClient("");
             var repo = new ItemRepository(client.Object);
 
             //Then, list items
-            var items = repo.ListItems(500);
+            Assert.Throws<ArgumentException>(() => repo.ListItems(500));
         }
 
         [Test]
@@ -104,7 +103,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(UnauthorizedException))]
         //That's bad idea not to distinguish between "wrong login/password" and "There is no such ID in DB"
         public void GetItemMissingId()
         {
@@ -121,7 +119,7 @@ namespace PromisePayDotNet.Tests
             client.Setup(x => x.Execute(It.IsAny<IRestRequest>())).Returns(response.Object);
             var repo = new ItemRepository(client.Object); 
             var id = Guid.NewGuid().ToString();
-            repo.GetItemById(id);
+            Assert.Throws<UnauthorizedException>(() => repo.GetItemById(id));
         }
 
         [Test]
@@ -136,7 +134,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(UnauthorizedException))]
         //That's bad idea not to distinguish between "wrong login/password" and "There is no such ID in DB"
         public void DeleteItemMissingId()
         {
@@ -153,7 +150,7 @@ namespace PromisePayDotNet.Tests
             client.Setup(x => x.Execute(It.IsAny<IRestRequest>())).Returns(response.Object);
             var repo = new ItemRepository(client.Object);
             var id = Guid.NewGuid().ToString();
-            Assert.IsFalse(repo.DeleteItem(id));
+            Assert.Throws<UnauthorizedException>(() => repo.DeleteItem(id));
         }
 
         [Test]
@@ -189,7 +186,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(UnauthorizedException))]
         public void EditItemMissingId()
         {
             var content = File.ReadAllText("../../Fixtures/items_edit_unsuccessful.json");
@@ -219,7 +215,7 @@ namespace PromisePayDotNet.Tests
                 Description = "Test item #1 description"
             };
 
-            repo.UpdateItem(item);
+            Assert.Throws<UnauthorizedException>(() => repo.UpdateItem(item));
         }
 
         [Test]

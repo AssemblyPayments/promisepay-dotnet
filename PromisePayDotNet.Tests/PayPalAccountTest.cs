@@ -60,14 +60,13 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetPayPalAccountEmptyId()
         {
             var client = GetMockClient("");
 
             var repo = new PayPalAccountRepository(client.Object);
 
-            repo.GetPayPalAccountById(string.Empty);
+            Assert.Throws<ArgumentException>(()=>repo.GetPayPalAccountById(string.Empty));
         }
 
         [Test]

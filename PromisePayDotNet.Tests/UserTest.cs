@@ -53,7 +53,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationException))]
         public void ValidationErrorUserCreateMissedId()
         {
             var repo = new UserRepository(new RestClient());
@@ -70,11 +69,10 @@ namespace PromisePayDotNet.Tests
                 Zip = "123456",
                 Email = id + "@google.com"
             };
-            repo.CreateUser(user);
+            Assert.Throws<ValidationException>(() => repo.CreateUser(user));
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationException))]
         public void ValidationErrorUserCreateMissedFirstName()
         {
             var repo = new UserRepository(new RestClient());
@@ -91,11 +89,10 @@ namespace PromisePayDotNet.Tests
                 Zip = "123456",
                 Email = id + "@google.com"
             };
-            repo.CreateUser(user);
+            Assert.Throws<ValidationException>(() => repo.CreateUser(user));
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationException))]
         public void ValidationErrorUserCreateWrongCountry()
         {
             var repo = new UserRepository(new RestClient());
@@ -112,11 +109,10 @@ namespace PromisePayDotNet.Tests
                 Zip = "123456",
                 Email = id + "@google.com"
             };
-            repo.CreateUser(user);
+            Assert.Throws<ValidationException>(() => repo.CreateUser(user));
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationException))]
         public void ValidationErrorUserCreateWrongEmail()
         {
             var repo = new UserRepository(new RestClient());
@@ -133,7 +129,7 @@ namespace PromisePayDotNet.Tests
                 Zip = "123456",
                 Email = id
             };
-            repo.CreateUser(user);
+            Assert.Throws<ValidationException>(() => repo.CreateUser(user));
         }
 
         [Test]
@@ -167,19 +163,17 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (ArgumentException))]
         public void ListUsersNegativeParams()
         {
             var repo = new UserRepository(new RestClient());
-            repo.ListUsers(-10, -20);
+            Assert.Throws<ArgumentException>(()=>repo.ListUsers(-10, -20));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ListUsersTooHighLimit()
         {
             var repo = new UserRepository(new RestClient());
-            repo.ListUsers(201);
+            Assert.Throws<ArgumentException>(() => repo.ListUsers(201));
         }
 
 
@@ -212,17 +206,16 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(UnauthorizedException))] 
         //That's bad idea not to distinguish between "wrong login/password" and "There is no such ID in DB"
         public void GetUserMissingId()
         {
             var repo = new UserRepository(new RestClient());
             var id = Guid.NewGuid().ToString();
-            repo.GetUserById(id);
+            Assert.Throws<UnauthorizedException>(() => repo.GetUserById(id));
         }
 
-        [Ignore] //Skipped until API method will be fixed
         [Test]
+        [Ignore("Skipped until API method will be fixed")]
         public void DeleteUserSuccessful()
         {
             //First, create a user with known id
@@ -309,7 +302,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(UnauthorizedException))]
         public void EditUserMissingId()
         {
             var repo = new UserRepository(new RestClient());
@@ -327,12 +319,12 @@ namespace PromisePayDotNet.Tests
                 Email = id + "@google.com"
             };
 
-            repo.UpdateUser(user);
+            Assert.Throws<UnauthorizedException>(() => repo.UpdateUser(user));
         }
 
 
         [Test]
-        [Ignore] //Currently, this test returns 401
+        [Ignore("Currently, this test returns 401")] 
         public void SendMobilePinSuccessful()
         {
             var repo = new UserRepository(new RestClient());
@@ -367,7 +359,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void ListUserDisbursementAccountsSuccessful()
         {
             var repo = new UserRepository(new RestClient());

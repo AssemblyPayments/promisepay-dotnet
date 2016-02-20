@@ -45,7 +45,6 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationException))]
         public void CreateFeeWrongTo()
         {
             var client = GetMockClient("");

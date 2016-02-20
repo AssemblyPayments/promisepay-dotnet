@@ -18,14 +18,14 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void CreateUploadSuccessfully()
         {
             Assert.Fail();
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void ListUploadsSuccessfully()
         {
             var repo = new UploadRepository(new RestClient());
@@ -34,7 +34,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void GetUploadByIdSuccessfully()
         {
             Assert.Fail();
@@ -43,14 +43,14 @@ namespace PromisePayDotNet.Tests
 
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void GetStatusSuccessfully()
         {
             Assert.Fail();            
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void StartImportSuccessfully()
         {
             Assert.Fail();            

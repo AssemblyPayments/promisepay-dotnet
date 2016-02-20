@@ -31,21 +31,20 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage="unspecified")]
         public void ListTransactionsNegativeParams()
         {
+            
             var client = GetMockClient("");
             var repo = new TransactionRepository(client.Object);
-            repo.ListTransactions(-10, -20);
+            Assert.Throws<ArgumentException>(() => repo.ListTransactions(-10, -20));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ListTransactionsTooHighLimit()
         {
             var client = GetMockClient("");
             var repo = new TransactionRepository(client.Object);
-            repo.ListTransactions(201);
+            Assert.Throws<ArgumentException>(() => repo.ListTransactions(201));
         }
     }
 }

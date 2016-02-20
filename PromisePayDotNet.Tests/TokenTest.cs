@@ -8,8 +8,7 @@ namespace PromisePayDotNet.Tests
     public class TokenTest
     {
         [Test]
-        [Ignore]
-        //it seems I have created a token already, so it return error
+        [Ignore("it seems I have created a token already, so it return error")]
         public void RequestToken()
         {
             var repo = new TokenRepository(new RestClient());
@@ -17,7 +16,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void RequestSessionToken()
         {
             var repo = new TokenRepository(new RestClient());
@@ -39,7 +38,7 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Not implemented yet")]
         public void Widget()
         {
             var repo = new TokenRepository(new RestClient());
