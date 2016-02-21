@@ -51,7 +51,7 @@ namespace PromisePayDotNet.Tests
 
             var repo = new FeeRepository(client.Object);
             var feeId = Guid.NewGuid().ToString();
-            var createdFee = repo.CreateFee(new Fee
+            Assert.Throws<ValidationException>(() => repo.CreateFee(new Fee
             {
                 Id = feeId,
                 Amount = 1000,
@@ -60,9 +60,7 @@ namespace PromisePayDotNet.Tests
                 Cap = "1",
                 Max = "3",
                 Min = "2",
-            });
-            Assert.IsNotNull(createdFee);
-            Assert.AreEqual("Test fee #1", createdFee.Name);
+            }));
         }
 
         [Test]
