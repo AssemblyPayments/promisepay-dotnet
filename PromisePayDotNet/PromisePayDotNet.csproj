@@ -87,6 +87,8 @@
     <Compile Include="DTO\Widget.cs" />
     <Compile Include="DTO\WireDetails.cs" />
     <Compile Include="DI\InitUnityContainer.cs" />
+    <Compile Include="Dynamic.Implementations\BankAccountRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Enums\FeeType.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Exceptions\ApiErrorsException.cs" />

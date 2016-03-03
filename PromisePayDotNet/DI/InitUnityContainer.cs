@@ -21,6 +21,8 @@ namespace PromisePayDotNet.DI
             container.RegisterType<ITransactionRepository, TransactionRepository>();
             container.RegisterType<IUploadRepository, UploadRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+
+
         }
     }
 }
