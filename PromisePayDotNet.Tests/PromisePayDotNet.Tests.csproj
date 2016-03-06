@@ -104,6 +104,7 @@
     <Compile Include="TokenTest.cs" />
     <Compile Include="TransactionTest.cs" />
     <Compile Include="DynamicBankAccountTest.cs" />
+    <Compile Include="DynamicCardAccountTest.cs" />
     <Compile Include="UploadTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="WidgetTest.cs" />
