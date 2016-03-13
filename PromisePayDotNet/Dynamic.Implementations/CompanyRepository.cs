@@ -1,0 +1,79 @@
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace PromisePayDotNet.Dynamic.Implementations
+{
+    public class CompanyRepository : PromisePayDotNet.Implementations.AbstractRepository,
+                                         PromisePayDotNet.Dynamic.Interfaces.ICompanyRepository
+    {
+        public CompanyRepository(IRestClient client)
+            : base(client)
+        {
+        }
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public IEnumerable<IDictionary<string,object>> ListCompanies()
+        {
+            var request = new RestRequest("/companies", Method.GET);
+
+            var response = SendRequest(Client, request);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("companies"))
+            {
+                var uploadCollection = dict["companies"];
+                return JsonConvert.DeserializeObject<List<IDictionary<string, object>>>(JsonConvert.SerializeObject(uploadCollection));
+            }
+            return new List<IDictionary<string, object>>();
+        }
+
+        public IDictionary<string, object> GetCompanyById(string companyId)
+        {
+            AssertIdNotNull(companyId);
+            var request = new RestRequest("/companies/{id}", Method.GET);
+            request.AddUrlSegment("id", companyId);
+            var response = SendRequest(Client, request);
+            var company = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(company));
+        }
+
+        public IDictionary<string, object> CreateCompany(IDictionary<string, object> company)
+        {
+            var request = new RestRequest("/companies", Method.POST);
+            request.AddParameter("name", (string)company["name"]);
+            request.AddParameter("legal_name", (string)company["legal_name"]);
+            request.AddParameter("tax_number", (string)company["tax_number"]);
+            request.AddParameter("charge_tax", (string)company["charge_tax"]);
+            request.AddParameter("address_line1", (string)company["address_line1"]);
+            request.AddParameter("address_line2", (string)company["address_line2"]);
+            request.AddParameter("city", (string)company["city"]);
+            request.AddParameter("state", (string)company["state"]);
+            request.AddParameter("zip", (string)company["zip"]);
+            request.AddParameter("country", (string)company["country"]);
+            var response = SendRequest(Client, request);
+            var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+        }
+
+        public IDictionary<string, object> EditCompany(IDictionary<string, object> company)
+        {
+            var request = new RestRequest("/companies", Method.POST);
+            request.AddParameter("name", (string)company["name"]);
+            request.AddParameter("legal_name", (string)company["legal_name"]);
+            request.AddParameter("tax_number", (string)company["tax_number"]);
+            request.AddParameter("charge_tax", (string)company["charge_tax"]);
+            request.AddParameter("address_line1", (string)company["address_line1"]);
+            request.AddParameter("address_line2", (string)company["address_line2"]);
+            request.AddParameter("city", (string)company["city"]);
+            request.AddParameter("state", (string)company["state"]);
+            request.AddParameter("zip", (string)company["zip"]);
+            request.AddParameter("country", (string)company["country"]);
+
+            var response = SendRequest(Client, request);
+            var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+        }
+    }
+}
