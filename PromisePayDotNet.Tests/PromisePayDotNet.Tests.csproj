@@ -98,6 +98,7 @@
     <Compile Include="DITest.cs" />
     <Compile Include="DynamicAddressTest.cs" />
     <Compile Include="DynamicCompanyTest.cs" />
+    <Compile Include="DynamicFeeTest.cs" />
     <Compile Include="DynamicPayPalAccountTest.cs" />
     <Compile Include="FeeTest.cs" />
     <Compile Include="ItemActionsTest.cs" />
