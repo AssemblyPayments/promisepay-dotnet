@@ -87,9 +87,11 @@
     <Compile Include="DTO\Widget.cs" />
     <Compile Include="DTO\WireDetails.cs" />
     <Compile Include="DI\InitUnityContainer.cs" />
+    <Compile Include="Dynamic.Implementations\AddressRepository.cs" />
     <Compile Include="Dynamic.Implementations\BankAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\CardAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\PayPalAccountRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IAddressRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICardAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IPayPalAccountRepository.cs" />
