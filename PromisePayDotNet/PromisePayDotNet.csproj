@@ -93,12 +93,14 @@
     <Compile Include="Dynamic.Implementations\CompanyRepository.cs" />
     <Compile Include="Dynamic.Implementations\FeeRepository.cs" />
     <Compile Include="Dynamic.Implementations\PayPalAccountRepository.cs" />
+    <Compile Include="Dynamic.Implementations\TokenRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IAddressRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICardAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICompanyRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IFeeRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IPayPalAccountRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\ITokenRepository.cs" />
     <Compile Include="Enums\FeeType.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Exceptions\ApiErrorsException.cs" />
