@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PromisePayDotNet.Tests
 {
-    public class DynamicTokenTest
+    public class DynamicTokenTest : AbstractTest
     {
         [Test]
         [Ignore("it seems I have created a token already, so it return error")]
