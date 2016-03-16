@@ -102,6 +102,7 @@
     <Compile Include="DynamicPayPalAccountTest.cs" />
     <Compile Include="DynamicTokenTest.cs" />
     <Compile Include="DynamicTransactionTest.cs" />
+    <Compile Include="DynamicUploadTest.cs" />
     <Compile Include="FeeTest.cs" />
     <Compile Include="ItemActionsTest.cs" />
     <Compile Include="ItemTest.cs" />

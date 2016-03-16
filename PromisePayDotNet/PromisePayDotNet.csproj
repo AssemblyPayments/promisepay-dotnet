@@ -95,6 +95,7 @@
     <Compile Include="Dynamic.Implementations\PayPalAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\TokenRepository.cs" />
     <Compile Include="Dynamic.Implementations\TransactionRepository.cs" />
+    <Compile Include="Dynamic.Implementations\UploadRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IAddressRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICardAccountRepository.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Dynamic.Interfaces\IPayPalAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITokenRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITransactionRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IUploadRepository.cs" />
     <Compile Include="Enums\FeeType.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Exceptions\ApiErrorsException.cs" />
