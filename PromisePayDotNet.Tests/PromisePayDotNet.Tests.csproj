@@ -99,6 +99,7 @@
     <Compile Include="DynamicAddressTest.cs" />
     <Compile Include="DynamicCompanyTest.cs" />
     <Compile Include="DynamicFeeTest.cs" />
+    <Compile Include="DynamicItemTest.cs" />
     <Compile Include="DynamicPayPalAccountTest.cs" />
     <Compile Include="DynamicTokenTest.cs" />
     <Compile Include="DynamicTransactionTest.cs" />
