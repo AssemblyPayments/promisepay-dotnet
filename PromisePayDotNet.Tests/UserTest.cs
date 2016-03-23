@@ -406,11 +406,17 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore("Not implemented yet")]
-        public void ListUserDisbursementAccountsSuccessful()
+        public void SetDisbursementAccountsSuccessful()
         {
-            var repo = new UserRepository(new RestClient());
-            var items = repo.SetDisbursementAccount("89592d8a-6cdb-4857-a90d-b41fc817d639", "123");
+            var content = File.ReadAllText("../../Fixtures/user_set_disbursement_account.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var account = repo.SetDisbursementAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c", "09b5bb3c-c0fd-404d-b373-d675f42d8865");
+
+            Assert.AreEqual("test sdfdf edited Test", account.FullName);
+            Assert.AreEqual("pending", account.VerificationState);
+
         }
     }
 }

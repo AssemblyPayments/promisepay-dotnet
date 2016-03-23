@@ -160,6 +160,7 @@
     <None Include="Fixtures\user_items.json" />
     <None Include="Fixtures\user_missing.json" />
     <None Include="Fixtures\user_paypal_accounts.json" />
+    <None Include="Fixtures\user_set_disbursement_account.json" />
     <None Include="Fixtures\user_update.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

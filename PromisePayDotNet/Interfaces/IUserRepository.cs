@@ -23,6 +23,6 @@ namespace PromisePayDotNet.Interfaces
 
         IEnumerable<BankAccount> ListBankAccountsForUser(string userId);
 
-        bool SetDisbursementAccount(string userId, string accountId);
+        DisbursementAccount SetDisbursementAccount(string userId, string accountId);
     }
 }

@@ -176,24 +176,30 @@ namespace PromisePayDotNet.Implementations
             return new List<BankAccount>();
         }
 
-        public bool SetDisbursementAccount(string userId, string accountId)
+        public DisbursementAccount SetDisbursementAccount(string userId, string accountId)
         {
-            //ToDo find out DisbursementAccount fields and implement this method 
-            throw new NotImplementedException();
-//            AssertIdNotNull(userId);
-//
-//            var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
-//            request.AddUrlSegment("id", userId);
-//            request.AddUrlSegment("account_id", accountId);
-//            try
-//            {
-//                SendRequest(Client, request);
-//            }
-//            catch (ApiErrorsException e)
-//            {
-//                throw;
-//            }
-        
+            AssertIdNotNull(userId);
+
+            var request = new RestRequest("/users/{id}/disbursement_account?account_id={account_id}", Method.POST);
+            request.AddUrlSegment("id", userId);
+            request.AddUrlSegment("account_id", accountId);
+            IRestResponse response;
+            try
+            {
+                response = SendRequest(Client, request);
+            }
+            catch (ApiErrorsException e)
+            {
+                throw;
+            }
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+            if (dict.ContainsKey("users"))
+            {
+                var itemCollection = dict["users"];
+                return JsonConvert.DeserializeObject<DisbursementAccount>(JsonConvert.SerializeObject(itemCollection));
+            }
+
+            return null;
         }
 
         public User UpdateUser(User user)
