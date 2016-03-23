@@ -52,12 +52,13 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CompanyRepository(client.Object);
+            var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
             var createdCompany = repo.CreateCompany(new Company
             {
                 LegalName = "Test company #1",
                 Name = "Test company #1",
                 Country = "AUS"
-            });
+            }, userId);
             client.VerifyAll();
             Assert.IsNotNull(createdCompany);
             Assert.IsNotNull(createdCompany.Id);

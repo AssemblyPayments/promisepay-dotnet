@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PromisePayDotNet.DTO;
+using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Interfaces;
 using RestSharp;
 using System.Collections.Generic;
@@ -38,8 +39,12 @@ namespace PromisePayDotNet.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }
 
-        public Company CreateCompany(Company company)
+        public Company CreateCompany(Company company, string userId)
         {
+            AssertIdNotNull(userId);
+            if (!IsCorrectCountryCode(company.Country)) {
+                throw new ValidationException("Field country should contain 3-letter ISO country code!");
+            }
             var request = new RestRequest("/companies", Method.POST);
             request.AddParameter("name", company.Name);
             request.AddParameter("legal_name", company.LegalName);
@@ -57,7 +62,9 @@ namespace PromisePayDotNet.Implementations
 
         public Company EditCompany(Company company)
         {
-            var request = new RestRequest("/companies", Method.POST);
+            AssertIdNotNull(company.Id);
+            var request = new RestRequest("/companies/{id}", Method.PATCH);
+            request.AddUrlSegment("id", company.Id);
             request.AddParameter("name", company.Name);
             request.AddParameter("legal_name", company.LegalName);
             request.AddParameter("tax_number", company.TaxNumber);
@@ -68,6 +75,7 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("state", company.State);
             request.AddParameter("zip", company.Zip);
             request.AddParameter("country", company.Country);
+            request.AddParameter("phone", company.Phone);
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, Company>>(response.Content).Values.First();
         }

@@ -40,5 +40,9 @@ namespace PromisePayDotNet.DTO
 
         [JsonProperty(PropertyName = "related")]
         public IDictionary<string, string> Related { get; set; }
+
+        [JsonProperty(PropertyName = "phone")]
+        public string Phone { get; set; }
+
     }
 }

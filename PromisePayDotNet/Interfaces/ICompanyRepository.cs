@@ -9,7 +9,7 @@ namespace PromisePayDotNet.Interfaces
 
         Company GetCompanyById(string companyId);
 
-        Company CreateCompany(Company company);
+        Company CreateCompany(Company company, string userId);
 
         Company EditCompany(Company company);
     }
