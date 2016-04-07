@@ -33,13 +33,9 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("user_id", (string)bankAccount["user_id"]);
             var bank = (IDictionary<string,object>)(bankAccount["bank"]);
 
-            request.AddParameter("bank_name", (string)bank["bank_name"]);
-            request.AddParameter("account_name", (string)bank["account_name"]);
-            request.AddParameter("routing_number", (string)bank["account_name"]);
-            request.AddParameter("account_number", (string)bank["account_name"]);
-            request.AddParameter("account_type", (string)bank["account_name"]);
-            request.AddParameter("holder_type", (string)bank["account_name"]);
-            request.AddParameter("country", (string)bank["account_name"]);
+            foreach (var key in bank.Keys) {
+                request.AddParameter(key, (string)bank[key]);
+            }
 
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, IDictionary<string,object>>>(response.Content).Values.First();

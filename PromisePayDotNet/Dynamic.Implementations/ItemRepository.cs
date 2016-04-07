@@ -48,14 +48,11 @@ namespace PromisePayDotNet.Dynamic.Implementations
         public IDictionary<string, object> CreateItem(IDictionary<string, object> item)
         {
             var request = new RestRequest("/items", Method.POST);
-            request.AddParameter("id", item["id"]);
-            request.AddParameter("name", item["name"]);
-            request.AddParameter("amount", item["amount"]);
-            request.AddParameter("payment_type", item["payment_type"]);
-            request.AddParameter("buyer_id", item["buyer_id"]);
-            request.AddParameter("seller_id", item["seller_id"]);
-            request.AddParameter("fee_ids", item["fee_ids"]);
-            request.AddParameter("description", item["description"]);
+
+            foreach (var key in item.Keys) {
+                request.AddParameter(key, item[key]);
+            }
+
             var response = SendRequest(Client, request);
             var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
@@ -79,12 +76,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/items/{id}", Method.PATCH);
             request.AddUrlSegment("id", (string)item["id"]);
 
-            request.AddParameter("amount", item["amount"]);
-            request.AddParameter("name", item["name"]);
-            request.AddParameter("description", item["description"]);
-            request.AddParameter("buyer_id", item["buyer_id"]);
-            request.AddParameter("seller_id", item["seller_id"]);
-            request.AddParameter("fee_ids", item["fee_ids"]);
+            foreach (var key in item.Keys)
+            {
+                request.AddParameter(key, item[key]);
+            }
 
             var response = SendRequest(Client, request);
             var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();

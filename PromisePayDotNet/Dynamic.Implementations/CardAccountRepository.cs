@@ -32,11 +32,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("user_id", (string)cardAccount["user_id"]);
 
             var card = (IDictionary<string, object>)(cardAccount["card"]);
-            request.AddParameter("full_name", (string)card["full_name"]);
-            request.AddParameter("number", (string)card["number"]);
-            request.AddParameter("expiry_month", (string)card["expiry_month"]);
-            request.AddParameter("expiry_year", (string)card["expiry_year"]);
-            request.AddParameter("cvv", (string)card["cvv"]);
+
+            foreach (var key in card.Keys) {
+                request.AddParameter(key, (string)card[key]);
+            }
 
             var response = SendRequest(Client, request);
             var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();

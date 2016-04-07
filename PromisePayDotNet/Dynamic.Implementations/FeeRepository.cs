@@ -44,13 +44,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
         {
             VailidateFee(fee);
             var request = new RestRequest("/fees", Method.POST);
-            request.AddParameter("name", (string)fee["name"]);
-            request.AddParameter("fee_type_id", (string)fee["fee_type_id"]);
-            request.AddParameter("amount", (string)fee["amount"]);
-            request.AddParameter("cap", (string)fee["cap"]);
-            request.AddParameter("min", (string)fee["min"]);
-            request.AddParameter("max", (string)fee["max"]);
-            request.AddParameter("to", (string)fee["to"]);
+
+            foreach (var key in fee.Keys) {
+                request.AddParameter(key, (string)fee[key]);            
+            }
 
             var response = SendRequest(Client, request);
             var returnedFee = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();

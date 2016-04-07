@@ -26,23 +26,11 @@ namespace PromisePayDotNet.Dynamic.Implementations
         public IDictionary<string, object> RequestSessionToken(IDictionary<string,object> token)
         {
             var request = new RestRequest("/request_session_token", Method.GET);
-            request.AddParameter("current_user_id", token["current_user_id"]);
-            request.AddParameter("current_user", token["current_user"]);
-            request.AddParameter("item_name", token["item_name"]);
-            request.AddParameter("amount", token["amount"]);
-            request.AddParameter("seller_lastname", token["seller_lastname"]);
-            request.AddParameter("seller_firstname", token["seller_firstname"]);
-            request.AddParameter("seller_country", token["seller_country"]);
-            request.AddParameter("buyer_lastname", token["buyer_lastname"]);
-            request.AddParameter("buyer_firstname", token["buyer_firstname"]);
-            request.AddParameter("buyer_country", token["buyer_country"]);
-            request.AddParameter("seller_email", token["seller_email"]);
-            request.AddParameter("buyer_email", token["buyer_email"]);
-            request.AddParameter("external_item_id", token["external_item_id"]);
-            request.AddParameter("external_seller_id", token["external_seller_id"]);
-            request.AddParameter("external_buyer_id", token["external_buyer_id"]);
-            request.AddParameter("fee_ids", token["fee_ids"]);
-            request.AddParameter("payment_type_id", token["payment_type_id"]);
+
+            foreach (var key in token.Keys) {
+                request.AddParameter(key, token[key]);
+            }
+
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }

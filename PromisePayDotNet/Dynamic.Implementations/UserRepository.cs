@@ -51,18 +51,11 @@ namespace PromisePayDotNet.Dynamic.Implementations
         {
             ValidateUser(user);
             var request = new RestRequest("/users", Method.POST);
-            request.AddParameter("id", (string)user["id"]);
-            request.AddParameter("first_name", (string)user["first_name"]);
-            request.AddParameter("last_name", (string)user["last_name"]);
-            request.AddParameter("email", (string)user["email"]);
-            request.AddParameter("mobile", (string)user["mobile"]);
-            request.AddParameter("address_line1", (string)user["address_line1"]);
-            request.AddParameter("address_line2", (string)user["address_line2"]);
-            request.AddParameter("state", (string)user["state"]);
-            request.AddParameter("city", (string)user["city"]);
-            request.AddParameter("zip", (string)user["zip"]);
-            request.AddParameter("country", (string)user["country"]);
 
+            foreach (var key in user.Keys) {
+                request.AddParameter(key, (string)user[key]);
+            }
+            
             var response = SendRequest(Client, request);
             var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
@@ -204,17 +197,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/users/{id}", Method.PATCH);
             request.AddUrlSegment("id", (string)user["id"]);
 
-            request.AddParameter("id", (string)user["id"]);
-            request.AddParameter("first_name", (string)user["first_name"]);
-            request.AddParameter("last_name", (string)user["last_name"]);
-            request.AddParameter("email", (string)user["email"]);
-            request.AddParameter("mobile", (string)user["mobile"]);
-            request.AddParameter("address_line1", (string)user["address_line1"]);
-            request.AddParameter("address_line2", (string)user["address_line2"]);
-            request.AddParameter("state", (string)user["state"]);
-            request.AddParameter("city", (string)user["city"]);
-            request.AddParameter("zip", (string)user["zip"]);
-            request.AddParameter("country", (string)user["country"]);
+            foreach (var key in user.Keys)
+            {
+                request.AddParameter(key, (string)user[key]);
+            }
             var response = SendRequest(Client, request);
             var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));

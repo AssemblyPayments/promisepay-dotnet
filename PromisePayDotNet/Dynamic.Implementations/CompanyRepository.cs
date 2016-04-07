@@ -42,16 +42,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
         public IDictionary<string, object> CreateCompany(IDictionary<string, object> company)
         {
             var request = new RestRequest("/companies", Method.POST);
-            request.AddParameter("name", (string)company["name"]);
-            request.AddParameter("legal_name", (string)company["legal_name"]);
-            request.AddParameter("tax_number", (string)company["tax_number"]);
-            request.AddParameter("charge_tax", (string)company["charge_tax"]);
-            request.AddParameter("address_line1", (string)company["address_line1"]);
-            request.AddParameter("address_line2", (string)company["address_line2"]);
-            request.AddParameter("city", (string)company["city"]);
-            request.AddParameter("state", (string)company["state"]);
-            request.AddParameter("zip", (string)company["zip"]);
-            request.AddParameter("country", (string)company["country"]);
+
+            foreach (var key in company.Keys) {
+                request.AddParameter(key, (string)company[key]);
+            }
             var response = SendRequest(Client, request);
             var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
@@ -60,16 +54,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
         public IDictionary<string, object> EditCompany(IDictionary<string, object> company)
         {
             var request = new RestRequest("/companies", Method.POST);
-            request.AddParameter("name", (string)company["name"]);
-            request.AddParameter("legal_name", (string)company["legal_name"]);
-            request.AddParameter("tax_number", (string)company["tax_number"]);
-            request.AddParameter("charge_tax", (string)company["charge_tax"]);
-            request.AddParameter("address_line1", (string)company["address_line1"]);
-            request.AddParameter("address_line2", (string)company["address_line2"]);
-            request.AddParameter("city", (string)company["city"]);
-            request.AddParameter("state", (string)company["state"]);
-            request.AddParameter("zip", (string)company["zip"]);
-            request.AddParameter("country", (string)company["country"]);
+
+            foreach (var key in company.Keys) {
+                request.AddParameter(key, (string)company[key]);
+            }
 
             var response = SendRequest(Client, request);
             var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();

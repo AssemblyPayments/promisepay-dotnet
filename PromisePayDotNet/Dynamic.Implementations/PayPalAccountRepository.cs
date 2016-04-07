@@ -31,7 +31,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/paypal_accounts", Method.POST);
             request.AddParameter("user_id", (string)paypalAccount["user_id"]);
             var paypal = (IDictionary<string, object>)(paypalAccount["paypal"]);
-            request.AddParameter("paypal_email", (string)paypal["email"]);
+
+            foreach (var key in paypal.Keys) {
+                request.AddParameter(key, paypal[key]);
+            }
 
             var response = SendRequest(Client, request);
             var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
