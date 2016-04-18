@@ -69,20 +69,20 @@ The below example shows the request for a marketplace configured to have the Ite
 
 ```cs
 var repo = container.Resolve<ITokenRepository>();
-var session_token = new Token {
-	current_user = "seller",
-	item_name = "Test Item",
-	amount = "2500",
-	seller_lastname = "Seller",
-	seller_firstname = "Sally",
-	buyer_lastname = "Buyer",
-	buyer_firstname = "Bobby",
-	buyer_country = "AUS",
-	seller_country = "USA",
-	seller_email = "sally.seller@promisepay.com",
-	buyer_email = "bobby.buyer@promisepay.com",
-	fee_ids = "",
-	payment_type_id = "2"		
+var session_token = new Dictionary<string,object> {
+	{"current_user" , "seller"},
+	{"item_name" , "Test Item"},
+	{"amount" , "2500"},
+	{"seller_lastname" , "Seller"},
+	{"seller_firstname" , "Sally"},
+	{"buyer_lastname" , "Buyer"},
+	{"buyer_firstname" , "Bobby"},
+	{"buyer_country" , "AUS"},
+	{"seller_country" , "USA"},
+	{"seller_email" , "sally.seller@promisepay.com"},
+	{"buyer_email" , "bobby.buyer@promisepay.com"},
+	{"fee_ids" , ""},
+	{"payment_type_id" , "2"}
 };
 ```
 #####Example 2 - Request session token
@@ -90,23 +90,23 @@ The below example shows the request for a marketplace that passes the Item and U
 
 ```cs
 var repo = container.Resolve<ITokenRepository>();
-var session_token = new Token {
-	current_user_id = "seller1234",
-	item_name = "Test Item",
-	amount = "2500",
-	seller_lastname = "Seller",
-	seller_firstname = "Sally",
-	buyer_lastname = "Buyer",
-	buyer_firstname = "Bobby",
-	buyer_country = "AUS",
-	seller_country = "USA",
-	seller_email = "sally.seller@promisepay.com",
-	buyer_email = "bobby.buyer@promisepay.com",
-	external_item_id = "TestItemId1234",
-	external_seller_id = "seller1234",
-	external_buyer_id = "buyer1234",
-	fee_ids = "",
-	payment_type_id = "2"		
+var session_token = new Dictionary<string, object> {
+	{"current_user_id", "seller1234"},
+	{"item_name", "Test Item"},
+	{"amount", "2500"},
+	{"seller_lastname", "Seller"},
+	{"seller_firstname", "Sally"},
+	{"buyer_lastname", "Buyer"},
+	{"buyer_firstname", "Bobby"},
+	{"buyer_country", "AUS"},
+	{"seller_country", "USA"},
+	{"seller_email", "sally.seller@promisepay.com"},
+	{"buyer_email", "bobby.buyer@promisepay.com"},
+	{"external_item_id", "TestItemId1234"},
+	{"external_seller_id", "seller1234"},
+	{"external_buyer_id", "buyer1234"},
+	{"fee_ids", = ""},
+	{"payment_type_id = "2"}		
 };
 ```
 ##Items
@@ -117,16 +117,16 @@ var repo = container.Resolve<IItemRepository>();
 var id = Guid.NewGuid().ToString();
 var buyerId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
 var sellerId = "fdf58725-96bd-4bf8-b5e6-9b61be20662e"; //some user created before
-var item = new Item
+var item = new Dictionary<string,object>
 {
-	Id = id,
-	Name = "Test Item #1",
-	Amount = 1000,
-	PaymentType = PaymentType.Express,
-	BuyerId = buyerId, //optional field
-	SellerId = sellerId, //optional field
+	{"id", id},
+	{"name", "Test Item #1"},
+	{"amount", 1000},
+	{"payment_type_id", (int)PaymentType.Express},
+	{"buyer_id", buyerId}, //optional field
+	{"seller_id", sellerId}, //optional field
 	//No fee at this stage, optional field
-	Description = "Test item #1 description"
+	{"description", "Test item #1 description"}
 };
 var createdItem = repo.CreateItem(item);
 ```
@@ -150,16 +150,16 @@ var repo = container.Resolve<IItemRepository>();
 var id = "bb2323cf-4838-4fcb-a288-933d0307523d";
 var buyerId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
 var sellerId = "fdf58725-96bd-4bf8-b5e6-9b61be20662e"; //some user created before
-var item = new Item
+var item = new Dictionary<string,object>
 {
-	Id = id,
-	Name = "Test Item #1",
-	Amount = 1000,
-	PaymentType = PaymentType.Express,
-	BuyerId = buyerId, //optional field
-	SellerId = sellerId, //optional field
+	{"id", id},
+	{"name", "Test Item #1"},
+	{"amount", 1000},
+	{"payment_type_id", (int)PaymentType.Express},
+	{"buyer_id", buyerId}, //optional field
+	{"seller_id", sellerId}, //optional field
 	//No fee at this stage, optional field
-	Description = "Test item #1 description"
+	{"description", "Test item #1 description"}
 };
 
 var updatedItem = repo.UpdateItem(item);
@@ -228,17 +228,17 @@ var bPayDetails = repo.GetBPayDetailsForItem(id);
 var repo = container.Resolve<IUserRepository>();
 
 var id = Guid.NewGuid().ToString();
-var user = new User
+var user = new Dictionary<string, object>
 {
-    Id = id,
-    FirstName = "Test",
-    LastName = "Test",
-    City = "Test",
-    AddressLine1 = "Line 1",
-    Country = "AUS",
-    State = "state",
-    Zip = "123456",
-    Email = id + "@google.com"
+    {"id", id},
+    {"first_name", "Test"},
+    {"last_name", "Test"},
+    {"city = "Test"},
+    {"address_line1" = "Line 1"},
+    {"country" = "AUS"},
+    {"state" = "state"},
+    {"zip" = "123456"},
+    {"email" = id + "@google.com"}
 };
 
 var createdUser = repo.CreateUser(user);	
@@ -392,18 +392,18 @@ var user = repo.GetUserById(id);
 ```cs
 var repo = container.Resolve<ICardAccountRepository>();
 var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-var account = new CardAccount
+var account = new Dictionary<string,object>
 {
-	UserId = userId,
-	Active = true,
-	Card = new Card
+	{"user_id", userId},
+	{"active = true,
+	{"card = new Dictionary<string,object>
 	{
-		FullName = "Batman",
-		ExpiryMonth = "11",
-		ExpiryYear = "2020",
-		Number = "4111111111111111",
-		Type = "visa",
-		CVV = "123"
+		{"full_name", "Batman"},
+		{"expiry_month", "11"},
+		{"expiry_year", "2020"},
+		{"number", "4111111111111111"},
+		{"type", "visa"},
+		{"cvv", "123"}
 	}
 };
 var createdAccount = repo.CreateCardAccount(account);
@@ -437,19 +437,19 @@ var gotUser = repo.GetUserForCardAccount(accountId);
 ```cs
 var repo = container.Resolve<IBankAccountRepository>();
 var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-var account = new BankAccount
+var account = new Dictionary<string,object>
 {
-	UserId = userId,
-	Active = true,
-	Bank = new Bank
+	{"user_id", userId},
+	{"active", true},
+	{"bank", new Dictionary<string,object>
 	{
-		BankName = "Test bank, inc",
-		AccountName = "Test account",
-		AccountNumber = "8123456789",
-		AccountType = "savings",
-		Country = "AUS",
-		HolderType = "personal",
-		RoutingNumber = "123456"
+		{"bank_name", "Test bank, inc"},
+		{"accountName", "Test account"},
+		{"accountNumber", "8123456789"},
+		{"accountType", "savings"},
+		{"country", "AUS"},
+		{"holderType", "personal"},
+		{"routingNumber", "123456"}
 	}
 };
 var createdAccount = repo.CreateBankAccount(account);
@@ -482,13 +482,13 @@ var gotUser = repo.GetUserForBankAccount(accountId);
 ```cs
 var repo = container.Resolve<IPayPalAccountRepository>();
 var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-var account = new PayPalAccount
+var account = new Dictionary<string,object>
 {
-	UserId = userId,
-	Active = true,
-	PayPal = new PayPal
+	{"user_id", userId},
+	{"active", true},
+	{"paypal", new Dictionary<string,object>
 	{
-		Email = "aaa@bbb.com"
+		{"email", "aaa@bbb.com"}
 	}
 };
 var createdAccount = repo.CreatePayPalAccount(account);
@@ -532,16 +532,16 @@ var fee = repo.GetFeeById(id);
 ```cs
 var repo = container.Resolve<IFeeRepository>();
 var feeId = Guid.NewGuid().ToString();
-var createdFee = repo.CreateFee(new Fee
+var createdFee = repo.CreateFee(new Dictionary<string,object>
 {
-	Id = feeId,
-	Amount = 1000,
-	Name = "Test fee #1",
-	FeeType = FeeType.Fixed,
-	Cap = "1",
-	Max = "3",
-	Min = "2",
-	To = "buyer"
+	{"id", feeId},
+	{"amount", 1000},
+	{"name", "Test fee #1"},
+	{"fee_type_id", (int)FeeType.Fixed},
+	{"cap", "1"},
+	{"max", "3"},
+	{"min", "2"},
+	{"to", "buyer"}
 });
 ```
 
