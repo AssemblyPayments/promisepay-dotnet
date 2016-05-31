@@ -135,6 +135,7 @@
     <None Include="Fixtures\fees_create.json" />
     <None Include="Fixtures\fees_get_by_id.json" />
     <None Include="Fixtures\fees_list.json" />
+    <None Include="Fixtures\generate_card_token.json" />
     <None Include="Fixtures\items_create.json" />
     <None Include="Fixtures\items_delete.json" />
     <None Include="Fixtures\items_edit.json" />
