@@ -89,7 +89,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             return new List<IDictionary<string,object>>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListPayPalAccountsForUser(string userId)
+        public IDictionary<string,object> GetPayPalAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/paypal_accounts", Method.GET);
@@ -103,7 +103,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw;
             }
@@ -111,12 +111,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("paypal_accounts"))
             {
                 var itemCollection = dict["paypal_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListCardAccountsForUser(string userId)
+        public IDictionary<string,object> GetCardAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/card_accounts", Method.GET);
@@ -130,7 +130,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw;
             }
@@ -138,12 +138,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("card_accounts"))
             {
                 var itemCollection = dict["card_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListBankAccountsForUser(string userId)
+        public IDictionary<string,object> GetBankAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/bank_accounts", Method.GET);
@@ -157,7 +157,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw e;
             }
@@ -165,10 +165,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("bank_accounts"))
             {
                 var itemCollection = dict["bank_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
 
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
         public bool SetDisbursementAccount(string userId, string accountId)
@@ -205,6 +205,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
         }
+
         #endregion
 
         #region private methods
