@@ -109,6 +109,13 @@ var session_token = new Dictionary<string, object> {
 	{"payment_type_id = "2"}		
 };
 ```
+
+##### Generate a card token
+```cs
+	var repo = container.Resolve<ITokenRepository>();
+    var token = repo.GenerateCardToken("card", "064d6800-fff3-11e5-86aa-5e5517507c66");
+```
+
 ##Items
 
 #####Create an item
@@ -268,28 +275,28 @@ var user = repo.GetUserById(id);
 	repo.DeleteUser(id);
 ```
 
-#####Get a user's card accounts
+#####Get a user's card account
 
 ```cs
 	var repo = container.Resolve<IUserRepository>();
 	var id = "871f83ce-c55d-43ce-ba97-c65628d041a9";
-	var accounts = repo.ListCardAccountsForUser(id);	
+	var account = repo.GetCardAccountForUser(id);	
 ```
 
-#####Get a user's PayPal accounts
+#####Get a user's PayPal account
 
 ```cs
 	var repo = container.Resolve<IUserRepository>();
 	var id = "871f83ce-c55d-43ce-ba97-c65628d041a9";
-	var accounts = repo.ListPayPalAccountsForUser(id);
+	var account = repo.GetPayPalAccountForUser(id);
 ```
 
-#####Get a user's bank accounts
+#####Get a user's bank account
 
 ```cs
 	var repo = container.Resolve<IUserRepository>();
 	var id = "871f83ce-c55d-43ce-ba97-c65628d041a9";
-	var accounts = repo.ListBankAccountsForUser(id);	
+	var account = repo.GetBankAccountForUser(id);	
 ```
 
 #####Get a user's items
