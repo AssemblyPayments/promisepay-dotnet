@@ -307,41 +307,80 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        public void ListUserBankAccountsSuccessful()
-        {
-            var content = File.ReadAllText("../../Fixtures/user_bank_accounts.json");
-            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
-            var repo = new UserRepository(client.Object);
-
-            var items = repo.ListBankAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
-        }
-
-        [Test]
-        public void ListUserCardAccountsSuccessful()
-        {
-            var content = File.ReadAllText("../../Fixtures/user_card_accounts.json");
-            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
-            var repo = new UserRepository(client.Object);
-
-            var items = repo.ListCardAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
-        }
-
-        [Test]
-        public void ListUserPayPalAccountsSuccessful()
-        {
-            var content = File.ReadAllText("../../Fixtures/user_paypal_accounts.json");
-            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
-            var repo = new UserRepository(client.Object);
-
-            var items = repo.ListPayPalAccountsForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
-        }
-        
-        [Test]
         [Ignore("Not implemented yet")]
         public void ListUserDisbursementAccountsSuccessful()
         {
             Assert.Fail();
         }
 
+        [Test]
+        public void ListUserBankAccountsSuccessful()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_bank_accounts.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetBankAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            Assert.AreEqual("c5d37185-4472-44c1-87e2-8a5a3abb96fc", items["id"]);
+        }
+
+        [Test]
+        public void GetUserCardAccountSuccessful()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_card_accounts.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetCardAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            Assert.AreEqual("81e44baa-b5df-4bcd-a6a7-39e5ecd91a74", items["id"]);
+        }
+
+        [Test]
+        public void GetUserPayPalAccountSuccessful()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_paypal_accounts.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetPayPalAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            Assert.AreEqual("fdc5e5e4-b5d2-456b-8d42-ff349ccf8346", items["id"]);
+        }
+
+        [Test]
+        public void GetUserBankAccountEmpty()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_bank_accounts_empty.json");
+            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetBankAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [Test]
+        public void GetUserCardAccountEmpty()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_card_accounts_empty.json");
+            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetCardAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+
+        [Test]
+        public void GetUserPayPalAccountEmpty()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_paypal_accounts_empty.json");
+            var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
+            var repo = new UserRepository(client.Object);
+
+            var items = repo.GetPayPalAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+        }
+        
+        [Test]
+        [Ignore("Not implemented yet")]
+        public void ListUserDisbursementAccountsEmpty()
+        {
+            Assert.Fail();
+        }
     }
 }

@@ -376,9 +376,9 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        public void ListUserBankAccountsSuccessful() 
+        public void ListUserBankAccountsEmpty() 
         {
-            var content = File.ReadAllText("../../Fixtures/user_bank_accounts.json");
+            var content = File.ReadAllText("../../Fixtures/user_bank_accounts_empty.json");
             var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
             var repo = new UserRepository(client.Object); 
 
@@ -386,9 +386,9 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        public void ListUserCardAccountsSuccessful()
+        public void ListUserCardAccountsEmpty()
         {
-            var content = File.ReadAllText("../../Fixtures/user_card_accounts.json");
+            var content = File.ReadAllText("../../Fixtures/user_card_accounts_empty.json");
             var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
             var repo = new UserRepository(client.Object); 
 
@@ -396,9 +396,9 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        public void ListUserPayPalAccountsSuccessful()
+        public void ListUserPayPalAccountsEmpty()
         {
-            var content = File.ReadAllText("../../Fixtures/user_paypal_accounts.json");
+            var content = File.ReadAllText("../../Fixtures/user_paypal_accounts_empty.json");
             var client = GetMockClient(content, (System.Net.HttpStatusCode)422);
             var repo = new UserRepository(client.Object); 
 

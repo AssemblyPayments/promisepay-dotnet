@@ -9,5 +9,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
         IDictionary<string, object> RequestSessionToken(IDictionary<string, object> token);
 
         IDictionary<string, object> GetWidget(string sessionToken);
+
+        IDictionary<string, object> GenerateCardToken(string tokenType, string userId);
     }
 }
