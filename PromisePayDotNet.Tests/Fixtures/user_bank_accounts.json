@@ -1,2 +1,1 @@
-﻿{"bank_accounts":{"id":"c5d37185-4472-44c1-87e2-8a5a3abb96fc","active":true,"created_at":"2015-06-11T18:09:46.845Z","updated_at":"2015-06-11T18:09:46.845Z","currency":"AUD","bank":{"bank_name":"Nab","country":"AUS","account_name":"test seller","routing_number":"XXXXXXX2","account_number":"XXXXXXX890","holder_type":"personal","account_type":"savings","direct_debit_authority_status":null},"links":{"self":"/users/1/bank_accounts","users":"/bank_accounts/c5d37185-4472-44c1-87e2-8a5a3abb96fc/users","direct_debit_authorities":"/bank_accounts/c5d37185-4472-44c1-87e2-8a5a3abb96fc/direct_debit_authorities"}}}
-    
+﻿{"errors":{"account":["no account found"]}}

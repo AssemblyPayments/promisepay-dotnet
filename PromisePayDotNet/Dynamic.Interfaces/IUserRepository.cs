@@ -16,11 +16,11 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 
         IEnumerable<IDictionary<string, object>> ListItemsForUser(string userId);
 
-        IDictionary<string, object> GetPayPalAccountForUser(string userId);
+        IEnumerable<IDictionary<string, object>> ListPayPalAccountsForUser(string userId);
 
-        IDictionary<string, object> GetCardAccountForUser(string userId);
-        
-        IDictionary<string, object> GetBankAccountForUser(string userId);
+        IEnumerable<IDictionary<string, object>> ListCardAccountsForUser(string userId);
+
+        IEnumerable<IDictionary<string, object>> ListBankAccountsForUser(string userId);
 
         bool SetDisbursementAccount(string userId, string accountId);
     }

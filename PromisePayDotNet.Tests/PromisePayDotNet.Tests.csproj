@@ -155,14 +155,11 @@
     <None Include="Fixtures\transactions_list.json" />
     <None Include="Fixtures\users_list.json" />
     <None Include="Fixtures\user_bank_accounts.json" />
-    <None Include="Fixtures\user_bank_accounts_empty.json" />
     <None Include="Fixtures\user_card_accounts.json" />
-    <None Include="Fixtures\user_card_accounts_empty.json" />
     <None Include="Fixtures\user_create.json" />
     <None Include="Fixtures\user_items.json" />
     <None Include="Fixtures\user_missing.json" />
     <None Include="Fixtures\user_paypal_accounts.json" />
-    <None Include="Fixtures\user_paypal_accounts_empty.json" />
     <None Include="Fixtures\user_set_disbursement_account.json" />
     <None Include="Fixtures\user_update.json" />
     <None Include="packages.config">
