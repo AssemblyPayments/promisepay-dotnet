@@ -3,9 +3,11 @@ using PromisePayDotNet.DTO;
 using PromisePayDotNet.Dynamic.Implementations;
 using RestSharp;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PromisePayDotNet.Tests
 {
+
     public class DynamicTokenTest : AbstractTest
     {
         [Test]
@@ -44,6 +46,19 @@ namespace PromisePayDotNet.Tests
         {
             var repo = new TokenRepository(new RestClient());
             var widget = repo.GetWidget("aaa-bbb-cc");
+        }
+
+        [Test]
+        public void GenerateCardToken()
+        {
+            var content = File.ReadAllText("../../Fixtures/generate_card_token.json");
+
+            var client = GetMockClient(content);
+            var repo = new TokenRepository(client.Object);
+            var result = repo.GenerateCardToken("card", "064d6800-fff3-11e5-86aa-5e5517507c66");
+            Assert.AreEqual("card", result["token_type"]);
+            Assert.AreEqual("6e37598a3b33582b1dfcf13d5e2e45e3", result["token"]);
+            Assert.AreEqual("064d6800-fff3-11e5-86aa-5e5517507c66", result["user_id"]);
         }
     }
 }
