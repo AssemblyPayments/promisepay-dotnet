@@ -142,7 +142,9 @@
     <Compile Include="Settings\PromisePaySettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="NugetBuild.txt" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PromisePayDotNet.nuspec" />
