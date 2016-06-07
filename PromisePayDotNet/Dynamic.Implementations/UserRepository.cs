@@ -89,7 +89,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             return new List<IDictionary<string,object>>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListPayPalAccountsForUser(string userId)
+        public IDictionary<string,object> GetPayPalAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/paypal_accounts", Method.GET);
@@ -103,7 +103,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw;
             }
@@ -111,12 +111,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("paypal_accounts"))
             {
                 var itemCollection = dict["paypal_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListCardAccountsForUser(string userId)
+        public IDictionary<string,object> GetCardAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/card_accounts", Method.GET);
@@ -130,7 +130,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw;
             }
@@ -138,12 +138,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("card_accounts"))
             {
                 var itemCollection = dict["card_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
-        public IEnumerable<IDictionary<string,object>> ListBankAccountsForUser(string userId)
+        public IDictionary<string,object> GetBankAccountForUser(string userId)
         {
             AssertIdNotNull(userId);
             var request = new RestRequest("/users/{id}/bank_accounts", Method.GET);
@@ -157,7 +157,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no account found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return new Dictionary<string,object>();
                 }
                 throw e;
             }
@@ -165,10 +165,10 @@ namespace PromisePayDotNet.Dynamic.Implementations
             if (dict.ContainsKey("bank_accounts"))
             {
                 var itemCollection = dict["bank_accounts"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
+                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
             }
 
-            return new List<IDictionary<string,object>>();
+            return new Dictionary<string,object>();
         }
 
         public bool SetDisbursementAccount(string userId, string accountId)
@@ -205,6 +205,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
         }
+
         #endregion
 
         #region private methods
@@ -241,13 +242,6 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 return false;
             }
         }
-
-        private bool IsCorrectCountryCode(string countryCode)
-        {
-            return _countryCodes.Contains(countryCode.ToUpper());
-        }
-
-        private readonly List<string> _countryCodes = new List<string> { "AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BIH", "BWA", "BVT", "BRA", "VGB", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "HKG", "MAC", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "ANT", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE" };
 
         #endregion
 

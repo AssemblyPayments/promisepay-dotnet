@@ -188,7 +188,7 @@ namespace PromisePayDotNet.Implementations
             {
                 response = SendRequest(Client, request);
             }
-            catch (ApiErrorsException e)
+            catch (ApiErrorsException)
             {
                 throw;
             }
