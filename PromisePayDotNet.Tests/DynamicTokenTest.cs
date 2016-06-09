@@ -4,6 +4,7 @@ using PromisePayDotNet.Dynamic.Implementations;
 using RestSharp;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace PromisePayDotNet.Tests
 {
@@ -55,10 +56,11 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new TokenRepository(client.Object);
-            var result = repo.GenerateCardToken("card", "064d6800-fff3-11e5-86aa-5e5517507c66");
-            Assert.AreEqual("card", result["token_type"]);
-            Assert.AreEqual("6e37598a3b33582b1dfcf13d5e2e45e3", result["token"]);
-            Assert.AreEqual("064d6800-fff3-11e5-86aa-5e5517507c66", result["user_id"]);
+            var resp = repo.GenerateCardToken("card", "064d6800-fff3-11e5-86aa-5e5517507c66");
+            var token = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp["token_auth"]));
+            Assert.AreEqual("card", token["token_type"]);
+            Assert.AreEqual("6e37598a3b33582b1dfcf13d5e2e45e3", token["token"]);
+            Assert.AreEqual("064d6800-fff3-11e5-86aa-5e5517507c66", token["user_id"]);
         }
     }
 }

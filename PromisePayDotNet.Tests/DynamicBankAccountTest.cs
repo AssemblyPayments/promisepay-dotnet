@@ -79,11 +79,14 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
             const string userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
-            var gotUser = repo.GetUserForBankAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c");
+            var resp = repo.GetUserForBankAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c");
             client.VerifyAll();
-            Assert.IsNotNull(gotUser);
+            Assert.IsNotNull(resp);
 
-            Assert.AreEqual(userId, gotUser["id"]);
+            var users = resp["users"];
+            Assert.IsNotNull(users);
+            var user = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(users));
+            Assert.AreEqual(userId, user["id"]);
         }
         
         [Test]

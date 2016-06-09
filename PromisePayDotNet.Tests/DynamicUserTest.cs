@@ -147,7 +147,7 @@ namespace PromisePayDotNet.Tests
         [Test]
         public void ListUsersSuccessful()
         {
-            var id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
+            //var id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
             //Then, list users
             var content = File.ReadAllText("../../Fixtures/users_list.json");
             var client = GetMockClient(content);
@@ -157,8 +157,6 @@ namespace PromisePayDotNet.Tests
 
             Assert.IsNotNull(users);
             Assert.IsTrue(users.Any());
-            Assert.IsTrue(users.Any(x => (string)x["id"] == id));
-
         }
         
         [Test]
@@ -331,8 +329,9 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new UserRepository(client.Object);
 
-            var items = repo.GetCardAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
-            Assert.AreEqual("81e44baa-b5df-4bcd-a6a7-39e5ecd91a74", items["id"]);
+            var resp = repo.GetCardAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            var cardAccounts = JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(resp["card_accounts"]));
+            Assert.AreEqual("81e44baa-b5df-4bcd-a6a7-39e5ecd91a74", cardAccounts["id"]);
         }
 
         [Test]
@@ -342,8 +341,9 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new UserRepository(client.Object);
 
-            var items = repo.GetPayPalAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
-            Assert.AreEqual("fdc5e5e4-b5d2-456b-8d42-ff349ccf8346", items["id"]);
+            var resp = repo.GetCardAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            var paypalAccounts = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp["paypal_accounts"]));
+            Assert.AreEqual("fdc5e5e4-b5d2-456b-8d42-ff349ccf8346", paypalAccounts["id"]);
         }
 
         [Test]

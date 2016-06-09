@@ -18,7 +18,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public IEnumerable<IDictionary<string,object>> ListItems(int limit = 10, int offset = 0)
+        public IDictionary<string,object> ListItems(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);
             var request = new RestRequest("/items", Method.GET);
@@ -27,12 +27,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var userCollection = dict["items"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string, object>>>(JsonConvert.SerializeObject(userCollection));
-            }
-            return new List<IDictionary<string, object>>();
+            return dict;
         }
 
         public IDictionary<string, object> GetItemById(string itemId)
@@ -87,7 +82,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         }
 
-        public IEnumerable<IDictionary<string,object>> ListTransactionsForItem(string itemId)
+        public IDictionary<string,object> ListTransactionsForItem(string itemId)
         {
             AssertIdNotNull(itemId);
             var request = new RestRequest("/items/{id}/transactions", Method.GET);
@@ -101,17 +96,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
             {
                 if (e.Errors.Count == 1 && e.Errors.Values.First().First() == "no transaction found")
                 {
-                    return new List<IDictionary<string,object>>();
+                    return null;
                 }
                 throw;
             }
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("transactions"))
-            {
-                var itemCollection = dict["transactions"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string,object>>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return new List<IDictionary<string,object>>();
+            return dict;
         }
 
         public IDictionary<string, object> GetStatusForItem(string itemId)
@@ -121,27 +111,17 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
-        public IEnumerable<IDictionary<string, object>> ListFeesForItem(string itemId)
+        public IDictionary<string, object> ListFeesForItem(string itemId)
         {
             AssertIdNotNull(itemId);
             var request = new RestRequest("/items/{id}/fees", Method.GET);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("fees"))
-            {
-                var itemCollection = dict["fees"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string, object>>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return new List<IDictionary<string, object>>();
+            return dict;
         }
 
         public IDictionary<string, object> GetBuyerForItem(string itemId)
@@ -151,12 +131,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             IRestResponse response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("users"))
-            {
-                var itemCollection = dict["users"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GetSellerForItem(string itemId)
@@ -166,12 +141,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             IRestResponse response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("users"))
-            {
-                var itemCollection = dict["users"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GetWireDetailsForItem(string itemId)
@@ -181,13 +151,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var details = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(details["wire_details"]));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GetBPayDetailsForItem(string itemId)
@@ -197,13 +161,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var details = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(details["bpay_details"]));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> MakePayment(string itemId, string accountId)
@@ -215,13 +173,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("account_id", accountId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> RequestPayment(string itemId)
@@ -231,13 +183,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> ReleasePayment(string itemId, int releaseAmount)
@@ -248,13 +194,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("release_amount", releaseAmount);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> RequestRelease(string itemId, int releaseAmount)
@@ -265,13 +205,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("release_amount", releaseAmount);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> Cancel(string itemId)
@@ -281,13 +215,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> AcknowledgeWire(string itemId)
@@ -297,13 +225,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> AcknowledgePayPal(string itemId)
@@ -313,13 +235,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> RevertWire(string itemId)
@@ -329,13 +245,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> RequestRefund(string itemId, string refundAmount, string refundMessage)
@@ -347,13 +257,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("refund_message", refundMessage);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> Refund(string itemId, string refundAmount, string refundMessage)
@@ -365,13 +269,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("refund_message", refundMessage);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("items"))
-            {
-                var itemCollection = dict["items"];
-                var item = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-                return item;
-            }
-            return null;
+            return dict;
         }
     }
 }

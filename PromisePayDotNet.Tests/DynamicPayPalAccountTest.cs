@@ -79,11 +79,11 @@ namespace PromisePayDotNet.Tests
 
             var userId = "ec9bf096-c505-4bef-87f6-18822b9dbf2c"; //some user created before
 
-            var gotUser = repo.GetUserForPayPalAccount(id);
+            var resp = repo.GetUserForPayPalAccount(id);
 
-            Assert.IsNotNull(gotUser);
-
-            Assert.AreEqual(userId, gotUser["id"]);
+            Assert.IsNotNull(resp);
+            var users = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp["users"]));
+            Assert.AreEqual(userId, users["id"]);
         }
 
         [Test]
