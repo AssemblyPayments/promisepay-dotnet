@@ -580,6 +580,58 @@ var id = "79116c9f-d750-4faa-85c7-b7da36f23b38";
 var fee = repo.GetFeeForTransaction(id);
 ```
 
+##Charges
+#####Create charge
+```cs
+var repo = container.Resolve<IChargeRepository>();
+var charge = new Dictionary<string, object>
+{
+    {"name" , "Charge for Delivery"},
+    {"account_id" , "b49d943f-add0-4d1c-b357-0f1a8fde677c"},
+    {"amount" , "4500"},
+    {"email" , "abc@abc.com"},
+    {"zip" , "3000"},
+    {"country" , "AUS"},
+    {"user_id" , "7af96d61-2339-4298-8a09-aadd6c4501b2"},
+    {"fee_ids" , "187"},
+    {"currency" , "AUD"},
+    {"retain_account" , "false"},
+    {"device_id" , "123456"},
+    {"ip_address" , "127.0.0.1"}
+};
+
+var response = repo.CreateCharge(charge);
+```
+
+#####List charges
+```cs
+var repo = container.Resolve<IChargeRepository>();
+var charges = repo.ListCharges();
+```
+
+#####Show charge
+```cs
+var repo = container.Resolve<IChargeRepository>();
+var id = "cb7eafc1-571c-425c-9adc-f56cb585cd68";
+var response = repo.ShowCharge(id);
+var charge = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["charges"]));
+```
+
+#####Show buyer for a charge
+```cs
+var repo = container.Resolve<IChargeRepository>();
+var id = "cb7eafc1-571c-425c-9adc-f56cb585cd68";
+var response = repo.ShowChargeBuyer(id);
+var buyer = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["users"]));
+```
+
+#####Show charge status
+```cs
+var repo = container.Resolve<IChargeRepository>();
+var response = repo.ShowChargeStatus(id);
+var charge = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["charges"]));
+```
+
 #4. Contributing
 	1. Fork it ( https://github.com/PromisePay/promisepay-dotnet/fork )
 	2. Create your feature branch (`git checkout -b my-new-feature`)
