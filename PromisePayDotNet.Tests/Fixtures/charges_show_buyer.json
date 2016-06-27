@@ -1,0 +1,34 @@
+﻿{
+  "users": {
+    "created_at": "2016-06-10T07:30:10.014Z",
+    "updated_at": "2016-06-10T07:30:10.669Z",
+    "full_name": "Anonymous Buyer",
+    "email": "anonymous+buyer+1@promisepay.com",
+    "mobile": null,
+    "phone": null,
+    "logo_url": null,
+    "color_1": null,
+    "color_2": null,
+    "first_name": "Anonymous",
+    "last_name": "Buyer",
+    "id": "1be7f54f-c09f-4298-a665-f3a9f1dac60c",
+    "location": "AUS",
+    "verification_state": "pending",
+    "held_state": false,
+    "dob": null,
+    "government_number": null,
+    "drivers_license": null,
+    "flags": {},
+    "related": {
+      "addresses": "9e2f1a34-3be0-4917-b27d-d6215cb164b3"
+    },
+    "links": {
+      "self": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/buyers",
+      "items": "/users/1be7f54f-c09f-4298-a665-f3a9f1dac60c/items",
+      "card_accounts": "/users/1be7f54f-c09f-4298-a665-f3a9f1dac60c/card_accounts",
+      "paypal_accounts": "/users/1be7f54f-c09f-4298-a665-f3a9f1dac60c/paypal_accounts",
+      "bank_accounts": "/users/1be7f54f-c09f-4298-a665-f3a9f1dac60c/bank_accounts",
+      "wallet_accounts": "/users/1be7f54f-c09f-4298-a665-f3a9f1dac60c/wallet_accounts"
+    }
+  }
+}

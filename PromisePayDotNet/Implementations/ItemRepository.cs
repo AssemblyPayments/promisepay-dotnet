@@ -210,7 +210,7 @@ namespace PromisePayDotNet.Implementations
         {
             AssertIdNotNull(itemId);
             AssertIdNotNull(accountId);
-            var request = new RestRequest("/items/:id/make_payment", Method.PATCH);
+            var request = new RestRequest("/items/{id}/make_payment", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             request.AddParameter("account_id", accountId);
             var response = SendRequest(Client, request);
@@ -227,7 +227,7 @@ namespace PromisePayDotNet.Implementations
         public Item RequestPayment(string itemId)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/request_payment", Method.PATCH);
+            var request = new RestRequest("/items/{id}/request_payment", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
@@ -243,7 +243,7 @@ namespace PromisePayDotNet.Implementations
         public Item ReleasePayment(string itemId, int releaseAmount)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/release_payment", Method.PATCH);
+            var request = new RestRequest("/items/{id}/release_payment", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             request.AddParameter("release_amount", releaseAmount);
             var response = SendRequest(Client, request);
@@ -260,7 +260,7 @@ namespace PromisePayDotNet.Implementations
         public Item RequestRelease(string itemId, int releaseAmount)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/request_release", Method.PATCH);
+            var request = new RestRequest("/items/{id}/request_release", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             request.AddParameter("release_amount", releaseAmount);
             var response = SendRequest(Client, request);
@@ -277,7 +277,7 @@ namespace PromisePayDotNet.Implementations
         public Item Cancel(string itemId)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/cancel", Method.PATCH);
+            var request = new RestRequest("/items/{id}/cancel", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
@@ -293,7 +293,7 @@ namespace PromisePayDotNet.Implementations
         public Item AcknowledgeWire(string itemId)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/acknowledge_wire", Method.PATCH);
+            var request = new RestRequest("/items/{id}/acknowledge_wire", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
@@ -309,7 +309,7 @@ namespace PromisePayDotNet.Implementations
         public Item AcknowledgePayPal(string itemId)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/acknowledge_paypal", Method.PATCH);
+            var request = new RestRequest("/items/{id}/acknowledge_paypal", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
@@ -325,7 +325,7 @@ namespace PromisePayDotNet.Implementations
         public Item RevertWire(string itemId)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/revert_wire", Method.PATCH);
+            var request = new RestRequest("/items/{id}/revert_wire", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
@@ -341,7 +341,7 @@ namespace PromisePayDotNet.Implementations
         public Item RequestRefund(string itemId, string refundAmount, string refundMessage)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/request_refund", Method.PATCH);
+            var request = new RestRequest("/items/{id}/request_refund", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             request.AddParameter("refund_amount", refundAmount);
             request.AddParameter("refund_message", refundMessage);
@@ -359,7 +359,7 @@ namespace PromisePayDotNet.Implementations
         public Item Refund(string itemId, string refundAmount, string refundMessage)
         {
             AssertIdNotNull(itemId);
-            var request = new RestRequest("/items/:id/refund", Method.PATCH);
+            var request = new RestRequest("/items/{id}/refund", Method.PATCH);
             request.AddUrlSegment("id", itemId);
             request.AddParameter("refund_amount", refundAmount);
             request.AddParameter("refund_message", refundMessage);

@@ -90,6 +90,7 @@
     <Compile Include="Dynamic.Implementations\AddressRepository.cs" />
     <Compile Include="Dynamic.Implementations\BankAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\CardAccountRepository.cs" />
+    <Compile Include="Dynamic.Implementations\ChargeRepository.cs" />
     <Compile Include="Dynamic.Implementations\CompanyRepository.cs" />
     <Compile Include="Dynamic.Implementations\FeeRepository.cs" />
     <Compile Include="Dynamic.Implementations\ItemRepository.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Dynamic.Interfaces\IAddressRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICardAccountRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IChargeRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICompanyRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IFeeRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IItemRepository.cs" />
