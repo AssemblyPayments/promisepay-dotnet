@@ -1,0 +1,17 @@
+﻿{
+  "direct_debit_authorities": {
+    "id": "8f233e04-ffaa-4c9d-adf9-244853848e21",
+    "created_at": "2016-04-18T05:21:27.339Z",
+    "updated_at": "2016-04-18T05:21:27.339Z",
+    "amount": 100000,
+    "bank_bsb": "083001",
+    "debit_user_id": "481561",
+    "state": "approved",
+    "related": {
+      "bank_accounts": "9fda18e7-b1d3-4a83-830d-0cef0f62cd25"
+    },
+    "links": {
+      "self": "/direct_debit_authorities/8f233e04-ffaa-4c9d-adf9-244853848e21"
+    }
+  }
+}
