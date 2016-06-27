@@ -188,7 +188,7 @@ namespace PromisePayDotNet.Implementations
             {
                 response = SendRequest(Client, request);
             }
-            catch (ApiErrorsException e)
+            catch (ApiErrorsException)
             {
                 throw;
             }
@@ -243,19 +243,6 @@ namespace PromisePayDotNet.Implementations
             if (!IsCorrectEmail(user.Email))
             {
                 throw new ValidationException("Field User.Email should contain correct email address!");
-            }
-        }
-
-        private bool IsCorrectEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
             }
         }
 

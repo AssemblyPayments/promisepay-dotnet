@@ -62,12 +62,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             IRestResponse response = SendRequest(Client, request);
 
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("users"))
-            {
-                var item = dict["users"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(item));
-            }
-            return null;
+            return dict;
         }
     }
 

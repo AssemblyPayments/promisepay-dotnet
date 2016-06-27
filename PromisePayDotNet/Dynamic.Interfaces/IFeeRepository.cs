@@ -5,7 +5,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
     public interface IFeeRepository
     {
 
-        IEnumerable<IDictionary<string, object>> ListFees();
+        IDictionary<string, object> ListFees();
 
         IDictionary<string, object> GetFeeById(string feeId);
 

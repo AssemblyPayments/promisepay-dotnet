@@ -1,0 +1,45 @@
+﻿{
+  "charges": [
+    {
+      "id": "cb7eafc1-571c-425c-9adc-f56cb585cd68",
+      "name": "Charge for Delivery",
+      "created_at": "2016-06-10T07:30:10.554Z",
+      "updated_at": "2016-06-10T07:30:17.350Z",
+      "state": 22500,
+      "buyer_fees": 0,
+      "seller_fees": 0,
+      "credit_card_fee": 0,
+      "status": 22500,
+      "amount": 4500,
+      "custom_data": null,
+      "account_type": "Credit Card Account",
+      "account_id": "b49d943f-add0-4d1c-b357-0f1a8fde677c",
+      "promisepay_fee": 187,
+      "currency": "AUD",
+      "payment_method": "charge",
+      "buyer_name": "Anonymous Buyer",
+      "buyer_email": "anonymous+buyer+1@promisepay.com",
+      "buyer_country": "AUS",
+      "seller_name": "Andrew McIntosh",
+      "seller_email": "walkthrough@promisepay.com",
+      "seller_country": "AUS",
+      "links": {
+        "self": "/charges",
+        "buyers": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/buyers",
+        "sellers": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/sellers",
+        "status": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/status",
+        "fees": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/fees",
+        "transactions": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/transactions",
+        "batch_transactions": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/batch_transactions"
+      }
+    }
+  ],
+  "links": {
+    "self": "/charges"
+  },
+  "meta": {
+    "limit": 10,
+    "offset": 0,
+    "total": 1
+  }
+}

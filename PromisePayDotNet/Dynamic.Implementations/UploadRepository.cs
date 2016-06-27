@@ -51,12 +51,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("import", csvData);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("uploads"))
-            {
-                var itemCollection = dict["uploads"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GetStatus(string uploadId)
@@ -65,12 +60,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/uploads/{id}/import", Method.GET);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("uploads"))
-            {
-                var itemCollection = dict["uploads"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> StartImport(string uploadId)
@@ -79,12 +69,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/uploads/{id}/import", Method.PATCH);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("uploads"))
-            {
-                var itemCollection = dict["uploads"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
     }

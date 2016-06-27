@@ -15,18 +15,13 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public IEnumerable<IDictionary<string,object>> ListCompanies()
+        public IDictionary<string,object> ListCompanies()
         {
             var request = new RestRequest("/companies", Method.GET);
 
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("companies"))
-            {
-                var uploadCollection = dict["companies"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string, object>>>(JsonConvert.SerializeObject(uploadCollection));
-            }
-            return new List<IDictionary<string, object>>();
+            return dict;
         }
 
         public IDictionary<string, object> GetCompanyById(string companyId)

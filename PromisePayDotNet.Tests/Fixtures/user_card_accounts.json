@@ -1,1 +1,1 @@
-﻿{"errors":{"account":["no account found"]}}
+﻿{"card_accounts":{"active":true,"created_at":"2015-06-11T18:09:26.041Z","updated_at":"2015-06-11T18:09:26.041Z","id":"81e44baa-b5df-4bcd-a6a7-39e5ecd91a74","currency":"AUD","card":{"type":"visa","full_name":"test Buyer","number":"XXXX-XXXX-XXXX-1111","expiry_month":"6","expiry_year":"2016"},"links":{"self":"/users/1/card_accounts","users":"/card_accounts/81e44baa-b5df-4bcd-a6a7-39e5ecd91a74/users"}}}

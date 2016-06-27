@@ -5,7 +5,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
     public interface IItemRepository
     {
 
-        IEnumerable<IDictionary<string,object>> ListItems(int limit = 10, int offset = 0);
+        IDictionary<string,object> ListItems(int limit = 10, int offset = 0);
 
         IDictionary<string, object> GetItemById(string itemId);
 
@@ -15,11 +15,11 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 
         IDictionary<string, object> UpdateItem(IDictionary<string, object> item);
 
-        IEnumerable<IDictionary<string, object>> ListTransactionsForItem(string itemId);
+        IDictionary<string, object> ListTransactionsForItem(string itemId);
 
         IDictionary<string, object> GetStatusForItem(string itemId);
 
-        IEnumerable<IDictionary<string, object>> ListFeesForItem(string itemId);
+        IDictionary<string, object> ListFeesForItem(string itemId);
 
         IDictionary<string, object> GetBuyerForItem(string itemId);
 

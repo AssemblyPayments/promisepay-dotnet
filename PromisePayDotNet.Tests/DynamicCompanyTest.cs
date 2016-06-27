@@ -26,10 +26,11 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CompanyRepository(client.Object);
-            var companies = repo.ListCompanies();
+            var resp = repo.ListCompanies();
             client.VerifyAll();
-            Assert.IsNotNull(companies);
-            Assert.IsTrue(companies.Any());
+            Assert.IsNotNull(resp);
+            var companies = JsonConvert.DeserializeObject<IList<IDictionary<string, object>>>(JsonConvert.SerializeObject(resp["companies"]));
+            Assert.IsTrue(companies.Count()>0);
         }
 
         [Test]

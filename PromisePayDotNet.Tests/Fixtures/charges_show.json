@@ -1,0 +1,37 @@
+﻿{
+  "charges": {
+    "id": "cb7eafc1-571c-425c-9adc-f56cb585cd68",
+    "name": "Charge for Delivery",
+    "created_at": "2016-06-10T07:30:10.554Z",
+    "updated_at": "2016-06-10T07:30:17.350Z",
+    "state": "completed",
+    "buyer_fees": 0,
+    "seller_fees": 0,
+    "credit_card_fee": 0,
+    "status": 22500,
+    "amount": 4500,
+    "custom_data": null,
+    "account_type": "Credit Card Account",
+    "account_id": "b49d943f-add0-4d1c-b357-0f1a8fde677c",
+    "promisepay_fee": 187,
+    "currency": "AUD",
+    "payment_method": "charge",
+    "buyer_name": "Anonymous Buyer",
+    "buyer_email": "anonymous+buyer+1@promisepay.com",
+    "buyer_zip": "3000",
+    "buyer_country": "AUS",
+    "related": {
+      "buyers": "1be7f54f-c09f-4298-a665-f3a9f1dac60c",
+      "sellers": "ec2700f6834b3f57b6531553fdf290f7"
+    },
+    "links": {
+      "self": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68",
+      "buyers": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/buyers",
+      "sellers": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/sellers",
+      "status": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/status",
+      "fees": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/fees",
+      "transactions": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/transactions",
+      "batch_transactions": "/charges/cb7eafc1-571c-425c-9adc-f56cb585cd68/batch_transactions"
+    }
+  }
+}

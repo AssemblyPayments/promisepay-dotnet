@@ -15,7 +15,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public IEnumerable<IDictionary<string,object>> ListTransactions(int limit = 10, int offset = 0)
+        public IDictionary<string,object> ListTransactions(int limit = 10, int offset = 0)
         {
             AssertListParamsCorrect(limit, offset);
 
@@ -25,12 +25,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("transactions"))
-            {
-                var transactionCollection = dict["transactions"];
-                return JsonConvert.DeserializeObject<List<IDictionary<string, object>>>(JsonConvert.SerializeObject(transactionCollection));
-            }
-            return new List<IDictionary<string, object>>();
+            return dict;
         }
 
         public IDictionary<string, object> GetTransaction(string transactionId)
@@ -50,12 +45,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", transactionId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("users"))
-            {
-                var itemCollection = dict["users"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GetFeeForTransaction(string transactionId)
@@ -65,13 +55,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", transactionId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("fees"))
-            {
-                var itemCollection = dict["fees"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
-
     }
 }

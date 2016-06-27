@@ -97,6 +97,7 @@
     <Compile Include="ConfigTest.cs" />
     <Compile Include="DITest.cs" />
     <Compile Include="DynamicAddressTest.cs" />
+    <Compile Include="DynamicChargeTest.cs" />
     <Compile Include="DynamicCompanyTest.cs" />
     <Compile Include="DynamicFeeTest.cs" />
     <Compile Include="DynamicItemTest.cs" />
@@ -128,6 +129,10 @@
     <None Include="Fixtures\card_account_delete.json" />
     <None Include="Fixtures\card_account_get_by_id.json" />
     <None Include="Fixtures\card_account_get_users.json" />
+    <None Include="Fixtures\charges_list.json" />
+    <None Include="Fixtures\charges_show.json" />
+    <None Include="Fixtures\charges_show_buyer.json" />
+    <None Include="Fixtures\charges_show_status.json" />
     <None Include="Fixtures\companies_create.json" />
     <None Include="Fixtures\companies_edit.json" />
     <None Include="Fixtures\companies_get_by_id.json" />
@@ -135,6 +140,7 @@
     <None Include="Fixtures\fees_create.json" />
     <None Include="Fixtures\fees_get_by_id.json" />
     <None Include="Fixtures\fees_list.json" />
+    <None Include="Fixtures\generate_card_token.json" />
     <None Include="Fixtures\items_create.json" />
     <None Include="Fixtures\items_delete.json" />
     <None Include="Fixtures\items_edit.json" />
@@ -155,11 +161,14 @@
     <None Include="Fixtures\transactions_list.json" />
     <None Include="Fixtures\users_list.json" />
     <None Include="Fixtures\user_bank_accounts.json" />
+    <None Include="Fixtures\user_bank_accounts_empty.json" />
     <None Include="Fixtures\user_card_accounts.json" />
+    <None Include="Fixtures\user_card_accounts_empty.json" />
     <None Include="Fixtures\user_create.json" />
     <None Include="Fixtures\user_items.json" />
     <None Include="Fixtures\user_missing.json" />
     <None Include="Fixtures\user_paypal_accounts.json" />
+    <None Include="Fixtures\user_paypal_accounts_empty.json" />
     <None Include="Fixtures\user_set_disbursement_account.json" />
     <None Include="Fixtures\user_update.json" />
     <None Include="packages.config">
@@ -180,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fixtures\items_list_fees.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\charges_create.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

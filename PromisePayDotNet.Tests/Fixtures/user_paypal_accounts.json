@@ -1,1 +1,1 @@
-﻿{"errors":{"account":["no account found"]}}
+﻿{"paypal_accounts":{"active":true,"created_at":"2015-06-09T17:42:43.553Z","updated_at":"2015-06-09T17:48:51.282Z","id":"fdc5e5e4-b5d2-456b-8d42-ff349ccf8346","currency":"AUD","paypal":{"email":"aa@mail.com"},"links":{"self":"/users/1/paypal_accounts","users":"/paypal_accounts/fdc5e5e4-b5d2-456b-8d42-ff349ccf8346/users"}}}
