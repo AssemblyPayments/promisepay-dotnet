@@ -22,8 +22,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/card_accounts/{id}", Method.GET);
             request.AddUrlSegment("id", cardAccountId);
             var response = SendRequest(Client, request);
-            var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(result));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> CreateCardAccount(IDictionary<string, object> cardAccount)
@@ -38,8 +37,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             }
 
             var response = SendRequest(Client, request);
-            var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public bool DeleteCardAccount(string cardAccountId)
@@ -62,8 +60,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", cardAccountId);
             IRestResponse response = SendRequest(Client, request);
 
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
     }

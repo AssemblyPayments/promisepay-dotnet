@@ -4,6 +4,7 @@ using PromisePayDotNet.Dynamic.Implementations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -44,8 +45,11 @@ namespace PromisePayDotNet.Tests
                     { "cvv" , "123"}
                 }
             }};
-            var createdAccount = repo.CreateCardAccount(account);
+            var resp = repo.CreateCardAccount(account);
             client.VerifyAll();
+            var result = resp.Values.First();
+            var createdAccount = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+
             Assert.IsNotNull(createdAccount);
             Assert.IsNotNull(createdAccount["id"]);
             Assert.AreEqual("AUD", (string)createdAccount["currency"]); // It seems that currency is determined by country
@@ -60,8 +64,11 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CardAccountRepository(client.Object);
-            var gotAccount = repo.GetCardAccountById("25d34744-8ef0-46a4-8b18-2a8322933cd1");
+            var resp = repo.GetCardAccountById("25d34744-8ef0-46a4-8b18-2a8322933cd1");
             client.VerifyAll();
+            var result = resp.Values.First();
+            var gotAccount = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+
             Assert.AreEqual("25d34744-8ef0-46a4-8b18-2a8322933cd1", gotAccount["id"]);
         }
         
