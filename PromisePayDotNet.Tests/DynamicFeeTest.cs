@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using PromisePayDotNet.Exceptions;
 using PromisePayDotNet.Dynamic.Implementations;
+using PromisePayDotNet.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,7 +69,9 @@ namespace PromisePayDotNet.Tests
 
             var repo = new FeeRepository(client.Object);
             const string id = "79116c9f-d750-4faa-85c7-b7da36f23b38";
-            var fee = repo.GetFeeById(id);
+            var response = repo.GetFeeById(id);
+            var fee = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response.Values.First()));
+
             Assert.AreEqual(id, (string)fee["id"]);
         }
 

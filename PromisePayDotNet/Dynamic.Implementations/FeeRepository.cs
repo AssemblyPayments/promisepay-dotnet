@@ -3,7 +3,6 @@ using PromisePayDotNet.Exceptions;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PromisePayDotNet.Dynamic.Implementations
 {
@@ -17,12 +16,12 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        #region public methods
         public IDictionary<string,object> ListFees()
         {
             var request = new RestRequest("/fees", Method.GET);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> GetFeeById(string feeId)
@@ -31,8 +30,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/fees/{id}", Method.GET);
             request.AddUrlSegment("id", feeId);
             var response = SendRequest(Client, request);
-            var fee = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(fee));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> CreateFee(IDictionary<string, object> fee)
@@ -45,10 +43,11 @@ namespace PromisePayDotNet.Dynamic.Implementations
             }
 
             var response = SendRequest(Client, request);
-            var returnedFee = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedFee));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
+        #endregion
 
+        #region private methods
         private void VailidateFee(IDictionary<string, object> fee)
         {
             if (fee == null) throw new ArgumentNullException("fee");
@@ -58,8 +57,8 @@ namespace PromisePayDotNet.Dynamic.Implementations
                     "To should have value of \"buyer\", \"seller\", \"cc\", \"int_wire\", \"paypal_payout\"");
             }
         }
+        #endregion
 
         private readonly List<string> _possibleTos = new List<string> { "buyer", "seller", "cc", "int_wire", "paypal_payout" };
-
     }
 }
