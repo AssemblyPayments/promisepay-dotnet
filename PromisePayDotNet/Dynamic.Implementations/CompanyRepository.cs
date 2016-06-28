@@ -20,8 +20,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/companies", Method.GET);
 
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> GetCompanyById(string companyId)
@@ -30,8 +29,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/companies/{id}", Method.GET);
             request.AddUrlSegment("id", companyId);
             var response = SendRequest(Client, request);
-            var company = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(company));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> CreateCompany(IDictionary<string, object> company)
@@ -42,8 +40,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 request.AddParameter(key, (string)company[key]);
             }
             var response = SendRequest(Client, request);
-            var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> EditCompany(IDictionary<string, object> company)
@@ -55,8 +52,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             }
 
             var response = SendRequest(Client, request);
-            var returnedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
     }
 }

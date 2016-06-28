@@ -40,8 +40,11 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CompanyRepository(client.Object);
-            var company = repo.GetCompanyById("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5");
+            var resp = repo.GetCompanyById("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5");
             client.VerifyAll();
+            var first = resp.Values.First();
+            var company = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(first));
+
             Assert.IsNotNull(company);
             Assert.AreEqual("e466dfb4-f05c-4c7f-92a3-09a0a28c7af5", (string)company["id"]);
         }
@@ -53,7 +56,7 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CompanyRepository(client.Object);
-            var createdCompany = repo.CreateCompany(new Dictionary<string, object>
+            var resp = repo.CreateCompany(new Dictionary<string, object>
             { { "legal_name", "Test company #1" },
                 { "name", "Test company #1" },
                 {"country", "AUS"},
@@ -66,6 +69,9 @@ namespace PromisePayDotNet.Tests
                 {"zip", string.Empty}
             });
             client.VerifyAll();
+            var returnedCompany = resp.Values.First();
+            var createdCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+
             Assert.IsNotNull(createdCompany);
             Assert.IsNotNull(createdCompany["id"]);
             Assert.AreEqual("Test company #1", (string)createdCompany["legal_name"]);
@@ -78,7 +84,7 @@ namespace PromisePayDotNet.Tests
 
             var client = GetMockClient(content);
             var repo = new CompanyRepository(client.Object);
-            var editedCompany = repo.EditCompany(new Dictionary<string,object>
+            var resp = repo.EditCompany(new Dictionary<string,object>
             {
                 {"id" , "739dcfc5-adf0-4a00-b639-b4e05922994d"},
                 {"legal_name" , "Test company #2"},
@@ -93,6 +99,9 @@ namespace PromisePayDotNet.Tests
                 {"zip", string.Empty}
             });
             client.VerifyAll();
+            var returnedCompany = resp.Values.First();
+            var editedCompany = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedCompany));
+
             Assert.AreEqual("Test company #2", (string)editedCompany["name"]);
         }
 
