@@ -1,10 +1,9 @@
-﻿using NUnit.Framework;
-using PromisePayDotNet.DTO;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using PromisePayDotNet.Dynamic.Implementations;
 using RestSharp;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace PromisePayDotNet.Tests
 {

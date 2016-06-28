@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 
 namespace PromisePayDotNet.Dynamic.Implementations

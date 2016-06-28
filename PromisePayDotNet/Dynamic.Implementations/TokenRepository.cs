@@ -2,7 +2,6 @@
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace PromisePayDotNet.Dynamic.Implementations
 {
@@ -16,11 +15,11 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public string RequestToken()
+        public IDictionary<string,object> RequestToken()
         {
             var request = new RestRequest("/request_token", Method.GET);
             var response = SendRequest(Client, request);
-            return JsonConvert.DeserializeObject<IDictionary<string, string>>(response.Content).Values.First();
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> RequestSessionToken(IDictionary<string,object> token)
@@ -40,8 +39,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/widget", Method.GET);
             request.AddParameter("session_token", sessionToken);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> GenerateCardToken(string tokenType, string userId) 
@@ -50,8 +48,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("token_type", tokenType);
             request.AddParameter("user_id", userId);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
     }
 }
