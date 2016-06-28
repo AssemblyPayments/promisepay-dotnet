@@ -24,8 +24,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("offset", offset);
 
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> GetTransaction(string transactionId)
@@ -34,8 +33,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/transactions/{id}", Method.GET);
             request.AddUrlSegment("id", transactionId);
             var response = SendRequest(Client, request);
-            var result =  JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> GetUserForTransaction(string transactionId)
@@ -44,8 +42,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/transactions/{id}/users", Method.GET);
             request.AddUrlSegment("id", transactionId);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> GetFeeForTransaction(string transactionId)
@@ -54,8 +51,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/transactions/{id}/fees", Method.GET);
             request.AddUrlSegment("id", transactionId);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
     }
 }
