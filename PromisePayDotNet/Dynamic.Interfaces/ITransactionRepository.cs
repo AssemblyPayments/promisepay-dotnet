@@ -8,7 +8,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 {
     public interface ITransactionRepository
     {
-        IEnumerable<IDictionary<string,object>> ListTransactions(int limit = 10, int offset = 0);
+        IDictionary<string,object> ListTransactions(int limit = 10, int offset = 0);
 
         IDictionary<string, object> GetTransaction(string transactionId);
 

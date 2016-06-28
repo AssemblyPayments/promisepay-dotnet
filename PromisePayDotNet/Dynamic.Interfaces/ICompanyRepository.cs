@@ -4,7 +4,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 {
     public interface ICompanyRepository
     {
-        IEnumerable<IDictionary<string, object>> ListCompanies();
+        IDictionary<string, object> ListCompanies();
 
         IDictionary<string, object> GetCompanyById(string companyId);
 

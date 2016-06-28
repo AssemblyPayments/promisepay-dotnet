@@ -41,12 +41,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("session_token", sessionToken);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("widget"))
-            {
-                var itemCollection = dict["widget"];
-                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
 
         public IDictionary<string, object> GenerateCardToken(string tokenType, string userId) 
@@ -56,12 +51,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("user_id", userId);
             var response = SendRequest(Client, request);
             var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("token_auth"))
-            {
-                var itemCollection = dict["token_auth"];
-                return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-            return null;
+            return dict;
         }
     }
 }
