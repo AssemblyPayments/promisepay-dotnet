@@ -3,6 +3,7 @@ using NUnit.Framework;
 using PromisePayDotNet.Dynamic.Implementations;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -26,9 +27,10 @@ namespace PromisePayDotNet.Tests
 
             var repo = new AddressRepository(client.Object);
 
-            var address = repo.GetAddressById("07ed45e5-bb9d-459f-bb7b-a02ecb38f443");
+            var resp = repo.GetAddressById("07ed45e5-bb9d-459f-bb7b-a02ecb38f443");
             client.VerifyAll();
-            Assert.IsNotNull(address);
+            Assert.IsNotNull(resp);
+            var address = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.AreEqual("07ed45e5-bb9d-459f-bb7b-a02ecb38f443", (string)address["id"]);
 
         }

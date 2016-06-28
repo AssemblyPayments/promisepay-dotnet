@@ -21,8 +21,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/addresses/{id}", Method.GET);
             request.AddUrlSegment("id", addressId);
             var response = SendRequest(Client, request);
-            var address = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(address));
+            return JsonConvert.DeserializeObject<IDictionary<string,object>>(response.Content);
         }
     }
 }

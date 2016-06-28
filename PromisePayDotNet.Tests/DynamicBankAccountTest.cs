@@ -4,6 +4,7 @@ using PromisePayDotNet.Dynamic.Implementations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -39,8 +40,9 @@ namespace PromisePayDotNet.Tests
                     {"holder_type" , "personal"},
                     {"routing_number" , "123456"}
                 }}};
-            var createdAccount = repo.CreateBankAccount(account);
+            var response = repo.CreateBankAccount(account);
             client.VerifyAll();
+            var createdAccount = JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(response.Values.First()));
             Assert.IsNotNull(createdAccount);
             Assert.IsNotNull(createdAccount["id"]);
             Assert.AreEqual("AUD", (string)createdAccount["currency"]); // It seems that currency is determined by country
@@ -58,8 +60,12 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new BankAccountRepository(client.Object);
             const string id = "ec9bf096-c505-4bef-87f6-18822b9dbf2c";
-            var gotAccount = repo.GetBankAccountById(id);
+            var response = repo.GetBankAccountById(id);
             client.VerifyAll();
+            var first = response.Values.First();
+            var firstJson = JsonConvert.SerializeObject(first);
+            var gotAccount = JsonConvert.DeserializeObject<IDictionary<string, object>>(firstJson);
+
             Assert.AreEqual(id, gotAccount["id"]);
         }
         
