@@ -44,7 +44,9 @@ namespace PromisePayDotNet.Tests
                 {"fee_ids" , ""},
                 {"description" , "Test item #1 description"}
             };
-            var createdItem = repo.CreateItem(item);
+            var resp = repo.CreateItem(item);
+            var createdItem = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
+
             Assert.AreEqual(item["id"], createdItem["id"]);
             Assert.AreEqual(item["name"], createdItem["name"]);
             Assert.AreEqual(item["amount"], createdItem["amount"]);
@@ -95,8 +97,8 @@ namespace PromisePayDotNet.Tests
             var repo = new ItemRepository(client.Object);
 
             const string id = "5e81906c-e14b-42a8-952f-4a0d1f1a4bb8";
-            var gotItem = repo.GetItemById(id);
-
+            var resp = repo.GetItemById(id);
+            var gotItem = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.IsNotNull(gotItem);
             Assert.AreEqual(id, gotItem["id"]);
         }
@@ -179,8 +181,8 @@ namespace PromisePayDotNet.Tests
             //Now, try to edit newly created item
             item["name"] = "Test123";
             item["description"] = "Test123";
-            var updatedItem = repo.UpdateItem(item);
-
+            var resp = repo.UpdateItem(item);
+            var updatedItem = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.AreEqual("Test123", updatedItem["name"]);
             Assert.AreEqual("Test123", updatedItem["description"]);
         }
