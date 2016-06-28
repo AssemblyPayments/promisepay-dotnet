@@ -45,7 +45,8 @@ namespace PromisePayDotNet.Tests
                 {"email" , id + "@google.com"}
             };
 
-            var createdUser = repo.CreateUser(user);
+            var resp = repo.CreateUser(user);
+            var createdUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
 
             Assert.AreEqual(user["id"], createdUser["id"]);
             Assert.AreEqual(user["first_name"], createdUser["first_name"]);
@@ -188,8 +189,8 @@ namespace PromisePayDotNet.Tests
             var id = "608ef7e7-6113-4981-a3a3-ab8cea04eb93";
 
             //Then, get user
-            var gotUser = repo.GetUserById(id);
-
+            var resp = repo.GetUserById(id);
+            var gotUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.IsNotNull(gotUser);
             Assert.AreEqual(id, (string)gotUser["id"], id);
         }
@@ -256,7 +257,8 @@ namespace PromisePayDotNet.Tests
             content = File.ReadAllText("../../Fixtures/user_update.json");
             client = GetMockClient(content);
             repo = new UserRepository(client.Object);
-            var modifiedUser = repo.UpdateUser(user);
+            var resp = repo.UpdateUser(user);
+            var modifiedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.AreEqual("Test123", modifiedUser["first_name"]);
             Assert.AreEqual("Test123", modifiedUser["last_name"]);
             Assert.AreEqual("Test123 Test123", modifiedUser["full_name"]);
@@ -318,7 +320,8 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new UserRepository(client.Object);
 
-            var items = repo.GetBankAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            var resp = repo.GetBankAccountForUser("89592d8a-6cdb-4857-a90d-b41fc817d639");
+            var items = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.AreEqual("c5d37185-4472-44c1-87e2-8a5a3abb96fc", items["id"]);
         }
 

@@ -28,8 +28,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("offset", offset);
 
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> GetUserById(string userId)
@@ -38,8 +37,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/users/{id}", Method.GET);
             request.AddUrlSegment("id", userId);
             var response = SendRequest(Client, request);
-            var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> CreateUser(IDictionary<string,object> user)
@@ -52,8 +50,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             }
             
             var response = SendRequest(Client, request);
-            var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public bool DeleteUser(string userId)
@@ -75,8 +72,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/users/{id}/items", Method.GET);
             request.AddUrlSegment("id", userId);
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> GetPayPalAccountForUser(string userId)
@@ -97,8 +93,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 }
                 throw;
             }
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> GetCardAccountForUser(string userId)
@@ -119,8 +114,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 }
                 throw;
             }
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> GetBankAccountForUser(string userId)
@@ -141,14 +135,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 }
                 throw e;
             }
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            if (dict.ContainsKey("bank_accounts"))
-            {
-                var itemCollection = dict["bank_accounts"];
-                return JsonConvert.DeserializeObject<IDictionary<string,object>>(JsonConvert.SerializeObject(itemCollection));
-            }
-
-            return new Dictionary<string,object>();
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public bool SetDisbursementAccount(string userId, string accountId)
@@ -182,8 +169,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 request.AddParameter(key, (string)user[key]);
             }
             var response = SendRequest(Client, request);
-            var returnedUser = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(returnedUser));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         #endregion
