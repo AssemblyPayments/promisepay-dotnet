@@ -13,6 +13,8 @@ namespace PromisePayDotNet.Dynamic.Implementations
         {
         }
 
+        #region public methods
+
         public IDictionary<string, object> CreateCharge(IDictionary<string, object> charge) 
         {
             var request = new RestRequest("/charges", Method.POST);
@@ -34,8 +36,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddParameter("offset", offset);
 
             var response = SendRequest(Client, request);
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> ShowCharge(string id)
@@ -64,7 +65,9 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
+        #endregion
 
+        #region private methods
         private void ValidateCharge(IDictionary<string,object> charge) 
         {
             if ((!charge.ContainsKey("country")) || !IsCorrectCountryCode((string)charge["country"]))
@@ -76,5 +79,6 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 throw new ValidationException("Field charge.Email should contain correct email address!");
             }
         }
+        #endregion
     }
 }
