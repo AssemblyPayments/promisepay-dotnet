@@ -4,7 +4,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 {
     public interface IUploadRepository
     {
-        IList<IDictionary<string,object>> ListUploads();
+        IDictionary<string,object> ListUploads();
 
         IDictionary<string, object> GetUploadById(string uploadId);
 
