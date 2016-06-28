@@ -22,8 +22,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/paypal_accounts/{id}", Method.GET);
             request.AddUrlSegment("id", paypalAccountId);
             var response = SendRequest(Client, request);
-            var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> CreatePayPalAccount(IDictionary<string, object> paypalAccount)
@@ -37,8 +36,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             }
 
             var response = SendRequest(Client, request);
-            var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content).Values.First();
-            return JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(result));
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public bool DeletePayPalAccount(string paypalAccountId)
@@ -60,9 +58,7 @@ namespace PromisePayDotNet.Dynamic.Implementations
             var request = new RestRequest("/paypal_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", paypalAccountId);
             var response = SendRequest(Client, request);
-
-            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
-            return dict;
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
     }
 }

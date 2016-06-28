@@ -4,6 +4,7 @@ using PromisePayDotNet.Dynamic.Implementations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PromisePayDotNet.Tests
 {
@@ -36,13 +37,14 @@ namespace PromisePayDotNet.Tests
                     {"email", "aaa@bbb.com"}
                 }}
             };
-            var createdAccount = repo.CreatePayPalAccount(account);
+            var resp = repo.CreatePayPalAccount(account);
+            var createdAccount = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
+
             Assert.IsNotNull(createdAccount);
             Assert.IsNotNull(createdAccount["id"]);
             Assert.AreEqual("AUD", (string)createdAccount["currency"]); // It seems that currency is determined by country
             Assert.IsNotNull(createdAccount["created_at"]);
             Assert.IsNotNull(createdAccount["updated_at"]);
-
         }
 
         [Test]
@@ -53,8 +55,8 @@ namespace PromisePayDotNet.Tests
             var client = GetMockClient(content);
             var repo = new PayPalAccountRepository(client.Object);
 
-            var gotAccount = repo.GetPayPalAccountById(id);
-
+            var resp = repo.GetPayPalAccountById(id);
+            var gotAccount = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
             Assert.AreEqual(id, (string)gotAccount["id"]);
         }
 
