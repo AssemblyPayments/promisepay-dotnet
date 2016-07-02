@@ -97,6 +97,7 @@
     <Compile Include="ConfigTest.cs" />
     <Compile Include="DITest.cs" />
     <Compile Include="DynamicAddressTest.cs" />
+    <Compile Include="DynamicBatchTransactionTest.cs" />
     <Compile Include="DynamicChargeTest.cs" />
     <Compile Include="DynamicCompanyTest.cs" />
     <Compile Include="DynamicDirectDebitAuthorityTest.cs" />
@@ -128,6 +129,8 @@
     <None Include="Fixtures\bank_account_get_by_id.json" />
     <None Include="Fixtures\bank_account_get_users.json" />
     <None Include="Fixtures\bank_account_validate_routing_number.json" />
+    <None Include="Fixtures\batch_list.json" />
+    <None Include="Fixtures\batch_show.json" />
     <None Include="Fixtures\card_account_delete.json" />
     <None Include="Fixtures\card_account_get_by_id.json" />
     <None Include="Fixtures\card_account_get_users.json" />

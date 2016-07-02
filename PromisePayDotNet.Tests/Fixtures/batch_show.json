@@ -1,0 +1,36 @@
+﻿{
+  "batch_transactions": {
+    "id": "b1652611-9544-4244-a601-54c24cfa5e90",
+    "created_at": "2016-04-18T08:20:20.354Z",
+    "updated_at": "2016-04-18T08:20:20.354Z",
+    "type": "misc",
+    "type_method": "misc",
+    "batch_id": 302,
+    "reference": null,
+    "state": "batched",
+    "user_id": "064d6800-fff3-11e5-86aa-5e5517507c66",
+    "account_id": "e57120ea-053d-11e6-b512-3e1d05defe78",
+    "account_type": "item",
+    "amount": 9800,
+    "currency": "AUD",
+    "debit_credit": "credit",
+    "description": "Credit of $98.00 to Item by Debit of $98.00 from Wallet Account",
+    "related": {
+      "account_to": {
+        "id": "385b50bb-237a-42cb-9382-22953e191ae6",
+        "account_type": "wallet_account",
+        "user_id": "5830def0-ffe8-11e5-86aa-5e5517507c66"
+      }
+    },
+    "links": {
+      "self": "/batch_transactions/b1652611-9544-4244-a601-54c24cfa5e90",
+      "users": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/users",
+      "fees": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/fees",
+      "wallet_accounts": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/wallet_accounts",
+      "card_accounts": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/card_accounts",
+      "paypal_accounts": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/paypal_accounts",
+      "bank_accounts": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/bank_accounts",
+      "items": "/transactions/b1652611-9544-4244-a601-54c24cfa5e90/items"
+    }
+  }
+}
