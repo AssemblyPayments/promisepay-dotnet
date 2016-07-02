@@ -127,6 +127,7 @@
     <None Include="Fixtures\bank_account_delete.json" />
     <None Include="Fixtures\bank_account_get_by_id.json" />
     <None Include="Fixtures\bank_account_get_users.json" />
+    <None Include="Fixtures\bank_account_validate_routing_number.json" />
     <None Include="Fixtures\card_account_delete.json" />
     <None Include="Fixtures\card_account_get_by_id.json" />
     <None Include="Fixtures\card_account_get_users.json" />

@@ -107,6 +107,18 @@ namespace PromisePayDotNet.Tests
             client.VerifyAll();
             Assert.IsTrue(result);
         }
-        
+
+        [Test]
+        public void ValidateRoutingNumberSuccessfully()
+        {
+            var content = File.ReadAllText("../../Fixtures/bank_account_validate_routing_number.json");
+            var client = GetMockClient(content);
+            var repo = new BankAccountRepository(client.Object);
+            var resp = repo.ValidateRoutingNumber("122235821");
+            client.VerifyAll();
+
+            var result = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp["routing_number"]));
+            Assert.AreEqual("US BANK NA", result["customer_name"]);
+        }
     }
 }

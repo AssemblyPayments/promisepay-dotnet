@@ -57,7 +57,17 @@ namespace PromisePayDotNet.Dynamic.Implementations
             AssertIdNotNull(bankAccountId);
             var request = new RestRequest("/bank_accounts/{id}/users", Method.GET);
             request.AddUrlSegment("id", bankAccountId);
-            IRestResponse response = SendRequest(Client, request);
+            var response = SendRequest(Client, request);
+
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> ValidateRoutingNumber(string routingNumber) 
+        {
+            AssertIdNotNull(routingNumber);
+            var request = new RestRequest("/status", Method.GET);
+            request.AddParameter("routing_number", routingNumber);
+            var response = SendRequest(Client, request);
 
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
