@@ -180,9 +180,9 @@ namespace PromisePayDotNet.Implementations
         {
             AssertIdNotNull(userId);
 
-            var request = new RestRequest("/users/{id}/disbursement_account?account_id={account_id}", Method.POST);
+            var request = new RestRequest("/users/{id}/disbursement_account", Method.PATCH);
             request.AddUrlSegment("id", userId);
-            request.AddUrlSegment("account_id", accountId);
+            request.AddParameter("account_id", accountId);
             IRestResponse response;
             try
             {

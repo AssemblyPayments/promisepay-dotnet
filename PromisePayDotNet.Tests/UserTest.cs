@@ -414,8 +414,8 @@ namespace PromisePayDotNet.Tests
 
             var account = repo.SetDisbursementAccount("ec9bf096-c505-4bef-87f6-18822b9dbf2c", "09b5bb3c-c0fd-404d-b373-d675f42d8865");
 
-            Assert.AreEqual("test sdfdf edited Test", account.FullName);
-            Assert.AreEqual("pending", account.VerificationState);
+            Assert.AreEqual("Samuel Seller", account.FullName);
+            Assert.AreEqual("approved", account.VerificationState);
 
         }
     }

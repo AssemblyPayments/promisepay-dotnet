@@ -138,24 +138,15 @@ namespace PromisePayDotNet.Dynamic.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
-        public bool SetDisbursementAccount(string userId, string accountId)
+        public IDictionary<string, object> SetDisbursementAccount(string userId, string accountId)
         {
-            //ToDo find out DisbursementAccount fields and implement this method 
-            throw new NotImplementedException();
-            //            AssertIdNotNull(userId);
-            //
-            //            var request = new RestRequest("/users/{id}/disbursement_account", Method.POST);
-            //            request.AddUrlSegment("id", userId);
-            //            request.AddUrlSegment("account_id", accountId);
-            //            try
-            //            {
-            //                SendRequest(Client, request);
-            //            }
-            //            catch (ApiErrorsException e)
-            //            {
-            //                throw;
-            //            }
-
+            AssertIdNotNull(userId);
+            
+            var request = new RestRequest("/users/{id}/disbursement_account", Method.PATCH);
+            request.AddUrlSegment("id", userId);
+            request.AddParameter("account_id", accountId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string,object> UpdateUser(IDictionary<string,object> user)

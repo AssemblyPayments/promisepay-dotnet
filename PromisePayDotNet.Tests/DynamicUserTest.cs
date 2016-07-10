@@ -307,10 +307,18 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
-        [Ignore("Not implemented yet")]
-        public void ListUserDisbursementAccountsSuccessful()
+        public void SetUserDisbursementAccountSuccessful()
         {
-            Assert.Fail();
+            var content = File.ReadAllText("../../Fixtures/user_set_disbursement_account.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var response = repo.SetDisbursementAccount("5830def0-ffe8-11e5-86aa-5e5517507c66", "46deb476-c1a6-41eb-8eb7-26a695bbe5bc");
+
+            var users = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["users"]));
+            var related = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(users["related"]));
+            Assert.AreEqual("46deb476-c1a6-41eb-8eb7-26a695bbe5bc", related["payout_account"]);
+            
         }
 
         [Test]
