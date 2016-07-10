@@ -23,5 +23,7 @@ namespace PromisePayDotNet.Dynamic.Interfaces
         IDictionary<string, object> GetBankAccountForUser(string userId);
 
         IDictionary<string, object> SetDisbursementAccount(string userId, string accountId);
+
+        IDictionary<string, object> ShowUserWalletAccount(string userId);
     }
 }

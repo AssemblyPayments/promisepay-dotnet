@@ -163,6 +163,17 @@ namespace PromisePayDotNet.Dynamic.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
+        public IDictionary<string, object> ShowUserWalletAccount(string userId)
+        {
+            AssertIdNotNull(userId);
+
+            var request = new RestRequest("/users/{id}/wallet_accounts", Method.GET);
+            request.AddUrlSegment("id", userId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+
         #endregion
 
         #region private methods
@@ -186,7 +197,6 @@ namespace PromisePayDotNet.Dynamic.Implementations
                 throw new ValidationException("Field User.Email should contain correct email address!");
             }
         }
-
         #endregion
 
     }

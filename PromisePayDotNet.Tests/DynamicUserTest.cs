@@ -334,6 +334,18 @@ namespace PromisePayDotNet.Tests
         }
 
         [Test]
+        public void ListUserWalletAccountsSuccessful()
+        {
+            var content = File.ReadAllText("../../Fixtures/user_list_wallet_accounts.json");
+            var client = GetMockClient(content);
+            var repo = new UserRepository(client.Object);
+
+            var resp = repo.GetBankAccountForUser("385b50bb-237a-42cb-9382-22953e191ae6");
+            var items = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(resp.Values.First()));
+            Assert.AreEqual("385b50bb-237a-42cb-9382-22953e191ae6", items["id"]);
+        }
+
+        [Test]
         public void GetUserCardAccountSuccessful()
         {
             var content = File.ReadAllText("../../Fixtures/user_card_accounts.json");

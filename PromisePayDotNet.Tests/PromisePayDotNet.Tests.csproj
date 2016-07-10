@@ -176,6 +176,7 @@
     <None Include="Fixtures\user_card_accounts_empty.json" />
     <None Include="Fixtures\user_create.json" />
     <None Include="Fixtures\user_items.json" />
+    <None Include="Fixtures\user_list_wallet_accounts.json" />
     <None Include="Fixtures\user_missing.json" />
     <None Include="Fixtures\user_paypal_accounts.json" />
     <None Include="Fixtures\user_paypal_accounts_empty.json" />
