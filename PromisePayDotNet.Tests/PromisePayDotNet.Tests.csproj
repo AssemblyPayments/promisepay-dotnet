@@ -163,6 +163,7 @@
     <None Include="Fixtures\items_list.json" />
     <None Include="Fixtures\items_list_transactions.json" />
     <None Include="Fixtures\items_not_found.json" />
+    <None Include="Fixtures\item_list_batch_transactions.json" />
     <None Include="Fixtures\paypal_account_create.json" />
     <None Include="Fixtures\paypal_account_delete.json" />
     <None Include="Fixtures\paypal_account_get_by_id.json" />

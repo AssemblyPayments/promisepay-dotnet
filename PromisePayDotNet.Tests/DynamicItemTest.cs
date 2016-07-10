@@ -291,6 +291,15 @@ namespace PromisePayDotNet.Tests
             var bPayDetails = repo.GetBPayDetailsForItem("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
             Assert.IsNotNull(bPayDetails);
         }
-        
+
+        [Test]
+        public void ListBatchTransactionsSuccessfully()
+        {
+            var content = File.ReadAllText("../../Fixtures/item_list_batch_transactions.json");
+            var client = GetMockClient(content);
+            var repo = new ItemRepository(client.Object);
+            var response = repo.ListBatchTransactions("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+            Assert.IsNotNull(response["batch_transactions"]);
+        }        
     }
 }

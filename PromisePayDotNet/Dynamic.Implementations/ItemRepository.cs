@@ -151,6 +151,16 @@ namespace PromisePayDotNet.Dynamic.Implementations
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
+        public IDictionary<string, object> ListBatchTransactions(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/batch_transactions", Method.GET);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+
         public IDictionary<string, object> MakePayment(string itemId, string accountId)
         {
             AssertIdNotNull(itemId);

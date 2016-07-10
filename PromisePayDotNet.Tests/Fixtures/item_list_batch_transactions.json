@@ -1,0 +1,39 @@
+﻿{
+  "batch_transactions": [
+    {
+      "id": "ad688d54-6791-4f1d-add7-88fbd89b70d1",
+      "created_at": "2016-04-26T08:56:25.035Z",
+      "updated_at": "2016-04-26T21:00:38.435Z",
+      "status": 12200,
+      "type": "disbursement",
+      "type_method": "direct_credit",
+      "batch_id": 316,
+      "reference": null,
+      "state": "batched",
+      "user_id": "5830def0-ffe8-11e5-86aa-5e5517507c66",
+      "account_id": "385b50bb-237a-42cb-9382-22953e191ae6",
+      "from_user_name": "Samuel Seller",
+      "from_user_id": "5830def0-ffe8-11e5-86aa-5e5517507c66",
+      "account_type": "wallet_account",
+      "amount": 10000,
+      "currency": "AUD",
+      "debit_credit": "credit",
+      "description": "Credit of $100.00 to Wallet Account by Debit of $100.00 from Bank Account",
+      "related": {
+        "account_to": {
+          "id": "46deb476-c1a6-41eb-8eb7-26a695bbe5bc",
+          "account_type": "bank_account",
+          "user_id": "5830def0-ffe8-11e5-86aa-5e5517507c66"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "limit": 10,
+    "offset": 0,
+    "total": 1
+  },
+  "links": {
+    "self": "/items/100fd4a0-0538-11e6-b512-3e1d05defe78/batch_transactions"
+  }
+}

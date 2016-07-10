@@ -29,6 +29,8 @@ namespace PromisePayDotNet.Dynamic.Interfaces
 
         IDictionary<string, object> GetBPayDetailsForItem(string itemId);
 
+        IDictionary<string, object> ListBatchTransactions(string itemId);
+
         //actions methods start here
 
         IDictionary<string, object> MakePayment(string itemId, string accountId);
