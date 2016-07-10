@@ -105,6 +105,7 @@
     <Compile Include="DynamicItemTest.cs" />
     <Compile Include="DynamicPayPalAccountTest.cs" />
     <Compile Include="DynamicTokenTest.cs" />
+    <Compile Include="DynamicToolTest.cs" />
     <Compile Include="DynamicTransactionTest.cs" />
     <Compile Include="DynamicUploadTest.cs" />
     <Compile Include="DynamicUserTest.cs" />
@@ -168,6 +169,7 @@
     <None Include="Fixtures\paypal_account_delete.json" />
     <None Include="Fixtures\paypal_account_get_by_id.json" />
     <None Include="Fixtures\paypal_account_get_users.json" />
+    <None Include="Fixtures\tool_health_status.json" />
     <None Include="Fixtures\transactions_list.json" />
     <None Include="Fixtures\users_list.json" />
     <None Include="Fixtures\user_bank_accounts.json" />

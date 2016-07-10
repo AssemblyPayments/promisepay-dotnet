@@ -98,6 +98,7 @@
     <Compile Include="Dynamic.Implementations\ItemRepository.cs" />
     <Compile Include="Dynamic.Implementations\PayPalAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\TokenRepository.cs" />
+    <Compile Include="Dynamic.Implementations\ToolRepository.cs" />
     <Compile Include="Dynamic.Implementations\TransactionRepository.cs" />
     <Compile Include="Dynamic.Implementations\UploadRepository.cs" />
     <Compile Include="Dynamic.Implementations\UserRepository.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Dynamic.Interfaces\IItemRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IPayPalAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITokenRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IToolRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITransactionRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IUploadRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IUserRepository.cs" />
