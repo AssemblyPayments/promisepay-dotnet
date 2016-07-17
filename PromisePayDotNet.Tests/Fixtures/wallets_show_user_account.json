@@ -1,0 +1,35 @@
+﻿{
+  "users": {
+    "created_at": "2016-04-12T08:13:10.665Z",
+    "updated_at": "2016-04-12T09:07:55.083Z",
+    "full_name": "Samuel Seller",
+    "email": "samuel.seller@promisepay.com",
+    "mobile": "+61491570156",
+    "phone": null,
+    "logo_url": null,
+    "color_1": null,
+    "color_2": null,
+    "first_name": "Samuel",
+    "last_name": "Seller",
+    "id": "5830def0-ffe8-11e5-86aa-5e5517507c66",
+    "location": "AUS",
+    "verification_state": "approved",
+    "held_state": false,
+    "dob": "encrypted",
+    "government_number": "encrypted",
+    "drivers_license": null,
+    "flags": {},
+    "related": {
+      "addresses": "fe602dcf-4175-4f88-b5be-3beb04092dcd",
+      "payout_account": "46deb476-c1a6-41eb-8eb7-26a695bbe5bc"
+    },
+    "links": {
+      "self": "/wallet_accounts/385b50bb-237a-42cb-9382-22953e191ae6/users",
+      "items": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/items",
+      "card_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/card_accounts",
+      "paypal_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/paypal_accounts",
+      "bank_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/bank_accounts",
+      "wallet_accounts": "/users/5830def0-ffe8-11e5-86aa-5e5517507c66/wallet_accounts"
+    }
+  }
+}

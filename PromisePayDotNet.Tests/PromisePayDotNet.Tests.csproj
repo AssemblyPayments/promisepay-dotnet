@@ -103,12 +103,14 @@
     <Compile Include="DynamicDirectDebitAuthorityTest.cs" />
     <Compile Include="DynamicFeeTest.cs" />
     <Compile Include="DynamicItemTest.cs" />
+    <Compile Include="DynamicMarketplaceTest.cs" />
     <Compile Include="DynamicPayPalAccountTest.cs" />
     <Compile Include="DynamicTokenTest.cs" />
     <Compile Include="DynamicToolTest.cs" />
     <Compile Include="DynamicTransactionTest.cs" />
     <Compile Include="DynamicUploadTest.cs" />
     <Compile Include="DynamicUserTest.cs" />
+    <Compile Include="DynamicWalletTest.cs" />
     <Compile Include="FeeTest.cs" />
     <Compile Include="ItemActionsTest.cs" />
     <Compile Include="ItemTest.cs" />
@@ -165,6 +167,7 @@
     <None Include="Fixtures\items_list_transactions.json" />
     <None Include="Fixtures\items_not_found.json" />
     <None Include="Fixtures\item_list_batch_transactions.json" />
+    <None Include="Fixtures\marketplaces_show.json" />
     <None Include="Fixtures\paypal_account_create.json" />
     <None Include="Fixtures\paypal_account_delete.json" />
     <None Include="Fixtures\paypal_account_get_by_id.json" />
@@ -184,6 +187,10 @@
     <None Include="Fixtures\user_paypal_accounts_empty.json" />
     <None Include="Fixtures\user_set_disbursement_account.json" />
     <None Include="Fixtures\user_update.json" />
+    <None Include="Fixtures\wallets_deposit_funds.json" />
+    <None Include="Fixtures\wallets_show.json" />
+    <None Include="Fixtures\wallets_show_user_account.json" />
+    <None Include="Fixtures\wallets_withdraw_funds.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

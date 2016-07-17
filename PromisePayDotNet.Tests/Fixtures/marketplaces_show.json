@@ -1,0 +1,65 @@
+﻿{
+  "marketplaces": {
+    "id": "c298d7ea-ea8c-486e-95d9-1e45ae3787ab",
+    "name": "Walkthrough",
+    "short_name": null,
+    "color_1": null,
+    "color_2": null,
+    "color_3": null,
+    "color_4": null,
+    "color_5": null,
+    "website": null,
+    "payment_frequency": null,
+    "alt_marketplace_id": null,
+    "state": "fully_approved",
+    "logo": null,
+    "active": true,
+    "alt_marketplace_auth": null,
+    "business_information": {
+      "principal_name": null,
+      "principal_government_number": null,
+      "incorporation_date": null,
+      "bank_account_holder": null,
+      "bank_account_number": null,
+      "bank_routing_number": null,
+      "avg_transaction_value": null,
+      "monthly_transactions": null,
+      "monthly_disputes": null,
+      "monthly_refunds": null,
+      "monthly_chargebacks": null,
+      "unique_users": null,
+      "company_phone": null,
+      "company_country": null,
+      "transaction_time": null,
+      "payments_flow": null,
+      "business_model_description": null,
+      "customer_support_email": null,
+      "bank_name": null,
+      "bank_account_type": null,
+      "bank_holder_type": null
+    },
+    "marketplace_addons": [
+      {
+        "name": "Fraud protection",
+        "enabled": true
+      },
+      {
+        "name": "End user support",
+        "enabled": true
+      }
+    ],
+    "currency": "AUD",
+    "email": "walkthrough@promisepay.com",
+    "seller_white_labeled": false,
+    "partial_refunds": true,
+    "related": {
+      "users": "ec2700f6834b3f57b6531553fdf290f7",
+      "company": "9280aa36-d7f8-4959-b1ed-0ace2c12cfa2"
+    },
+    "links": {
+      "self": "/marketplace",
+      "principal": "/users/ec2700f6834b3f57b6531553fdf290f7",
+      "company": "/company/9280aa36-d7f8-4959-b1ed-0ace2c12cfa2"
+    }
+  }
+}

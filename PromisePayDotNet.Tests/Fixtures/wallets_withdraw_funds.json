@@ -1,0 +1,24 @@
+﻿{
+  "disbursements": {
+    "id": "ad688d54-6791-4f1d-add7-88fbd89b70d1",
+    "amount": 10000,
+    "currency": "AUD",
+    "batch_id": null,
+    "created_at": "2016-04-26T08:56:25.035Z",
+    "updated_at": "2016-04-26T08:56:25.035Z",
+    "state": "pending",
+    "to": "Bank Account",
+    "bank_name": "Bank of Australia",
+    "bank_account_name": "Samuel Seller",
+    "bank_account_number": "XXX234",
+    "bank_routing_number": "XXXXX3",
+    "links": {
+      "transactions": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/transactions",
+      "wallet_accounts": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/wallet_accounts",
+      "bank_accounts": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/bank_accounts",
+      "paypal_accounts": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/paypal_accounts",
+      "items": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/items",
+      "users": "/disbursements/ad688d54-6791-4f1d-add7-88fbd89b70d1/users"
+    }
+  }
+}

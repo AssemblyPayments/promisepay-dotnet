@@ -1,0 +1,19 @@
+﻿{
+  "disbursements": {
+    "id": "210bc8ba-d646-4e35-b029-a1959e4ca8c5",
+    "amount": 5000,
+    "currency": "AUD",
+    "batch_id": null,
+    "created_at": "2016-04-26T09:01:02.199Z",
+    "updated_at": "2016-04-26T09:01:02.199Z",
+    "state": "pending",
+    "links": {
+      "transactions": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/transactions",
+      "wallet_accounts": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/wallet_accounts",
+      "bank_accounts": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/bank_accounts",
+      "paypal_accounts": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/paypal_accounts",
+      "items": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/items",
+      "users": "/disbursements/210bc8ba-d646-4e35-b029-a1959e4ca8c5/users"
+    }
+  }
+}
