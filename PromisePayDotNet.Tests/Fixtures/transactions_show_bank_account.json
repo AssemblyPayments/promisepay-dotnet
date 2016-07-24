@@ -1,0 +1,37 @@
+﻿{
+  "transactions": {
+    "id": "2f2870f5-7c8f-45cb-8aeb-95190d54f125",
+    "created_at": "2016-04-19T08:13:43.963Z",
+    "updated_at": "2016-04-19T08:13:43.963Z",
+    "description": "Credit of $50.00 to Item by Debit of $50.00 from Bank Account",
+    "type": "payment",
+    "type_method": "direct_debit",
+    "state": "successful",
+    "user_id": "064d6800-fff3-11e5-86aa-5e5517507c66",
+    "account_id": "53e777d5-a2f2-4925-b5cd-029fe8c5d231",
+    "account_type": "item",
+    "amount": 5000,
+    "currency": "AUD",
+    "debit_credit": "credit",
+    "related": {
+      "transactions": [
+        {
+          "id": "7fc08177-38c5-4b65-87ea-6546e5360a57",
+          "account_id": "9fda18e7-b1d3-4a83-830d-0cef0f62cd25",
+          "account_type": "bank_account",
+          "user_id": "064d6800-fff3-11e5-86aa-5e5517507c66"
+        }
+      ]
+    },
+    "links": {
+      "self": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125",
+      "users": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/users",
+      "fees": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/fees",
+      "wallet_accounts": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/wallet_accounts",
+      "card_accounts": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/card_accounts",
+      "paypal_accounts": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/paypal_accounts",
+      "bank_accounts": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/bank_accounts",
+      "items": "/transactions/2f2870f5-7c8f-45cb-8aeb-95190d54f125/items"
+    }
+  }
+}

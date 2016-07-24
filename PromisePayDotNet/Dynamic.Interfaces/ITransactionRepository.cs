@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PromisePayDotNet.Dynamic.Interfaces
 {
@@ -15,5 +11,13 @@ namespace PromisePayDotNet.Dynamic.Interfaces
         IDictionary<string, object> GetUserForTransaction(string transactionId);
 
         IDictionary<string, object> GetFeeForTransaction(string transactionId);
+
+        IDictionary<string, object> ShowTransactionWalletAccount(string transactionId);
+
+        IDictionary<string, object> ShowTransactionBankAccount(string transactionId);
+
+        IDictionary<string, object> ShowTransactionCardAccount(string transactionId);
+
+        IDictionary<string, object> ShowTransactionPayPalAccount(string transactionId);
     }
 }

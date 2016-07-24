@@ -1,0 +1,20 @@
+﻿{
+  "card_accounts": {
+    "active": true,
+    "created_at": "2016-04-13T02:59:39.048Z",
+    "updated_at": "2016-04-18T09:01:43.739Z",
+    "id": "930a7f78-6bf6-4f33-8cfc-b82c787b5f83",
+    "currency": "AUD",
+    "card": {
+      "type": "visa",
+      "full_name": "Bella Buyer",
+      "number": "XXXX-XXXX-XXXX-1111",
+      "expiry_month": "10",
+      "expiry_year": "2020"
+    },
+    "links": {
+      "self": "/transactions/7a138862-f821-412d-a91e-367ed7391fe7/card_accounts",
+      "users": "/card_accounts/930a7f78-6bf6-4f33-8cfc-b82c787b5f83/users"
+    }
+  }
+}

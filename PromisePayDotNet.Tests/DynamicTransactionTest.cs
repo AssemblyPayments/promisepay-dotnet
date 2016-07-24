@@ -47,5 +47,56 @@ namespace PromisePayDotNet.Tests
             Assert.Throws<ArgumentException>(() => repo.ListTransactions(201));
         }
 
+        [Test]
+        public void ShowTransactionWalletAccount() 
+        {
+            var content = File.ReadAllText("../../Fixtures/transactions_show_wallet_account.json");
+            var client = GetMockClient(content);
+            var repo = new TransactionRepository(client.Object);
+
+            var response = repo.ShowTransactionWalletAccount("100fd4a0-0538-11e6-b512-3e1d05defe78");
+            client.VerifyAll();
+            var accounts = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["wallet_accounts"]));
+
+            Assert.NotNull(accounts);
+            Assert.AreEqual("4f4a9428-5fdd-4b4a-a7e3-0919cbba5e20", accounts["id"]);
+        }
+
+        [Test]
+        public void ShowTransactionBankAccount()
+        {
+            var content = File.ReadAllText("../../Fixtures/transactions_show_bank_account.json");
+            var client = GetMockClient(content);
+            var repo = new TransactionRepository(client.Object);
+
+            var response = repo.ShowTransactionBankAccount("100fd4a0-0538-11e6-b512-3e1d05defe78");
+            client.VerifyAll();
+            var accounts = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["transactions"]));
+
+            Assert.NotNull(accounts);
+            Assert.AreEqual("2f2870f5-7c8f-45cb-8aeb-95190d54f125", accounts["id"]);
+        }
+
+        [Test]
+        public void ShowTransactionCardAccount()
+        {
+            var content = File.ReadAllText("../../Fixtures/transactions_show_card_account.json");
+            var client = GetMockClient(content);
+            var repo = new TransactionRepository(client.Object);
+
+            var response = repo.ShowTransactionCardAccount("100fd4a0-0538-11e6-b512-3e1d05defe78");
+            client.VerifyAll();
+            var accounts = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["card_accounts"]));
+
+            Assert.NotNull(accounts);
+            Assert.AreEqual("930a7f78-6bf6-4f33-8cfc-b82c787b5f83", accounts["id"]);
+        }
+
+        [Test]
+        [Ignore]
+        public void ShowTransactionPayPalAccount()
+        {
+            Assert.Fail("No fixture yet!");
+        }
     }
 }

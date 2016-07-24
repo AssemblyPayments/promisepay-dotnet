@@ -1,0 +1,15 @@
+﻿{
+  "wallet_accounts": {
+    "id": "4f4a9428-5fdd-4b4a-a7e3-0919cbba5e20",
+    "active": true,
+    "created_at": "2016-04-10T15:40:32.345Z",
+    "updated_at": "2016-04-18T08:20:20.154Z",
+    "balance": -585,
+    "currency": "AUD",
+    "links": {
+      "self": "/transactions/5eb9842f-41a6-4117-a539-79a6b11d1ae5/wallet_accounts",
+      "users": "/wallet_accounts/4f4a9428-5fdd-4b4a-a7e3-0919cbba5e20/users",
+      "disbursements": "/wallet_accounts/4f4a9428-5fdd-4b4a-a7e3-0919cbba5e20/disbursements"
+    }
+  }
+}

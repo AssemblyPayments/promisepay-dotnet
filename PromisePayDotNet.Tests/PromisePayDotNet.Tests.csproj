@@ -191,6 +191,9 @@
     <None Include="Fixtures\paypal_account_get_users.json" />
     <None Include="Fixtures\tool_health_status.json" />
     <None Include="Fixtures\transactions_list.json" />
+    <None Include="Fixtures\transactions_show_bank_account.json" />
+    <None Include="Fixtures\transactions_show_card_account.json" />
+    <None Include="Fixtures\transactions_show_wallet_account.json" />
     <None Include="Fixtures\users_list.json" />
     <None Include="Fixtures\user_bank_accounts.json" />
     <None Include="Fixtures\user_bank_accounts_empty.json" />
