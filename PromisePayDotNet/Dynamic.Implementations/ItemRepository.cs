@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PromisePayDotNet.Exceptions;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -255,6 +256,70 @@ namespace PromisePayDotNet.Dynamic.Implementations
             request.AddUrlSegment("id", itemId);
             request.AddParameter("refund_amount", refundAmount);
             request.AddParameter("refund_message", refundMessage);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> DeclineRefund(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/decline_refund", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> RaiseDispute(string itemId, string userId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/raise_dispute", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            request.AddParameter("user_id", userId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> RequestDisputeResolution(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/request_resolve_dispute", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> ResolveDispute(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/resolve_dispute", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> EscalateDispute(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/escalate_dispute", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> SendTaxInvoice(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/send_tax_invoice", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
+        }
+
+        public IDictionary<string, object> RequestTaxInvoice(string itemId)
+        {
+            AssertIdNotNull(itemId);
+            var request = new RestRequest("/items/{id}/request_tax_invoice", Method.PATCH);
+            request.AddUrlSegment("id", itemId);
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }

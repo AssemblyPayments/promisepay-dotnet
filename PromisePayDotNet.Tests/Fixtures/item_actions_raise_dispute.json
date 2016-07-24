@@ -1,0 +1,53 @@
+﻿{
+  "items": {
+    "id": "4c423a39-358a-4ea9-a19e-9727a9738fdb",
+    "name": "Landscaping Job #003",
+    "description": "Building of deck.",
+    "created_at": "2016-04-18T08:21:34.258Z",
+    "updated_at": "2016-04-18T08:30:04.289Z",
+    "state": "problem_flagged",
+    "net_amount": 30000,
+    "refunded_amount": 0,
+    "released_amount": 0,
+    "buyer_fees": 0,
+    "seller_fees": 600,
+    "credit_card_fee": 0,
+    "paypal_fee": 0,
+    "seller_url": "",
+    "buyer_url": "",
+    "direct_debit_fee": 0,
+    "status": 22400,
+    "amount": 30000,
+    "payment_type_id": 1,
+    "due_date": "2016-04-28",
+    "pending_release_amount": 0,
+    "deposit_reference": "100014013962813",
+    "promisepay_fee": 1080,
+    "total_outstanding": 30000,
+    "total_amount": 30000,
+    "currency": "AUD",
+    "payment_method": "credit card",
+    "buyer_name": "Bella Buyer",
+    "buyer_email": "bella.buyer@example.com",
+    "buyer_country": "AUS",
+    "seller_name": "Samuel Seller",
+    "seller_email": "samuel.seller@promisepay.com",
+    "seller_country": "AUS",
+    "payment_credit_card_enabled": true,
+    "payment_direct_debit_enabled": true,
+    "related": {
+      "buyers": "064d6800-fff3-11e5-86aa-5e5517507c66",
+      "sellers": "5830def0-ffe8-11e5-86aa-5e5517507c66"
+    },
+    "links": {
+      "self": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/raise_dispute",
+      "buyers": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/buyers",
+      "sellers": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/sellers",
+      "status": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/status",
+      "fees": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/fees",
+      "transactions": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/transactions",
+      "wire_details": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/wire_details",
+      "bpay_details": "/items/4c423a39-358a-4ea9-a19e-9727a9738fdb/bpay_details"
+    }
+  }
+}

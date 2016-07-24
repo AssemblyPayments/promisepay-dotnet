@@ -52,6 +52,19 @@ namespace PromisePayDotNet.Dynamic.Interfaces
         IDictionary<string, object> RequestRefund(string itemId, string refundAmount, string refundMessage);
 
         IDictionary<string, object> Refund(string itemId, string refundAmount, string refundMessage);
+        
+        IDictionary<string, object> DeclineRefund(string itemId);
 
+        IDictionary<string, object> RaiseDispute(string itemId, string userId);
+        
+        IDictionary<string, object> RequestDisputeResolution(string itemId);
+        
+        IDictionary<string, object> ResolveDispute(string itemId);
+        
+        IDictionary<string, object> EscalateDispute(string itemId);
+        
+        IDictionary<string, object> SendTaxInvoice(string itemId);
+        
+        IDictionary<string, object> RequestTaxInvoice(string itemId);
     }
 }
