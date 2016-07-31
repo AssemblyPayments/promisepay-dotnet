@@ -26,17 +26,11 @@ namespace PromisePayDotNet.Implementations
             client.Authenticator = new HttpBasicAuthenticator(Login, Password);
         }
 
-        protected Hashtable Configurataion
+        private Hashtable Configurataion
         {
             get
             {
-                var ht = ConfigurationManager.GetSection("PromisePay/Settings") as Hashtable;
-                if (ht == null)
-                {
-                    log.Fatal("Unable to get PromisePay settings section from config file");
-                    throw new MisconfigurationException("Unable to get PromisePay settings section from config file");
-                }
-                return ht;
+                return ConfigurationManager.GetSection("PromisePay/Settings") as Hashtable;
             }
         }
 
@@ -44,12 +38,17 @@ namespace PromisePayDotNet.Implementations
         {
             get
             {
-                var baseUrl = Configurataion["ApiUrl"] as String;
+                var baseUrl = ConfigurationManager.AppSettings["PromisePayApiUrl"] as String;
+                if (baseUrl == null && (Configurataion != null))
+                {
+                    baseUrl = Configurataion["ApiUrl"] as String;                    
+                }
                 if (baseUrl == null)
                 {
                     log.Fatal("Unable to get URL info from config file");
                     throw new MisconfigurationException("Unable to get URL info from config file");
                 }
+                
                 return baseUrl;
             }
         }
@@ -58,14 +57,19 @@ namespace PromisePayDotNet.Implementations
         {
             get
             {
-                var baseUrl = Configurataion["Login"] as String;
-                if (baseUrl == null)
+                var login = ConfigurationManager.AppSettings["PromisePayLogin"] as String;
+                if (login == null && (Configurataion != null))
+                {
+                    login = Configurataion["Login"] as String;
+                }
+                if (login == null)
                 {
                     log.Fatal("Unable to get Login info from config file");
-                    throw new MisconfigurationException("Unable to get Login info from config file");
+                    throw new MisconfigurationException("Unable to get URL info from config file");
                 }
-                return baseUrl;
-               
+
+                return login;
+              
             }
         }
 
@@ -73,13 +77,18 @@ namespace PromisePayDotNet.Implementations
         {
             get
             {
-                var baseUrl = Configurataion["Password"] as String;
-                if (baseUrl == null)
+                var password = ConfigurationManager.AppSettings["PromisePayPassword"] as String;
+                if (password == null && (Configurataion != null))
+                {
+                    password = Configurataion["Password"] as String;
+                }
+                if (password == null)
                 {
                     log.Fatal("Unable to get Password info from config file");
-                    throw new MisconfigurationException("Unable to get Password info from config file");
+                    throw new MisconfigurationException("Unable to get URL info from config file");
                 }
-                return baseUrl;
+
+                return password;
             }
         }
 

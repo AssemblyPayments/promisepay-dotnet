@@ -21,5 +21,13 @@ namespace PromisePayDotNet.Tests
                 Assert.Fail();
             }
         }
+
+        [Test]
+        public void TestAlternativeConfig() 
+        {
+            var apiUrl = ConfigurationManager.AppSettings["PromisePayApiUrl"] as string;
+
+            Assert.AreEqual("https://test.api.promisepay.com", apiUrl);
+        }
     }
 }
