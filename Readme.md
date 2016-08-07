@@ -204,6 +204,12 @@ var id = "bb2323cf-4838-4fcb-a288-933d0307523d";
 var result = repo.DeleteItem(id);
 ```
 
+#####List Item Batch Transactions
+```cs
+var repo = container.Resolve<IItemRepository>();
+var response = repo.ListBatchTransactions("7c269f52-2236-4aa5-899e-a2e3ecadbc3f");
+```
+
 #####Get an item status
 ```cs
 var repo = container.Resolve<IItemRepository>();
