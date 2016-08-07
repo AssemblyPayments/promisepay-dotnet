@@ -669,6 +669,15 @@ var response = repo.ShowChargeStatus(id);
 var charge = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["charges"]));
 ```
 
+##Tools
+#####Health check
+```cs
+var repo = container.Resolve<IToolRepository>();
+var response = repo.HealthCheck();
+if (response["status"] == 'healthy') 
+...
+```
+
 #4. Contributing
 	1. Fork it ( https://github.com/PromisePay/promisepay-dotnet/fork )
 	2. Create your feature branch (`git checkout -b my-new-feature`)
