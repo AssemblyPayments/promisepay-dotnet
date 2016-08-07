@@ -118,11 +118,27 @@ var session_token = new Dictionary<string, object> {
 
 ##Addresses
 
-#####
-Get Address By Id
+#####Get Address By Id
 ```cs
 	var repo = container.Resolve<IAddressRepository>();
     var resp = repo.GetAddressById("07ed45e5-bb9d-459f-bb7b-a02ecb38f443");
+```
+
+##Batch transactions
+
+#####List Batch Transactions
+```cs
+	var repo = container.Resolve<IBatchTransactionRepository>();
+    var response = repo.List();
+	var transactions = JsonConvert.DeserializeObject<IList<IDictionary<string, object>>>(JsonConvert.SerializeObject(response["batch_transactions"]));
+```
+
+#####Show Batch Transaction
+```cs
+	var repo = container.Resolve<IBatchTransactionRepository>();
+    const string id = "b1652611-9544-4244-a601-54c24cfa5e90";
+    var response = repo.Show(id);
+    var transaction = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["batch_transactions"]));
 ```
 
 ##Items
@@ -491,6 +507,12 @@ var gotAccount = repo.GetBankAccountById(accountId); //gotAccount.Active should 
 var repo = container.Resolve<IBankAccountRepository>();
 var accountId = "14a74a3c-8358-4c99-bcf2-4c6ed7454747";
 var gotUser = repo.GetUserForBankAccount(accountId);
+```
+
+#####Validate routing number
+```cs
+var repo = container.Resolve<IBankAccountRepository>();
+var resp = repo.ValidateRoutingNumber("122235821");
 ```
 
 ##PayPal Accounts
