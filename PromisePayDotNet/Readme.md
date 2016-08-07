@@ -116,6 +116,15 @@ var session_token = new Dictionary<string, object> {
     var token = repo.GenerateCardToken("card", "064d6800-fff3-11e5-86aa-5e5517507c66");
 ```
 
+##Addresses
+
+#####
+Get Address By Id
+```cs
+	var repo = container.Resolve<IAddressRepository>();
+    var resp = repo.GetAddressById("07ed45e5-bb9d-459f-bb7b-a02ecb38f443");
+```
+
 ##Items
 
 #####Create an item
