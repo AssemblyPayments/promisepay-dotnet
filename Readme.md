@@ -262,18 +262,26 @@ var bPayDetails = repo.GetBPayDetailsForItem(id);
 
 #####Create Direct Debit Authority
 ```cs
+var repo = container.Resolve<IDirectDebitAuthorityRepository>();
+var resp = repo.Create("9fda18e7-b1d3-4a83-830d-0cef0f62cd25", "100000");
 ```
 
 #####List Direct Debit Authorities
 ```cs
+var repo = container.Resolve<IDirectDebitAuthorityRepository>();
+var resp = repo.List("9fda18e7-b1d3-4a83-830d-0cef0f62cd25");
 ```
 
 #####Show Direct Debit Authority
 ```cs
+var repo = container.Resolve<IDirectDebitAuthorityRepository>();
+var resp = repo.Show("8f233e04-ffaa-4c9d-adf9-244853848e21");
 ```
 
 #####Delete Direct Debit Authority
 ```cs
+var repo = container.Resolve<IDirectDebitAuthorityRepository>();
+var resp = repo.Delete("9fda18e7-b1d3-4a83-830d-0cef0f62cd25");
 ```
 
 ##Users
@@ -441,6 +449,56 @@ var user = repo.GetUserById(id);
 	var refundAmount = 123;
 	var refundMessage = "refund message";
 	var item = repo.Refund(itemId, refundAmount, refundMessage);
+```
+
+#####Decline Refund
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+    var response = repo.DeclineRefund(itemId);
+```
+
+#####Raise Dispute
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+	var userId = "5830def0-ffe8-11e5-86aa-5e5517507c66";
+    var response = repo.RaiseDispute(itemId, userId);
+```
+
+#####Request Dispute Resolution
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+    var response = repo.RequestDisputeResolution(itemId);
+```
+
+#####Resolve Dispute
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+	var response = repo.ResolveDispute(itemId);
+```
+
+#####Escalate Dispute
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+    var response = repo.EscalateDispute(itemId);
+```
+
+#####Send Tax Invoice
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+    var response = repo.SendTaxInvoice(itemId);
+```
+
+#####Request Tax Invoice
+```cs
+	var repo = container.Resolve<IItemRepository>();
+	var itemId = "100fd4a0-0538-11e6-b512-3e1d05defe78";
+    var response = repo.RequestTaxInvoice(itemId);
 ```
 
 ##Card Accounts
