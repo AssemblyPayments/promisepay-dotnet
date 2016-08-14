@@ -258,6 +258,24 @@ var id = "bb2323cf-4838-4fcb-a288-933d0307523d";
 var bPayDetails = repo.GetBPayDetailsForItem(id);
 ```
 
+##Direct debit authority
+
+#####Create Direct Debit Authority
+```cs
+```
+
+#####List Direct Debit Authorities
+```cs
+```
+
+#####Show Direct Debit Authority
+```cs
+```
+
+#####Delete Direct Debit Authority
+```cs
+```
+
 ##Users
 
 #####Create a user
