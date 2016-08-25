@@ -2,17 +2,16 @@
 
 [![Join the chat at https://gitter.im/PromisePay/promisepay-dotnet](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PromisePay/promisepay-dotnet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![NuGet version](https://badge.fury.io/nu/PromisePay%2Fpromisepay-dotnet.svg)](http://badge.fury.io/nu/PromisePay%2Fpromisepay-dotnet) [![Build Status](https://travis-ci.org/PromisePay/promisepay-dotnet.svg)](https://travis-ci.org/PromisePay/promisepay-dotnet) [![Code Climate](https://codeclimate.com/github/PromisePay/promisepay-dotnet/badges/gpa.svg)](https://codeclimate.com/github/PromisePay/promisepay-dotnet) 
+[![NuGet version](https://badge.fury.io/nu/PromisePay.API.NET.svg)](https://badge.fury.io/nu/PromisePay.API.NET) [![Build Status](https://travis-ci.org/PromisePay/promisepay-dotnet.svg)](https://travis-ci.org/PromisePay/promisepay-dotnet) [![Code Climate](https://codeclimate.com/github/PromisePay/promisepay-dotnet/badges/gpa.svg)](https://codeclimate.com/github/PromisePay/promisepay-dotnet) 
 
 #1. Installation
-**NuGet:** Install PromisePay via NuGet package manager. The package name is '[PromisePay](https://www.nuget.org/packages/PromisePay.API.NET/0.0.1)'.
+**NuGet:** Install PromisePay via NuGet package manager. The package name is '[PromisePay.API.NET](https://www.nuget.org/packages/PromisePay.API.NET)'.
 
 **Source:** Download latest sources from GitHub, add project into your solution and build it.
 
-
 #2. Configuration
 
-Before interacting with PromisePay API, you need to generate an API token. See [http://docs.promisepay.com/v2.2/docs/request_token](http://docs.promisepay.com/v2.2/docs/request_token) for more information.
+Before interacting with PromisePay API, you'll need to [create a prelive account](https://management.prelive.promisepay.com/#/sign-up/prelive) and get an API key.
 
 Once you have recorded your API token, configure the .NET package - see below.
 
