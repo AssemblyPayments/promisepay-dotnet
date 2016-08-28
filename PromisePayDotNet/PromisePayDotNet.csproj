@@ -93,11 +93,13 @@
     <Compile Include="Dynamic.Implementations\CardAccountRepository.cs" />
     <Compile Include="Dynamic.Implementations\ChargeRepository.cs" />
     <Compile Include="Dynamic.Implementations\CompanyRepository.cs" />
+    <Compile Include="Dynamic.Implementations\ConfigurationRepository.cs" />
     <Compile Include="Dynamic.Implementations\DirectDebitAuthorityRepository.cs" />
     <Compile Include="Dynamic.Implementations\FeeRepository.cs" />
     <Compile Include="Dynamic.Implementations\ItemRepository.cs" />
     <Compile Include="Dynamic.Implementations\MarketplaceRepository.cs" />
     <Compile Include="Dynamic.Implementations\PayPalAccountRepository.cs" />
+    <Compile Include="Dynamic.Implementations\RestrictionRepository.cs" />
     <Compile Include="Dynamic.Implementations\TokenRepository.cs" />
     <Compile Include="Dynamic.Implementations\ToolRepository.cs" />
     <Compile Include="Dynamic.Implementations\TransactionRepository.cs" />
@@ -110,11 +112,13 @@
     <Compile Include="Dynamic.Interfaces\ICardAccountRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IChargeRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ICompanyRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IConfigurationRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IDirectDebitAuthorityRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IFeeRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IItemRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IMarketplaceRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IPayPalAccountRepository.cs" />
+    <Compile Include="Dynamic.Interfaces\IRestrictionRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITokenRepository.cs" />
     <Compile Include="Dynamic.Interfaces\IToolRepository.cs" />
     <Compile Include="Dynamic.Interfaces\ITransactionRepository.cs" />

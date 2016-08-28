@@ -100,12 +100,14 @@
     <Compile Include="DynamicBatchTransactionTest.cs" />
     <Compile Include="DynamicChargeTest.cs" />
     <Compile Include="DynamicCompanyTest.cs" />
+    <Compile Include="DynamicConfigurationTest.cs" />
     <Compile Include="DynamicDirectDebitAuthorityTest.cs" />
     <Compile Include="DynamicFeeTest.cs" />
     <Compile Include="DynamicItemActionTest.cs" />
     <Compile Include="DynamicItemTest.cs" />
     <Compile Include="DynamicMarketplaceTest.cs" />
     <Compile Include="DynamicPayPalAccountTest.cs" />
+    <Compile Include="DynamicRestrictionTest.cs" />
     <Compile Include="DynamicTokenTest.cs" />
     <Compile Include="DynamicToolTest.cs" />
     <Compile Include="DynamicTransactionTest.cs" />
@@ -146,6 +148,11 @@
     <None Include="Fixtures\companies_edit.json" />
     <None Include="Fixtures\companies_get_by_id.json" />
     <None Include="Fixtures\companies_list.json" />
+    <None Include="Fixtures\configuration_create.json" />
+    <None Include="Fixtures\configuration_delete.json" />
+    <None Include="Fixtures\configuration_list.json" />
+    <None Include="Fixtures\configuration_show.json" />
+    <None Include="Fixtures\configuration_update.json" />
     <None Include="Fixtures\direct_debit_authorities_create.json" />
     <None Include="Fixtures\direct_debit_authorities_delete.json" />
     <None Include="Fixtures\direct_debit_authorities_list.json" />
@@ -189,6 +196,8 @@
     <None Include="Fixtures\paypal_account_delete.json" />
     <None Include="Fixtures\paypal_account_get_by_id.json" />
     <None Include="Fixtures\paypal_account_get_users.json" />
+    <None Include="Fixtures\restriction_list.json" />
+    <None Include="Fixtures\restriction_show.json" />
     <None Include="Fixtures\tool_health_status.json" />
     <None Include="Fixtures\transactions_list.json" />
     <None Include="Fixtures\transactions_show_bank_account.json" />

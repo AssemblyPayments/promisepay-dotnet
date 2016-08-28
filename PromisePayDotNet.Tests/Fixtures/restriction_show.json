@@ -1,0 +1,17 @@
+﻿{
+  "payment_restrictions": {
+    "name": "credit_card",
+    "direction": "out",
+    "enabled": false,
+    "min": null,
+    "max": null,
+    "user_role": null,
+    "id": "12a7732c-87a8-432d-a814-b53c1586ec3c",
+    "user_id": null,
+    "country": null,
+    "item_id": null,
+    "links": {
+      "self": "/payment_restrictions/12a7732c-87a8-432d-a814-b53c1586ec3c"
+    }
+  }
+}
