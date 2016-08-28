@@ -34,7 +34,7 @@ namespace PromisePayDotNet.Tests
             var response = repo.Show(id);
             Assert.IsNotNull(response);
             var restriction = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["payment_restrictions"]));
-            Assert.AreEqual("12a7732c-87a8-432d-a814-b53c1586ec3c", restriction["id"]);
+            Assert.AreEqual(id, restriction["id"]);
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using PromisePayDotNet.Exceptions;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace PromisePayDotNet.Dynamic.Implementations
 {
@@ -14,27 +17,72 @@ namespace PromisePayDotNet.Dynamic.Implementations
 
         public IDictionary<string, object> Create(IDictionary<string, object> configuration)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/configurations", Method.POST);
+
+            if (!configuration.ContainsKey("name")) 
+            {
+                throw new ValidationException("configuration should contain \"name\" field");
+            }
+
+            foreach (var key in configuration.Keys)
+            {
+                request.AddParameter(key, (string)configuration[key]);
+            }
+
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> List()
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/configurations", Method.GET);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
 
         public IDictionary<string, object> Show(string id)
         {
-            throw new NotImplementedException();
+            AssertIdNotNull(id);
+            var request = new RestRequest("/configurations/{id}", Method.GET);
+            request.AddUrlSegment("id", id);
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);
         }
+
 
         public IDictionary<string, object> Update(IDictionary<string, object> configuration)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("/configurations/{id}", Method.PATCH);
+
+            if (!configuration.ContainsKey("name"))
+            {
+                throw new ValidationException("configuration should contain \"name\" field");
+            }
+
+            if (!configuration.ContainsKey("id"))
+            {
+                throw new ValidationException("configuration should contain \"id\" field");
+            }
+
+            foreach (var key in configuration.Keys)
+            {
+                request.AddParameter(key, (string)configuration[key]);
+            }
+
+            request.AddUrlSegment("id", (string)configuration["id"]);
+
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);            
         }
 
         public IDictionary<string, object> Delete(string id)
         {
-            throw new NotImplementedException();
+            AssertIdNotNull(id);
+            var request = new RestRequest("/configurations/{id}", Method.DELETE);
+            request.AddUrlSegment("id", id);
+
+            var response = SendRequest(Client, request);
+            return JsonConvert.DeserializeObject<IDictionary<string, object>>(response.Content);            
         }
     }
 }
