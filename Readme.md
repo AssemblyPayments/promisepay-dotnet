@@ -745,6 +745,52 @@ var response = repo.ShowChargeStatus(id);
 var charge = JsonConvert.DeserializeObject<IDictionary<string, object>>(JsonConvert.SerializeObject(response["charges"]));
 ```
 
+##Feature Configuration
+#####Create
+```cs
+var repo = container.Resolve<IConfigurationRepository>();
+var response = repo.Create(new Dictionary<string,object> {{"name","test"}});
+...
+```
+#####List
+```cs
+var repo = container.Resolve<IConfigurationRepository>();
+var response = repo.List();
+...
+```
+#####Show
+```cs
+var repo = container.Resolve<IConfigurationRepository>();
+var response = repo.Show("ca321b3f-db87-4d75-ba05-531c7f1bb515");
+...
+```
+#####Update
+```cs
+var repo = container.Resolve<IConfigurationRepository>();
+var response = repo.Update(new Dictionary<string,object> {{"id",""ca321b3f-db87-4d75-ba05-531c7f1bb515""}, {"name","test"}});
+...
+```
+#####Delete
+```cs
+var repo = container.Resolve<IConfigurationRepository>();
+var response = repo.Delete("ca321b3f-db87-4d75-ba05-531c7f1bb515");
+...
+```
+
+##Restrictions
+#####List
+```cs
+var repo = container.Resolve<IRestrictionRepository>();
+var response = repo.List();
+...
+```
+#####Show
+```cs
+var repo = container.Resolve<IRestrictionRepository>();
+var response = repo.Show("ca321b3f-db87-4d75-ba05-531c7f1bb515");
+...
+```
+
 ##Tools
 #####Health check
 ```cs
