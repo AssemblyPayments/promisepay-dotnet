@@ -42,7 +42,8 @@ namespace PromisePayDotNet.Tests
                 {"mobile" , "123123"},
                 {"state" , "state"},
                 {"zip" , "123456"},
-                {"email" , id + "@google.com"}
+                {"email" , id + "@google.com"},
+                {"government_number", "555555555"}
             };
 
             var resp = repo.CreateUser(user);
@@ -53,6 +54,7 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual(user["last_name"], createdUser["last_name"]);
             Assert.AreEqual("Test Test", createdUser["full_name"]);
             Assert.AreEqual(user["email"], createdUser["email"]);
+            Assert.AreEqual("encrypted", createdUser["government_number"]);
             Assert.IsTrue(((DateTime?)createdUser["created_at"]).HasValue);
             Assert.IsTrue(((DateTime?)createdUser["updated_at"]).HasValue);
         }
