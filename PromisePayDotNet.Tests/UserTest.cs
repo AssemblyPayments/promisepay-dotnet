@@ -41,7 +41,9 @@ namespace PromisePayDotNet.Tests
                 Country = "AUS",
                 State = "state",
                 Zip = "123456",
-                Email = id + "@google.com"
+                Email = id + "@google.com",
+                DriversLicense = "123123",
+                GovernmentNumber = "123123"
             };
 
             var createdUser = repo.CreateUser(user);
@@ -51,6 +53,8 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual(user.LastName, createdUser.LastName);
             Assert.AreEqual("Test Test", createdUser.FullName);
             Assert.AreEqual(user.Email, createdUser.Email);
+            Assert.AreEqual(user.DriversLicense, createdUser.DriversLicense);
+            Assert.AreEqual("encrypted", createdUser.GovernmentNumber);
             Assert.IsTrue(createdUser.CreatedAt.HasValue);
             Assert.IsTrue(createdUser.UpdatedAt.HasValue);
         }
@@ -316,7 +320,9 @@ namespace PromisePayDotNet.Tests
                 Country = "AUS",
                 State = "state",
                 Zip = "123456",
-                Email = id + "@google.com"
+                Email = id + "@google.com",
+                DriversLicense = "123123",
+                GovernmentNumber = "123123"
             };
 
             var createdUser = repo.CreateUser(user);
@@ -332,6 +338,8 @@ namespace PromisePayDotNet.Tests
             Assert.AreEqual("Test123", modifiedUser.FirstName);
             Assert.AreEqual("Test123", modifiedUser.LastName);
             Assert.AreEqual("Test123 Test123", modifiedUser.FullName);
+            Assert.AreEqual(user.DriversLicense, modifiedUser.DriversLicense);
+            Assert.AreEqual("encrypted", modifiedUser.GovernmentNumber);
         }
 
         [Test]

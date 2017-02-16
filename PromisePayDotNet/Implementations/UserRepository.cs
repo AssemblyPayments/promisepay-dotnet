@@ -62,6 +62,9 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("zip", user.Zip);
             request.AddParameter("country", user.Country);
 
+            request.AddParameter("drivers_license", user.DriversLicense);
+            request.AddParameter("government_number", user.GovernmentNumber);
+
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string,User>>(response.Content).Values.First();
         }
@@ -218,6 +221,9 @@ namespace PromisePayDotNet.Implementations
             request.AddParameter("city", user.City);
             request.AddParameter("zip", user.Zip);
             request.AddParameter("country", user.Country);
+
+            request.AddParameter("drivers_license", user.DriversLicense);
+            request.AddParameter("government_number", user.GovernmentNumber);
 
             var response = SendRequest(Client, request);
             return JsonConvert.DeserializeObject<IDictionary<string, User>>(response.Content).Values.First();
