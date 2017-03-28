@@ -34,7 +34,7 @@ namespace PromisePayDotNet.Tests
                 {"active" , true},
                 {"paypal" , new Dictionary<string, object>
                 {
-                    {"email", "aaa@bbb.com"}
+                    {"paypal_email", "aaa@bbb.com"}
                 }}
             };
             var resp = repo.CreatePayPalAccount(account);
