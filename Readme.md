@@ -34,6 +34,9 @@ Add the below configuration to either the **App.config** or **Web.config** file,
   </PromisePay>
 </configuration>
 ```
+**TLS 1.2**
+We require a minimum of TLS 1.2 on the client connection. 
+
 **Environments**
 
 	Prelive: https://test.api.promisepay.com
